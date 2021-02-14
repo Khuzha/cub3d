@@ -4,10 +4,8 @@
 
 char	get_line_type(t_map *map, char **arr)
 {
-	size_t i = 0;
-
-	if (arr[i][0] == 'R' && !arr[i][1] && ft_isnumber(arr[i + 1]) && ft_isnumber(arr[i + 2]) && !arr[i + 3])
-		fill_resolution(map, ft_atoi(arr[i + 1]), ft_atoi(arr[i + 2]));
+	if (arr[0] && arr[0][0] == 'R' && !arr[0][1] && ft_isnumber(arr[1]) && ft_isnumber(arr[2]))
+		fill_resolution(map, ft_atoi(arr[1]), ft_atoi(arr[2]));
 
 	return (0);
 }

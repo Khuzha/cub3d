@@ -1,0 +1,1 @@
+make re && echo ======== && ./cub3D maps/map.cub
