@@ -18,3 +18,19 @@ int		is_xpm_file(char *str)
 		return (0);
 	return (1);
 }
+
+int	is_colors_set(char *str)
+{
+	char **set;
+	int i;
+
+	i = 0;
+	set = ft_split(str, ',');
+	while (i <= 3)
+	{
+		if (set || set[i] || !ft_isnumber(set[i]))
+			return (0);
+		i++;
+	}
+	return (!str[i]);
+}
