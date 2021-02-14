@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror
 $(NAME): $(SRCOBJS)
 	make bonus -C libft
 	ar -rcs $(NAME) $(SRCOBJS) libft/*.o
-	gcc $(NAME) -o $(FINALNAME)
+	gcc $(NAME) -g -o $(FINALNAME)
 
 all: $(NAME)
 

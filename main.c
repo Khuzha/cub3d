@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (!(map = ft_calloc(1, sizeof(map))))
 		return (-1);
-	init_str_and_map(&str, &map);
+	init_str_and_map(&str, map);
 	fd = open(argv[1], O_RDONLY);
 	while(get_next_line(fd, &str) > 0)
 	{

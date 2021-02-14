@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-int		is_dir(char *str)
+int		is_wside(char *str)
 {
 	if (!str || !(*str) ||
 		(ft_strncmp(str, "WE", 3) &&
