@@ -18,6 +18,7 @@ typedef struct	s_map
 	char	*ea;
 	char	*so;
 	char	*no;
+	char	*s;
 }				t_map;
 
 
@@ -34,6 +35,7 @@ int		is_wside(char *str);
 int		is_xpm_file(char *str);
 void	fill_resolution(t_map *map, int res_y, int res_x);
 void	fill_wside(t_map *map, char *wside, char *file);
+void	fill_sprite(t_map *map, char *file);
 
 /*
  *	Additional utils

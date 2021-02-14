@@ -17,3 +17,8 @@ void	fill_wside(t_map *map, char *wside, char *file)
 	if (!ft_strncmp(wside, "NO", 2))
 		map->no = file;
 }
+
+void	fill_sprite(t_map *map, char *file)
+{
+	map->s = file;
+}
