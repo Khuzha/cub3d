@@ -16,3 +16,11 @@ int		is_dir(char *str)
 		return (0);
 	return (1);
 }
+
+int		is_xpm_file(char *str)
+{
+	if (!str ||
+		ft_strncmp(ft_substr(str, ft_strlen(str) - 4, 4), ".xpm", 5))
+		return (0);
+	return (1);
+}

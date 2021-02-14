@@ -14,14 +14,18 @@ typedef struct	s_map
 }				t_map;
 
 void	init_str_and_map(char **str, t_map **map);
+
+/*
+ *	Map validating functions
+ */
 int		validate_map(t_map *map);
 int		is_dir(char *str);
-
+int		is_xpm_file(char *str);
+void	fill_resolution(t_map *map, int res_y, int res_x);
 
 /*
  *	Additional utils
  */
-void	fill_resolution(t_map *map, int res_y, int res_x);
 int		ft_isnumber(char *str);
 
 #endif
