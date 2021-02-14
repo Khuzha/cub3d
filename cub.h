@@ -15,6 +15,7 @@ typedef struct	s_map
 
 void	init_str_and_map(char **str, t_map **map);
 int		validate_map(t_map *map);
+int		is_dir(char *str);
 
 
 /*
