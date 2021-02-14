@@ -33,6 +33,7 @@ int		validate_map(t_map *map);
 int		is_wside(char *str);
 int		is_xpm_file(char *str);
 void	fill_resolution(t_map *map, int res_y, int res_x);
+void	fill_wside(t_map *map, char *wside, char *file);
 
 /*
  *	Additional utils
