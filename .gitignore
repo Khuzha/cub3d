@@ -1,2 +1,6 @@
+cub3D
+
+*.a
+*.lib
 *.o
 .vscode
