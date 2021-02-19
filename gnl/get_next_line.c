@@ -57,18 +57,13 @@ int	get_next_line(int fd, char **line)
 	int			reached_eol;
 	int			res;
 
-	printf("in gnl\n");
 	if (BUFFER_SIZE < 1 || fd < 0 || read(fd, "", 0) < 0 || !line)
 		return (-1);
 	*line = NULL;
-	printf("bef rem\n");
 	if (!rem)
 		rem = ft_strdup("");
-	printf("bef prepare_rem\n");
 	reached_eol = prepare_rem(&rem, line);
-	printf("bef fill_line\n");
 	res = fill_line(fd, line, &rem, reached_eol);
-	printf("aft fill_line\n");
 	if (!*line)
 		*line = ft_strdup("");
 	return (res);
