@@ -6,4 +6,8 @@ void	init_str_and_map(char **str, t_map *map)
 	map->list = NULL;
 	map->res_x = 0;
 	map->res_y = 0;
+	map->we = NULL;
+	map->ea = NULL;
+	map->so = NULL;
+	map->no = NULL;
 }

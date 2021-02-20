@@ -28,23 +28,17 @@ void	store_colors(t_map *map, char c, char *str)
 {
 	char	**set;
 
-	printf("enter store_colors\n");
 	set = ft_split(str, ',');
-	while (set && *set) {
-		printf("color = %d\n", ft_atoi(*set));
-		set++;
-	}
 	if (c == 'C')
 	{
-		map->c_colors->r = ft_atoi(set[0]);
-		map->c_colors->g = ft_atoi(set[1]);
-		map->c_colors->b = ft_atoi(set[2]);
+		map->c_colors.r = ft_atoi(set[0]);
+		map->c_colors.g = ft_atoi(set[1]);
+		map->c_colors.b = ft_atoi(set[2]);
 	}
 	if (c == 'F')
 	{
-		printf("f\n");
-		map->f_colors->r = ft_atoi(set[0]);
-		map->f_colors->g = ft_atoi(set[1]);
-		map->f_colors->b = ft_atoi(set[2]);
+		map->f_colors.r = ft_atoi(set[0]);
+		map->f_colors.g = ft_atoi(set[1]);
+		map->f_colors.b = ft_atoi(set[2]);
 	}
 }

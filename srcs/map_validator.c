@@ -20,6 +20,6 @@ int		validate_map(t_map *map)
 		map->list = map->list->next;
 	}
 	printf("res_x = %d, \nres_y = %d, we = %s, ea = %s, so = %s, no = %s, \nsprite = %s \n", map->res_x, map->res_y, map->we, map->ea, map->so, map->no, map->s);
-	printf("c = %s, f =  \n", map->c);
+	printf("c = %d,%d,%d; f = %d,%d,%d\n", map->c_colors.r, map->c_colors.g, map->c_colors.b, map->f_colors.r, map->f_colors.g, map->f_colors.b);
 	return (1);
 }

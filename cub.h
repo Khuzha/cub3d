@@ -19,8 +19,8 @@ typedef struct	s_colors
 typedef struct	s_map
 {
 	t_list		*list;
-	t_colors	*c_colors;
-	t_colors	*f_colors;
+	t_colors	c_colors;
+	t_colors	f_colors;
 	int			res_x;
 	int			res_y;
 	char		*we;
