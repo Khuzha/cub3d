@@ -7,7 +7,6 @@ char	get_line_type(t_map *map, char **arr)
 	if ((is_wside(arr[0]) || (arr[0] && arr[0][0] == 'S')) && is_xpm_file(arr[1]) && !arr[2])
 		define_file(map, arr[0], arr[1]);
 	if (arr[0] && arr[0][0] && arr[1])
-		printf("arr[0] = %s, ft_strnchr = %s, arr[1] = %s, is = %d\n", arr[0], ft_strchr("CF", arr[0][0]), arr[1], is_colors_set(arr[1]));
 	if (arr[0] && ft_strchr("CF", arr[0][0]) && !arr[0][1] && is_colors_set(arr[1]))
 		store_colors(map, arr[0][0], arr[1]);
 	return (0);
