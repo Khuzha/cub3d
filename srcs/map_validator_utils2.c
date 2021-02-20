@@ -26,11 +26,13 @@ int	is_colors_set(char *str)
 
 	i = 0;
 	set = ft_split(str, ',');
-	while (i <= 3)
+	while (set && *set)
 	{
-		if (set || set[i] || !ft_isnumber(set[i]))
+		// printf("*set = %s, !!set = %d, !!(*set) = %d\n", *set, !!set, !!(*set));
+		if (!set || !(*set) || !ft_isnumber(*set))
 			return (0);
+		set++;
 		i++;
 	}
-	return (!str[i]);
+	return (i == 3);
 }

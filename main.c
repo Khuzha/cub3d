@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 1)
 		return (-1);
-	if (!(map = ft_calloc(1, sizeof(*map))))
+	if (!(map = ft_calloc(1, sizeof(*map) + (sizeof(t_colors) * 2))))
 		return (-1);
 	init_str_and_map(&str, map);
 	fd = open(argv[1], O_RDONLY);

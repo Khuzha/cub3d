@@ -36,6 +36,7 @@ typedef struct	s_map
 /*
  *	Kinda general functions
  */
+void	error(char *err);
 void	init_str_and_map(char **str, t_map *map);
 
 /*
