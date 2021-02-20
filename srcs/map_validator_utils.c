@@ -24,21 +24,39 @@ void	define_file(t_map *map, char *type, char *file)
 		error("Invalid map (textures)");
 }
 
-void	store_colors(t_map *map, char c, char *str)
+void	store_colors(t_map *map, char type, char *str)
 {
 	char	**set;
 
+	str += 2;
 	set = ft_split(str, ',');
-	if (c == 'C')
+	if (type == 'C')
 	{
 		map->c_colors.r = ft_atoi(set[0]);
 		map->c_colors.g = ft_atoi(set[1]);
 		map->c_colors.b = ft_atoi(set[2]);
 	}
-	if (c == 'F')
+	if (type == 'F')
 	{
 		map->f_colors.r = ft_atoi(set[0]);
 		map->f_colors.g = ft_atoi(set[1]);
 		map->f_colors.b = ft_atoi(set[2]);
 	}
+}
+
+int		is_param(char *str)
+{
+	printf("str = |%s|\n", str);
+	if (ft_strncmp(str, "R", 1) &&
+		ft_strncmp(str, "WE", 2) &&
+		ft_strncmp(str, "EA", 2) &&
+		ft_strncmp(str, "SO", 2) &&
+		ft_strncmp(str, "NO", 2) &&
+		ft_strncmp(str, "S", 1) &&
+		ft_strncmp(str, "C", 1) &&
+		ft_strncmp(str, "F", 1))
+	{
+		return (0);
+	}
+	return (1);
 }

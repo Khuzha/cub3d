@@ -19,7 +19,7 @@ int		is_xpm_file(char *str)
 	return (1);
 }
 
-int	is_colors_set(char *str)
+int	is_colors_set_1(char *str)
 {
 	char **set;
 	int i;
@@ -28,11 +28,21 @@ int	is_colors_set(char *str)
 	set = ft_split(str, ',');
 	while (set && *set)
 	{
-		// printf("*set = %s, !!set = %d, !!(*set) = %d\n", *set, !!set, !!(*set));
 		if (!set || !(*set) || !ft_isnumber(*set))
 			return (0);
 		set++;
 		i++;
 	}
 	return (i == 3);
+}
+
+int is_colors_set(char *str)
+{
+	if (str && str[0] && str[1] && str[2])
+	{
+		str += 2;
+	}
+	else
+		return (0);
+	return (is_colors_set_1(str));
 }

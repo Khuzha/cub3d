@@ -49,7 +49,8 @@ void	fill_resolution(t_map *map, int res_y, int res_x);
 void	define_file(t_map *map, char *type, char *file);
 void	fill_s_c_f(t_map *map, char c, char *file);
 int		is_colors_set(char *str);
-void	store_colors(t_map *map, char c, char *str);
+void	store_colors(t_map *map, char type, char *str);
+int		is_param(char *str);
 
 /*
  *	Additional utils
