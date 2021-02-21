@@ -6,7 +6,8 @@ void	init_str_and_map(char **str, t_map *map)
 	map->list = NULL;
 	map->res.x = 0;
 	map->res.y = 0;
-	map->res.max = 0;
+	map->res.x_max = 0;
+	map->res.y_max = 0;
 	map->we = NULL;
 	map->ea = NULL;
 	map->so = NULL;

@@ -19,7 +19,8 @@ typedef struct	s_colors
 
 typedef struct	s_res
 {
-	int max;
+	int x_max;
+	int y_max;
 	int	x;
 	int	y;
 }				t_res;
@@ -50,7 +51,7 @@ void	init_str_and_map(char **str, t_map *map);
 int		validate_map(t_map *map);
 int		is_wside(char *str);
 int		is_xpm_file(char *str);
-void	fill_resolution(t_map *map, int res_x, int res_y);
+void	fill_resolution(t_map *map, char *res_x, char *res_y);
 void	define_file(t_map *map, char *type, char *file);
 void	fill_s_c_f(t_map *map, char c, char *file);
 int		is_colors_set(char *str);

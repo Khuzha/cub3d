@@ -1,11 +1,15 @@
 #include "../cub.h"
 
-void	fill_resolution(t_map *map, int res_x, int res_y)
+void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
+	if (ft_strlen(res_x) > 5)
+		map->res.x_max = 1;
+	if (ft_strlen(res_y) > 5)
+		map->res.y_max = 1;
 	if (map->res.x || map->res.y)
 		return error("Invalid map (resolution)");
-	map->res.x = res_x;
-	map->res.y = res_y;
+	map->res.x = ft_atoi(res_x);
+	map->res.y = ft_atoi(res_y);
 }
 
 void	define_file(t_map *map, char *type, char *file)
@@ -52,14 +56,14 @@ void	store_colors(t_map *map, char type, char *str)
 int		is_param(char *str)
 {
 	printf("str = |%s|\n", str);
-	if (ft_strncmp(str, "R", 1) &&
-		ft_strncmp(str, "WE", 2) &&
-		ft_strncmp(str, "EA", 2) &&
-		ft_strncmp(str, "SO", 2) &&
-		ft_strncmp(str, "NO", 2) &&
-		ft_strncmp(str, "S", 1) &&
-		ft_strncmp(str, "C", 1) &&
-		ft_strncmp(str, "F", 1))
+	if (ft_strncmp(str, "R", 2) &&
+		ft_strncmp(str, "WE", 3) &&
+		ft_strncmp(str, "EA", 3) &&
+		ft_strncmp(str, "SO", 3) &&
+		ft_strncmp(str, "NO", 3) &&
+		ft_strncmp(str, "S", 2) &&
+		ft_strncmp(str, "C", 2) &&
+		ft_strncmp(str, "F", 2))
 	{
 		return (0);
 	}
