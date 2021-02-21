@@ -20,7 +20,9 @@ void	check_map(t_map *map)
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
 		!map->s || !ft_strlen(map->s) ||
-		!map->c_colors.defined || !map->f_colors.defined)
+		!map->c_colors.defined || !map->f_colors.defined ||
+		map->c_colors.r > 255 || map->c_colors.g > 255 || map->c_colors.b > 255 ||
+		map->f_colors.r > 255 || map->f_colors.g > 255 || map->f_colors.b > 255)
 		error("Invalid map");
 }
 
