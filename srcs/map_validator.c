@@ -16,7 +16,7 @@ char	get_line_type(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
-	if (map->res_x <= 0 || map->res_y <= 0 ||
+	if (map->res.x <= 0 || map->res.y <= 0 ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
 		!map->s || !ft_strlen(map->s) ||
@@ -34,7 +34,7 @@ int		validate_map(t_map *map)
 		map->list = map->list->next;
 	}
 	check_map(map);
-	printf("res_x = %d, res_y = %d, \nwe = %s, ea = %s, so = %s, no = %s, \nsprite = %s \n", map->res_x, map->res_y, map->we, map->ea, map->so, map->no, map->s);
+	printf("res_x = %d, res_y = %d, \nwe = %s, ea = %s, so = %s, no = %s, \nsprite = %s \n", map->res.x, map->res.y, map->we, map->ea, map->so, map->no, map->s);
 	printf("c = %d,%d,%d; f = %d,%d,%d\n", map->c_colors.r, map->c_colors.g, map->c_colors.b, map->f_colors.r, map->f_colors.g, map->f_colors.b);
 	return (1);
 }

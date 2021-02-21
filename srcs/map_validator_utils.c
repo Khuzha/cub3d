@@ -2,10 +2,10 @@
 
 void	fill_resolution(t_map *map, int res_x, int res_y)
 {
-	if (map->res_x || map->res_y)
+	if (map->res.x || map->res.y)
 		return error("Invalid map (resolution)");
-	map->res_x = res_x;
-	map->res_y = res_y;
+	map->res.x = res_x;
+	map->res.y = res_y;
 }
 
 void	define_file(t_map *map, char *type, char *file)
