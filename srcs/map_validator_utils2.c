@@ -38,10 +38,17 @@ int	is_colors_set_1(char *str)
 
 int is_colors_set(char *str)
 {
-	if (str && str[0] && str[1] && str[2])
+	int i;
+
+	i = 0;
+	while (str && str[i])
 	{
-		str += 2;
+		if (str[i] == ',' && str[i + 1] == ',')
+			return (0);
+		i++;
 	}
+	if (i >= 2)
+		str += 2;
 	else
 		return (0);
 	return (is_colors_set_1(str));

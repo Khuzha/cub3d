@@ -11,6 +11,7 @@
  */
 typedef struct	s_colors
 {
+	int defined;
 	int	r;
 	int	g;
 	int	b;
@@ -28,8 +29,6 @@ typedef struct	s_map
 	char		*so;
 	char		*no;
 	char		*s;
-	char		*c;
-	char		*f;
 }				t_map;
 
 

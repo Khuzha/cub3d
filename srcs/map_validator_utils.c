@@ -10,6 +10,9 @@ void	fill_resolution(t_map *map, int res_x, int res_y)
 
 void	define_file(t_map *map, char *type, char *file)
 {
+	int fd = open(file, O_RDONLY);
+	if (fd < 0)
+		error("Invalid map (file didn't open)");
 	if (!ft_strncmp(type, "WE", 2) && !map->we)
 		map->we = file;
 	else if (!ft_strncmp(type, "EA", 2) && !map->ea)
@@ -32,12 +35,14 @@ void	store_colors(t_map *map, char type, char *str)
 	set = ft_split(str, ',');
 	if (type == 'C')
 	{
+		map->c_colors.defined = 1;
 		map->c_colors.r = ft_atoi(set[0]);
 		map->c_colors.g = ft_atoi(set[1]);
 		map->c_colors.b = ft_atoi(set[2]);
 	}
 	if (type == 'F')
 	{
+		map->f_colors.defined = 1;
 		map->f_colors.r = ft_atoi(set[0]);
 		map->f_colors.g = ft_atoi(set[1]);
 		map->f_colors.b = ft_atoi(set[2]);
