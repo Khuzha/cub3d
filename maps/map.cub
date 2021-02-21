@@ -1,11 +1,10 @@
 R 1 10000
 
-ST
 NO ./img/xp1.xpm
 SO ./img/cartoon.xpm
 EA ./img/bricks.xpm
 WE ./img/xp4.xpm
- 
+
 S ./img/barrel.xpm
 
 F 100, 255, 25

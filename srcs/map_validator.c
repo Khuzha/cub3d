@@ -2,9 +2,11 @@
 
 char	get_line_type(t_map *map, char **arr, char *str)
 {
-	if (arr[0] && !is_param(arr[0])) {
-		error("Invalid map (parameters)");
-	}
+	// if (arr[0] && !is_param(arr[0])) {
+	// 	error("Invalid map (parameters)");
+	// }
+	if (!arr[0] && *str == ' ')
+		error("Invalid map (empty line contains spaces)");
 	if (arr[0] && arr[0][0] == 'R' && !arr[0][1] && ft_isnumber(arr[1]) && ft_isnumber(arr[2]) && !arr[3])
 		fill_resolution(map, arr[1], arr[2]);
 	if ((is_wside(arr[0]) || (arr[0] && arr[0][0] == 'S')) && is_xpm_file(arr[1]) && !arr[2])
