@@ -38,7 +38,6 @@ typedef struct	s_map
 	char		*s;
 }				t_map;
 
-
 /*
  *	Kinda general functions
  */

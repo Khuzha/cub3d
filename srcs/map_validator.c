@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-char	get_line_type(t_map *map, char **arr, char *str)
+char	fill_struct(t_map *map, char **arr, char *str)
 {
 	// if (arr[0] && !is_param(arr[0])) {
 	// 	error("Invalid map (parameters)");
@@ -32,7 +32,7 @@ int		validate_map(t_map *map)
 {
 	while (map->list->next)
 	{
-		get_line_type(map, ft_split(map->list->content, ' '), map->list->content); // TODO: free ft_split
+		fill_struct(map, ft_split(map->list->content, ' '), map->list->content); // TODO: free ft_split
 		map->list = map->list->next;
 	}
 	check_map(map);
