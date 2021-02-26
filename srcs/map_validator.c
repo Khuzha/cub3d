@@ -28,7 +28,7 @@ void	check_map(t_map *map)
 		error("Invalid map");
 }
 
-int		validate_map(t_map *map)
+int		iterate_list(t_map *map)
 {
 	while (map->list->next)
 	{

@@ -15,5 +15,5 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&map.list, ft_lstnew(str));
 	}
 	ft_lstadd_back(&map.list, ft_lstnew(str));
-	validate_map(&map);
+	iterate_list(&map);
 }
