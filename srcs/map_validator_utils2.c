@@ -53,3 +53,14 @@ int is_colors_set(char *str)
 		return (0);
 	return (is_colors_set_1(str));
 }
+
+int	is_map_line(char *str)
+{
+	while (str && *str)
+	{
+		if (*str != '1' || *str != ' ')
+			return (0);
+		str++;
+	}
+	return (1);
+}

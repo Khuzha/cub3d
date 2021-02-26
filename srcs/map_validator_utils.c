@@ -17,15 +17,15 @@ void	define_file(t_map *map, char *type, char *file)
 	int fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error("Invalid map (file didn't open)");
-	if (!ft_strncmp(type, "WE", 2) && !map->we)
+	if (!ft_strncmp(type, "WE", 3) && !map->we)
 		map->we = file;
-	else if (!ft_strncmp(type, "EA", 2) && !map->ea)
+	else if (!ft_strncmp(type, "EA", 3) && !map->ea)
 		map->ea = file;
-	else if (!ft_strncmp(type, "SO", 2) && !map->so)
+	else if (!ft_strncmp(type, "SO", 3) && !map->so)
 		map->so = file;
-	else if (!ft_strncmp(type, "NO", 2) && !map->no)
+	else if (!ft_strncmp(type, "NO", 3) && !map->no)
 		map->no = file;
-	else if (!ft_strncmp(type, "S", 1) && !map->s)
+	else if (!ft_strncmp(type, "S", 2) && !map->s)
 		map->s = file;
 	else
 		error("Invalid map (textures)");
@@ -55,7 +55,6 @@ void	store_colors(t_map *map, char type, char *str)
 
 int		is_param(char *str)
 {
-	printf("str = |%s|\n", str);
 	if (ft_strncmp(str, "R", 2) &&
 		ft_strncmp(str, "WE", 3) &&
 		ft_strncmp(str, "EA", 3) &&

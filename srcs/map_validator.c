@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-char	fill_struct(t_map *map, char **arr, char *str)
+void	fill_struct(t_map *map, char **arr, char *str)
 {
 	// if (arr[0] && !is_param(arr[0])) {
 	// 	error("Invalid map (parameters)");
@@ -13,7 +13,6 @@ char	fill_struct(t_map *map, char **arr, char *str)
 		define_file(map, arr[0], arr[1]);
 	if (arr[0] && arr[0][0] && arr[1] && arr[0] && ft_strchr("CF", arr[0][0]) && !arr[0][1] && is_colors_set(str))
 		store_colors(map, arr[0][0], str);
-	return (0);
 }
 
 void	check_map(t_map *map)
@@ -28,15 +27,23 @@ void	check_map(t_map *map)
 		error("Invalid map");
 }
 
-int		iterate_list(t_map *map)
+void		iterate_list(t_map *map)
 {
+	char **arr;
+
 	while (map->list->next)
 	{
-		fill_struct(map, ft_split(map->list->content, ' '), map->list->content); // TODO: free ft_split
+		arr = ft_split(map->list->content, ' ');
+		if (arr[0] && !(is_param(arr[0]) && arr[1]) && !is_map_line(map->list->content))
+		{
+			printf("map started, str = %s\n", map->list->content);
+			return (0); // TODO: call func to fill map to arr[][] and check map 
+		}
+		fill_struct(map, arr, map->list->content); // TODO: free ft_split
 		map->list = map->list->next;
+		free(arr);
 	}
 	check_map(map);
-	printf("res_x = %d, res_y = %d, x_max = %d, y_max = %d \nwe = %s, ea = %s, so = %s, no = %s, \nsprite = %s \n", map->res.x, map->res.y, map->res.x_max, map->res.y_max, map->we, map->ea, map->so, map->no, map->s);
-	printf("c = %d,%d,%d; f = %d,%d,%d\n", map->c_colors.r, map->c_colors.g, map->c_colors.b, map->f_colors.r, map->f_colors.g, map->f_colors.b);
+	free(arr);
 	return (1);
 }

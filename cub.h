@@ -47,7 +47,8 @@ void	init_str_and_map(char **str, t_map *map);
 /*
  *	Map validating functions
  */
-int		iterate_list(t_map *map);
+void	iterate_list(t_map *map);
+int		is_map_line(char *str);
 int		is_wside(char *str);
 int		is_xpm_file(char *str);
 void	fill_resolution(t_map *map, char *res_x, char *res_y);
