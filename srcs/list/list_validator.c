@@ -1,4 +1,4 @@
-#include "../cub.h"
+#include "../../cub.h"
 
 void	fill_struct(t_map *map, char **arr, char *str)
 {
@@ -36,8 +36,8 @@ void		iterate_list(t_map *map)
 		arr = ft_split(map->list->content, ' ');
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) && !is_map_line(map->list->content))
 		{
-			printf("map started, str = %s\n", map->list->content);
-			return (0); // TODO: call func to fill map to arr[][] and check map 
+			// printf("map started, str = %s\n", map->list->content);
+			return (convert_to_array(map->list, map));
 		}
 		fill_struct(map, arr, map->list->content); // TODO: free ft_split
 		map->list = map->list->next;
@@ -45,5 +45,4 @@ void		iterate_list(t_map *map)
 	}
 	check_map(map);
 	free(arr);
-	return (1);
 }

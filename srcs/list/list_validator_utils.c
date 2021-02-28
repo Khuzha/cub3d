@@ -1,4 +1,4 @@
-#include "../cub.h"
+#include "../../cub.h"
 
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {

@@ -1,4 +1,4 @@
-#include "../cub.h"
+#include "../../cub.h"
 
 int		ft_isnumber(char *str)
 {
@@ -18,4 +18,12 @@ int		ft_isnumber(char *str)
 		str++;
 	}
 	return (1);
+}
+
+size_t	get_max(size_t a, size_t b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

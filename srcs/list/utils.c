@@ -1,4 +1,4 @@
-#include "../cub.h"
+#include "../../cub.h"
 
 void	init_str_and_map(char **str, t_map *map)
 {
