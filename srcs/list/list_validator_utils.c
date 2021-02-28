@@ -31,12 +31,40 @@ void	define_file(t_map *map, char *type, char *file)
 		error("Invalid map (textures)");
 }
 
+int		count_commas(char *str)
+{
+	int res;
+
+	res = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			res++;
+		str++;
+	}
+	return (res);
+}
+
+// void	validate_colors(char **arr)
+// {
+// 	while (*arr)
+// 	{
+// 		printf("*arr = |%s|\n", *arr);
+// 		if (!ft_isnumber(*arr))
+// 			error("Invalid map (colors)");
+// 		arr++;
+// 	}
+// }
+
 void	store_colors(t_map *map, char type, char *str)
 {
 	char	**set;
 
 	str += 2;
+	if (count_commas(str) != 2)
+		error("Invalid map (commas in colors)");
 	set = ft_split(str, ',');
+	// validate_colors(set);
 	if (type == 'C')
 	{
 		map->c_colors.defined = 1;

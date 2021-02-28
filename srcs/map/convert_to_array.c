@@ -45,13 +45,13 @@ void	init_lines(char **arr, size_t width)
 	}
 }
 
-void	fill_lines(char **arr, t_list *list)
-{
-	while (*arr)
-	{
-		// printf()
-	}
-}
+// void	fill_lines(char **arr, t_list *list)
+// {
+// 	while (*arr)
+// 	{
+// 		// printf()
+// 	}
+// }
 
 void	convert_to_array(t_list *list, t_map *data)
 {
@@ -64,7 +64,7 @@ void	convert_to_array(t_list *list, t_map *data)
 	if (!(arr = malloc(sizeof(char *) * height)))
 		error("Malloc error");
 	init_lines(arr, width);
-	fill_lines(arr, list);
+	// fill_lines(arr, list);
 	printf("height = %lu, width = %lu\n", height, width);
 	data++;
 	width = 0;

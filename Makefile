@@ -2,9 +2,9 @@ NAME = cub3D.lib
 FINALNAME = cub3D
 SRCS =	main.c gnl/get_next_line.c \
 		srcs/list/utils.c srcs/list/list_validator.c \
-		srcs/list/list_validator_utils.c srcs/list/list_validator_utils2.c srcs/list/error.c \
+		srcs/list/list_validator_utils.c srcs/list/list_validator_utils2.c \
 		srcs/map/convert_to_array.c \
-		srcs/utils/lib_utils.c
+		srcs/utils/lib_utils.c srcs/utils/error.c
 
 SRCOBJS = $(SRCS:.c=.o)
 CC = gcc

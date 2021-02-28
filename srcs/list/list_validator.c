@@ -17,7 +17,9 @@ void	fill_struct(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
-	if (map->res.x <= 0 || map->res.y <= 0 ||
+	// printf("res.x = %d, res.y = %d\n", map->res.x, map->res.y);
+	// printf("f def = %d, c def = %d\n",map->f_colors.defined, map->c_colors.defined);
+	if ((map->res.x <= 0 && !map->res.x_max) || (map->res.y <= 0 && !map->res.y_max) ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
 		!map->s || !ft_strlen(map->s) ||
@@ -37,7 +39,8 @@ void		iterate_list(t_map *map)
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) && !is_map_line(map->list->content))
 		{
 			// printf("map started, str = %s\n", map->list->content);
-			return (convert_to_array(map->list, map));
+			convert_to_array(map->list, map);
+			break ;
 		}
 		fill_struct(map, arr, map->list->content); // TODO: free ft_split
 		map->list = map->list->next;

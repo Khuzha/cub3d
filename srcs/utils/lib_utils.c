@@ -13,7 +13,7 @@ int		ft_isnumber(char *str)
 			return (0);
 		if (*str == ' ')
 			was_space = 1;
-		if (was_space && ft_isdigit(*str))
+		if (was_space && *str != ' ')
 			return 0;
 		str++;
 	}
