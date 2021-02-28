@@ -45,7 +45,7 @@ void	error(char *err);
 void	init_str_and_map(char **str, t_map *map);
 
 /*
- *	List validating functions
+ *	List validation functions
  */
 void	iterate_list(t_map *map);
 int		is_map_line(char *str);
@@ -59,9 +59,10 @@ void	store_colors(t_map *map, char type, char *str);
 int		is_param(char *str);
 
 /*
- *	List validating functions
+ *	Map validation functions
  */
 void	convert_to_array(t_list *map_list, t_map *data);
+void	validate_map(char **arr, t_map *data);
 
 /*
  *	Additional utils

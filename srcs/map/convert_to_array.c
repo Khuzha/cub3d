@@ -53,7 +53,7 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 	while (i < height)
 	{
 		arr[i] = list->content;
-		printf("*arr = |%s|\n", arr[i]);
+		// printf("*arr = |%s|\n", arr[i]);
 		i++;
 		list = list->next;
 	}
@@ -72,7 +72,8 @@ void	convert_to_array(t_list *list, t_map *data)
 		error("Malloc error");
 	init_lines(arr, width);
 	fill_lines(arr, list, height);
-	printf("height = %lu, width = %lu\n", height, width);
+	validate_map(arr, data);
+	// printf("height = %lu, width = %lu\n", height, width);
 	data++;
 	width = 0;
 }
