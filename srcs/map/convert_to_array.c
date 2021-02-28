@@ -49,7 +49,7 @@ void	fill_lines(char **arr, t_list *list)
 {
 	while (*arr)
 	{
-		printf()
+		// printf()
 	}
 }
 
