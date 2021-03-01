@@ -64,9 +64,10 @@ void	store_colors(t_map *map, char type, char *str)
 	if (count_commas(str) != 2)
 		error("Invalid map (commas in colors)");
 	set = ft_split(str, ',');
-	// validate_colors(set);
 	if (type == 'C')
 	{
+		if (map->c_colors.defined)
+			error("Ceiling colors are repeating");
 		map->c_colors.defined = 1;
 		map->c_colors.r = ft_atoi(set[0]);
 		map->c_colors.g = ft_atoi(set[1]);
@@ -74,6 +75,8 @@ void	store_colors(t_map *map, char type, char *str)
 	}
 	if (type == 'F')
 	{
+		if (map->f_colors.defined)
+			error("Floor colors are repeating");
 		map->f_colors.defined = 1;
 		map->f_colors.r = ft_atoi(set[0]);
 		map->f_colors.g = ft_atoi(set[1]);
