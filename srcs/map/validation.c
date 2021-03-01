@@ -47,7 +47,8 @@ void	check_char(char c)
 
 void	flood_fill(char **arr, size_t x, size_t y)
 {
-	if (arr[y][x] != '1')
+	printf("x = %lu, y = %lu\n", x, y);
+	if (arr[y] && arr[y][x] != '1')
 		check_char(arr[y][x]);
 	if (x >= 0 && y >= 0 && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
 	{
@@ -67,7 +68,9 @@ void	validate_map(char **arr, t_map *data)
 	size_t	x;
 	size_t	y;
 
+	printf("bef find player\n");
 	find_player(arr, &x, &y);
+	printf("bef flood_fill\n");
 	flood_fill(arr, x, y);
 	data++;
 }
