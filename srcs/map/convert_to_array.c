@@ -38,8 +38,8 @@ void	init_lines(char **arr, size_t width)
 		i = 0;
 		while (i < width)
 		{
-			printf("i = %lu\n", i);
-			*arr[i] = 0;
+			// printf("i = %lu\n", i);
+			(*arr)[i] = 0;
 			i++;
 		}
 		arr++;
