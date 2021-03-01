@@ -29,10 +29,27 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y)
 	printf("found %d players\n", (int)counter);
 }
 
+char	emp(char c)
+{
+	if (c == ' ' || c == 0)
+		return (1);
+	else
+		return (0);
+}
+
+void	check_char(char c)
+{
+	if (!ft_strchr("WENS", c) && c != '0' && c != '@')
+		error("Map validation failed");
+}
+
 void	flood_fill(char **arr, size_t x, size_t y)
 {
+	if (arr[y][x] != '1')
+		check_char(arr[y][x]);
 	if (x >= 0 && y >= 0 && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
 	{
+		arr[y][x] = '@';
 		flood_fill(arr, x + 1, y + 1);
 		flood_fill(arr, x + 1, y);
 		flood_fill(arr, x + 1, y - 1);
