@@ -26,7 +26,9 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y)
 		x = 0;
 		y++;
 	}
-	printf("found %d players\n", (int)counter);
+	if (!counter)
+		error("No player found");
+	// printf("found %d players\n", (int)counter);
 }
 
 char	emp(char c)

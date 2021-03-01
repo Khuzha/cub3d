@@ -18,7 +18,7 @@ size_t	get_height(t_list *list)
 {
 	size_t	counter;
 
-	counter = 0;
+	counter = 1;
 	while (list->next)
 	{
 		list = list->next;
@@ -38,6 +38,7 @@ void	init_lines(char **arr, size_t width)
 		i = 0;
 		while (i < width)
 		{
+			printf("i = %lu\n", i);
 			*arr[i] = 0;
 			i++;
 		}
@@ -70,10 +71,11 @@ void	convert_to_array(t_list *list, t_map *data)
 	width = get_width(list, height);
 	if (!(arr = malloc(sizeof(char *) * height)))
 		error("Malloc error");
+
+	printf("bef init_lines, width = %lu, h = %lu\n", width, height);
 	init_lines(arr, width);
 	fill_lines(arr, list, height);
 	validate_map(arr, data);
-	// printf("height = %lu, width = %lu\n", height, width);
 	data++;
 	width = 0;
 }

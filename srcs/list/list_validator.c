@@ -31,14 +31,17 @@ void	check_map(t_map *map)
 
 void		iterate_list(t_map *map)
 {
-	char **arr;
+	char	**arr;
+	char	was_map;
 
+	was_map = 0;
 	while (map->list->next)
 	{
 		arr = ft_split(map->list->content, ' ');
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) && !is_map_line(map->list->content))
 		{
 			// printf("map started, str = %s\n", map->list->content);
+			was_map = 1;
 			convert_to_array(map->list, map);
 			break ;
 		}
@@ -46,6 +49,9 @@ void		iterate_list(t_map *map)
 		map->list = map->list->next;
 		free(arr);
 	}
+	// printf("iterate_list bef call check_map\n");
+	if (!was_map)
+		error("No map found");
 	check_map(map);
-	free(arr);
+	// free(arr);
 }
