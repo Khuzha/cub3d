@@ -12,17 +12,22 @@ CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(SRCOBJS)
 	make bonus -C libft
+	make -C minilibx
 	ar -rcs $(NAME) $(SRCOBJS) libft/*.o
+	ar -rcs $(NAME) $(SRCOBJS) minilibx/libmlx.a
 	gcc $(NAME) -g -o $(FINALNAME)
 
 all: $(NAME)
 
 clean :
 		rm -rf $(SRCOBJS) $(NAME)
-		make -C libft/ clean
+		make clean -C libft
 
 fclean : clean
-		make -C libft/ fclean
+		make clean -C minilibx
+		make fclean -C libft
+		rm -f minilibx/libmlx.a
 		rm -rf $(FINALNAME)
 
 re :  fclean all
+	make re -C minilibx
