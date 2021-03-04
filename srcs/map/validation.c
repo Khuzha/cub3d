@@ -41,26 +41,34 @@ char	emp(char c)
 
 void	check_char(char c)
 {
-	if (!ft_strchr("WENS", c) && c != '0' && c != '@')
+	if (!c || !ft_strchr("WENS", c))
 		error("Map validation failed");
 }
 
 void	flood_fill(char **arr, size_t x, size_t y)
 {
-	printf("x = %lu, y = %lu\n", x, y);
-	if (arr[y] && arr[y][x] != '1')
+	// if (arr[y])
+	// 	printf("x = %lu, y = %lu, char = |%c|, int = %d\n", x, y, arr[y][x], (int)arr[y][x]);
+	// else
+	// 	printf("x = %lu, y = %lu\n", x, y);
+
+	if (x < 0 || y < 0)
+		error("Map validation failed");
+	if (arr[y] && arr[y][x] != '1' && arr[y][x] != '0' && arr[y][x] != '@')
 		check_char(arr[y][x]);
-	if (x >= 0 && y >= 0 && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
+	if (arr[y] && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
 	{
 		arr[y][x] = '@';
-		flood_fill(arr, x + 1, y + 1);
-		flood_fill(arr, x + 1, y);
 		flood_fill(arr, x + 1, y - 1);
-		flood_fill(arr, x, y - 1);
-		flood_fill(arr, x - 1, y - 1);
-		flood_fill(arr, x - 1, y);
+		flood_fill(arr, x + 1, y);
+		flood_fill(arr, x + 1, y + 1);
+		flood_fill(arr, x, y + 1);
 		flood_fill(arr, x - 1, y + 1);
+		flood_fill(arr, x - 1, y);
+		flood_fill(arr, x - 1, y - 1);
+		flood_fill(arr, x, y - 1);
 	}
+	// printf("end\n");
 }
 
 void	validate_map(char **arr, t_map *data)
@@ -70,7 +78,7 @@ void	validate_map(char **arr, t_map *data)
 
 	printf("bef find player\n");
 	find_player(arr, &x, &y);
-	printf("bef flood_fill\n");
+	printf("bef flood_fill, x = %lu, y = %lu\n", x, y);
 	flood_fill(arr, x, y);
 	data++;
 }

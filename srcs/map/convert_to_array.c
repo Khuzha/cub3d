@@ -63,7 +63,7 @@ void	convert_to_array(t_list *list, t_map *data)
 	height = get_height(list);
 	width = get_width(list, height);
 	printf("height = %lu, width = %lu\n", height, width);
-	if (!(arr = malloc(sizeof(char *) * height)))
+	if (!(arr = ft_calloc(sizeof(char *) * (height + 1), height + 1)))
 		error("Malloc error");
 	init_lines(arr, width);
 	fill_lines(arr, list, height);
