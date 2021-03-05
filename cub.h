@@ -39,6 +39,15 @@ typedef struct	s_map
 	char		*s;
 }				t_map;
 
+typedef struct	s_img
+{
+	void	*ptr;
+    char	*addr;
+    int		bpp;
+    int		length;
+    int		endian;
+}				t_img;
+
 /*
  *	Kinda general functions
  */
