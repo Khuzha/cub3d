@@ -4,3 +4,4 @@ cub3D
 *.lib
 *.o
 .vscode
+.DS_Store
