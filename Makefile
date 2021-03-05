@@ -4,7 +4,8 @@ SRCS =	main.c gnl/get_next_line.c \
 		srcs/list/utils.c srcs/list/list_validator.c \
 		srcs/list/list_validator_utils.c srcs/list/list_validator_utils2.c \
 		srcs/map/convert_to_array.c srcs/map/validation.c \
-		srcs/utils/lib_utils.c srcs/utils/error.c
+		srcs/utils/lib_utils.c srcs/utils/error.c \
+		srcs/gui/start.c
 
 SRCOBJS = $(SRCS:.c=.o)
 CC = gcc
@@ -13,8 +14,7 @@ CFLAGS = -Wall -Wextra -Werror
 $(NAME): $(SRCOBJS)
 	make bonus -C libft
 	make -C minilibx
-	ar -rcs $(NAME) $(SRCOBJS) libft/*.o
-	ar -rcs $(NAME) $(SRCOBJS) minilibx/libmlx.a
+	ar -rcs $(NAME) $(SRCOBJS) libft/*.o minilibx/libmlx.a
 	gcc $(NAME) -g -o $(FINALNAME)
 
 all: $(NAME)

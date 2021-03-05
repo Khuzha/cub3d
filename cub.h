@@ -66,6 +66,11 @@ void	convert_to_array(t_list *map_list, t_map *data);
 void	validate_map(char **arr, t_map *data);
 
 /*
+ *	GUI functions
+ */
+void	init_windows(char **arr, t_map *data);
+
+/*
  *	Additional utils
  */
 int		ft_isnumber(char *str);
