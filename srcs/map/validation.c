@@ -71,5 +71,7 @@ void	validate_map(char **arr, t_map *data)
 
 	find_player(arr, &x, &y);
 	flood_fill(arr, x, y);
+	data->pos.x = (double)x;
+	data->pos.y = (double)y;
 	init_windows(arr, data);
 }

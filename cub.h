@@ -26,12 +26,19 @@ typedef struct	s_res
 	int	y;
 }				t_res;
 
+typedef struct	s_pos
+{
+	double x;
+	double y;
+}				t_pos;
+
 typedef struct	s_map
 {
 	t_list		*list;
 	t_colors	c_colors;
 	t_colors	f_colors;
 	t_res		res;
+	t_pos		pos;
 	char		*we;
 	char		*ea;
 	char		*so;
