@@ -61,14 +61,29 @@ typedef struct	s_dxy
 	double	y;
 }				t_dxy;
 
+typedef struct	s_speed
+{
+	double	y;
+	double	rot;
+}				t_speed;
 
+
+typedef struct	s_rc
+{
+	t_dxy	pos;
+	t_dxy	dir;
+	t_dxy	plane;
+	t_speed	speed;
+	void	*mlx;
+	void	*win;
+}				t_rc;
 
 /*
  *	Kinda general functions
  */
 void	error(char *err);
 void	init_str_and_map(char **str, t_map *map);
-
+z
 /*
  *	List validation functions
  */
