@@ -55,6 +55,14 @@ typedef struct	s_img
     int		endian;
 }				t_img;
 
+typedef struct	s_dxy
+{
+	double	x;
+	double	y;
+}				t_dxy;
+
+
+
 /*
  *	Kinda general functions
  */
