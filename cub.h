@@ -61,6 +61,13 @@ typedef struct	s_dxy
 	double	y;
 }				t_dxy;
 
+typedef struct	s_ixy
+{
+	int	x;
+	int	y;
+}				t_ixy;
+
+
 typedef struct	s_speed
 {
 	double	y;
@@ -72,10 +79,17 @@ typedef struct	s_rc
 {
 	t_dxy	pos;
 	t_dxy	dir;
+	t_dxy	wens;
+	t_ixy	square;
+	t_dxy	dirlen;
+	t_dxy	dirdiff;
+	t_dxy	pos;
+	double	cam;
 	t_dxy	plane;
 	t_speed	speed;
 	void	*mlx;
 	void	*win;
+	t_img	img;
 }				t_rc;
 
 /*
@@ -83,7 +97,7 @@ typedef struct	s_rc
  */
 void	error(char *err);
 void	init_str_and_map(char **str, t_map *map);
-z
+
 /*
  *	List validation functions
  */
