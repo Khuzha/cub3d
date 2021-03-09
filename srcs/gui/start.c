@@ -37,7 +37,7 @@ double	get_floor(double num)
 	if ((double)tmp < num)
 		return ((double)tmp);
 	else
-		return ((double)tmp + 1);
+		return ((double)tmp - 1);
 }
 
 void	init_windows(char **arr, t_map *data)
@@ -63,7 +63,7 @@ void	init_windows(char **arr, t_map *data)
 			rc->dir.y = rc->wens.y + rc->plane.y + rc->cam;
 			rc->square.x = (int)rc->pos.x;
 			rc->square.y = (int)rc->pos.y;
-			
+
 			rc->dirlen.x = rc->dir.x >= 0 ? 
 
 			x++;
