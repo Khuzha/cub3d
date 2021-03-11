@@ -10,8 +10,8 @@ void	put_pixel(t_img img, int x, int y, int color)
 
 void	init_rc(t_rc *rc, t_map *data)
 {
-	rc->pos.x = 0;
-	rc->pos.y = 0;
+	rc->pos.x = 10;
+	rc->pos.y = 3;
 	rc->wens.x = 0;
 	rc->wens.y = 1;
 	rc->ray_square.x = 0;
@@ -52,6 +52,25 @@ double	get_up(double num)
 		return ((double)tmp + 1);
 }
 
+
+void	handle_rc(t_rc *rc, t_map *data, int x)
+{
+	rc->cam = 2 * x / (double)data->res.x - 1;
+			
+	rc->ray_dir.x = rc->wens.x + rc->plane.x + rc->cam;
+	rc->ray_dir.y = rc->wens.y + rc->plane.y + rc->cam;
+
+	rc->ray_square.x = (int)rc->pos.x;
+	rc->ray_square.y = (int)rc->pos.y;
+
+	if (rc->ray_dir.y == 0)
+		rc->delta_dist.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
+	if (rc->ray_dir.x == 0)
+		rc->delta_dist.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
+
+	prepare_rc(rc);
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
@@ -70,19 +89,7 @@ void	init_windows(char **arr, t_map *data)
 		x = 0;
 		while (x < data->res.x)
 		{
-			rc->cam = 2 * x / (double)data->res.x - 1;
-			
-			rc->ray_dir.x = rc->wens.x + rc->plane.x + rc->cam;
-			rc->ray_dir.y = rc->wens.y + rc->plane.y + rc->cam;
-
-			rc->ray_square.x = (int)rc->pos.x;
-			rc->ray_square.y = (int)rc->pos.y;
-
-			if (rc->ray_dir.y == 0)
-				rc->d_dist.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
-			if (rc->ray_dir.x == 0)
-				rc->d_dist.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
-
+			handle_rc(rc, data, x);
 			// rc->dirlen.x = rc->dir.x >= 0 ? get_up(rc->pos.x) : get_floor(rc->pos.x);
 			// rc->dirlen.y = rc->dir.y >= 0 ? get_up(rc->pos.y) : get_floor(rc->pos.y);
 
