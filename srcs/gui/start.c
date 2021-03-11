@@ -52,6 +52,29 @@ double	get_up(double num)
 		return ((double)tmp + 1);
 }
 
+void	prepare_rc(t_rc *rc)
+{
+	if (rc->ray_dir.x < 0)
+	{
+		rc->ray_step.x = -1;
+		rc->abs_dist.x = (rc->pos.x - rc->ray_square.x) * rc->delta_dist.x;
+	}
+	else
+	{
+		rc->ray_step.x = 1;
+		rc->abs_dist.x = (rc->ray_square.x + 1 - rc->pos.x) * rc->delta_dist.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->ray_step.y = -1;
+		rc->abs_dist.y = (rc->pos.y - rc->ray_square.y) * rc->delta_dist.y;
+	}
+	else
+	{
+		rc->ray_step.y = 1;
+		rc->abs_dist.y = (rc->ray_square.y + 1 - rc->pos.y) * rc->delta_dist.y;
+	}
+}
 
 void	handle_rc(t_rc *rc, t_map *data, int x)
 {
