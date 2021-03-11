@@ -94,6 +94,27 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	prepare_rc(rc);
 }
 
+void	run_dda(t_rc *rc, char **arr)
+{
+	while (!rc->was_hit)
+	{
+		if (rc->abs_dist.x < rc->abs_dist.y)
+		{
+			rc->abs_dist.x += rc->delta_dist.x;
+			rc->ray_square.x += rc->ray_step.x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->abs_dist.y += rc->delta_dist.y;
+			rc->ray_square.y += rc->ray_step.y;
+			rc->side = 1;
+		}
+		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
+			rc->was_hit = 1;
+	}
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
@@ -113,6 +134,7 @@ void	init_windows(char **arr, t_map *data)
 		while (x < data->res.x)
 		{
 			handle_rc(rc, data, x);
+			run_dda(rc, arr);
 			// rc->dirlen.x = rc->dir.x >= 0 ? get_up(rc->pos.x) : get_floor(rc->pos.x);
 			// rc->dirlen.y = rc->dir.y >= 0 ? get_up(rc->pos.y) : get_floor(rc->pos.y);
 
@@ -121,6 +143,4 @@ void	init_windows(char **arr, t_map *data)
 			x++;
 		}
 	}
-
-	arr++;
 }

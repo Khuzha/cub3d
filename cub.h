@@ -94,6 +94,7 @@ typedef struct	s_rc
 	void	*win;
 	t_img	img;
 	int		was_hit;
+	int		side;
 }				t_rc;
 
 /*
