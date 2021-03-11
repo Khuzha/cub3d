@@ -94,7 +94,7 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	prepare_rc(rc);
 }
 
-void	run_dda(t_rc *rc, char **arr)
+void	run_dda(t_rc *rc, char **arr, t_map *data)
 {
 	while (!rc->was_hit)
 	{
@@ -117,6 +117,7 @@ void	run_dda(t_rc *rc, char **arr)
 		rc->dist_to_wall = (rc->ray_square.y - rc->pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
+	rc->w_height = (int)(data->res.y / rc->dist_to_wall);
 }
 
 void	init_windows(char **arr, t_map *data)
@@ -138,7 +139,7 @@ void	init_windows(char **arr, t_map *data)
 		while (x < data->res.x)
 		{
 			handle_rc(rc, data, x);
-			run_dda(rc, arr);
+			run_dda(rc, arr, data);
 			// rc->dirlen.x = rc->dir.x >= 0 ? get_up(rc->pos.x) : get_floor(rc->pos.x);
 			// rc->dirlen.y = rc->dir.y >= 0 ? get_up(rc->pos.y) : get_floor(rc->pos.y);
 
