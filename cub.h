@@ -78,18 +78,21 @@ typedef struct	s_speed
 typedef struct	s_rc
 {
 	t_dxy	pos;
-	t_dxy	dir;
+	t_dxy	ray_dir;
 	t_dxy	wens;
-	t_ixy	square;
-	t_dxy	dirlen;
-	t_dxy	dirdiff;
+	t_ixy	ray_square;
+	// t_dxy	dirlen;
+	// t_dxy	dirdiff;
 	t_dxy	pos;
+	t_dxy	d_dist;
+	t_dxy	ray_step;
 	double	cam;
 	t_dxy	plane;
 	t_speed	speed;
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	int		was_hit;
 }				t_rc;
 
 /*
@@ -128,5 +131,6 @@ void	init_windows(char **arr, t_map *data);
  */
 int		ft_isnumber(char *str);
 size_t	get_max(size_t a, size_t b);
+double	ft_abs_dvl(double num);
 
 #endif
