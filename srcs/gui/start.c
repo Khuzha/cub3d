@@ -113,6 +113,10 @@ void	run_dda(t_rc *rc, char **arr)
 		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
 			rc->was_hit = 1;
 	}
+	if (rc->side)
+		rc->dist_to_wall = (rc->ray_square.y - rc->pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
+	else
+		rc->dist_to_wall = (rc->ray_square.x - rc->pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
 }
 
 void	init_windows(char **arr, t_map *data)

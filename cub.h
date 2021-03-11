@@ -87,6 +87,7 @@ typedef struct	s_rc
 	t_dxy	delta_dist;
 	t_dxy	abs_dist;
 	t_ixy	ray_step;
+	double	dist_to_wall;
 	double	cam;
 	t_dxy	plane;
 	t_speed	speed;
