@@ -74,6 +74,14 @@ typedef struct	s_speed
 	double	rot;
 }				t_speed;
 
+typedef struct	s_wall
+{
+	int	height;
+	int start;
+	int	finish;
+}				t_wall;
+
+
 
 typedef struct	s_rc
 {
@@ -88,7 +96,7 @@ typedef struct	s_rc
 	t_dxy	abs_dist;
 	t_ixy	ray_step;
 	double	dist_to_wall;
-	int		w_height;
+	t_wall	wall;
 	double	cam;
 	t_dxy	plane;
 	t_speed	speed;
