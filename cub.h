@@ -79,6 +79,7 @@ typedef struct	s_wall
 	int	height;
 	int start;
 	int	finish;
+	int	color;
 }				t_wall;
 
 
@@ -94,15 +95,15 @@ typedef struct	s_rc
 	t_dxy	pos;
 	t_dxy	delta_dist;
 	t_dxy	abs_dist;
-	t_ixy	ray_step;
-	double	dist_to_wall;
-	t_wall	wall;
-	double	cam;
 	t_dxy	plane;
+	t_ixy	ray_step;
+	t_img	img;
+	t_wall	wall;
 	t_speed	speed;
+	double	dist_to_wall;
+	double	cam;
 	void	*mlx;
 	void	*win;
-	t_img	img;
 	int		was_hit;
 	int		side;
 }				t_rc;

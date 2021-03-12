@@ -130,6 +130,16 @@ void	calc_wall(t_rc *rc, t_map *data)
 		rc->wall.finish = data->res.y - 1;
 }
 
+int		make_trgb(int t, int r, int g, int b)
+{
+	return(t << 24 | r << 16 | g << 8 | b);
+}
+
+void	define_color(t_rc *rc)
+{
+	
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
@@ -151,6 +161,7 @@ void	init_windows(char **arr, t_map *data)
 			handle_rc(rc, data, x);
 			run_dda(rc, arr, data);
 			calc_wall(rc, data);
+			define_color(rc);
 			// rc->dirlen.x = rc->dir.x >= 0 ? get_up(rc->pos.x) : get_floor(rc->pos.x);
 			// rc->dirlen.y = rc->dir.y >= 0 ? get_up(rc->pos.y) : get_floor(rc->pos.y);
 
