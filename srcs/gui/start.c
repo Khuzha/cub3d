@@ -185,8 +185,5 @@ void	init_windows(char **arr, t_map *data)
 		x++;
 	}
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
-	while (1)
-	{
-		x = 0;
-	}
+	mlx_loop(rc->mlx);
 }
