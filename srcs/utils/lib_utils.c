@@ -28,7 +28,7 @@ size_t	get_max(size_t a, size_t b)
 		return (b);
 }
 
-double	ft_abs_dvl(double num) {
+double	ft_abs_dbl(double num) {
 	if (num >= 0)
 		return (num);
 	else

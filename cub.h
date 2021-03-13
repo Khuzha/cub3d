@@ -90,7 +90,6 @@ typedef struct	s_rc
 	t_ixy	ray_square;
 	// t_dxy	dirlen;
 	// t_dxy	dirdiff;
-	t_dxy	pos;
 	t_dxy	delta_dist;
 	t_dxy	abs_dist;
 	t_dxy	plane;
@@ -142,6 +141,6 @@ void	init_windows(char **arr, t_map *data);
  */
 int		ft_isnumber(char *str);
 size_t	get_max(size_t a, size_t b);
-double	ft_abs_dvl(double num);
+double	ft_abs_dbl(double num);
 
 #endif

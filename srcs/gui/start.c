@@ -28,6 +28,7 @@ void	init_rc(t_rc *rc, t_map *data)
 	rc->speed.y = 0;
 	rc->speed.rot = 0;
 	rc->was_hit = 0;
+	data++;
 }
 
 double	get_floor(double num)
@@ -143,6 +144,23 @@ void	define_color(t_rc *rc)
 		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00) / 2;
 }
 
+void	draw_line(t_rc *rc, t_map *data, int x)
+{
+	int	y;
+
+	y = 0;
+	while (y < data->res.y)
+	{
+		if (y < rc->wall.start)
+			put_pixel(rc->img, x, y, 0x00FFFFFF);
+		else if (y < rc->wall.finish)
+			put_pixel(rc->img, x, y, rc->wall.color);
+		else
+			put_pixel(rc->img, x, y, 0x00000000);
+		y++;
+	}
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
@@ -156,21 +174,19 @@ void	init_windows(char **arr, t_map *data)
 	rc->pos.x = data->pos.x;
 	rc->pos.y = data->pos.y;
 
+
+	while (x < data->res.x)
+	{
+		handle_rc(rc, data, x);
+		run_dda(rc, arr, data);
+		calc_wall(rc, data);
+		define_color(rc);
+		draw_line(rc, data, x);
+		x++;
+	}
+	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	while (1)
 	{
 		x = 0;
-		while (x < data->res.x)
-		{
-			handle_rc(rc, data, x);
-			run_dda(rc, arr, data);
-			calc_wall(rc, data);
-			define_color(rc);
-			// rc->dirlen.x = rc->dir.x >= 0 ? get_up(rc->pos.x) : get_floor(rc->pos.x);
-			// rc->dirlen.y = rc->dir.y >= 0 ? get_up(rc->pos.y) : get_floor(rc->pos.y);
-
-			//       double perpWallDist; ??
-
-			x++;
-		}
 	}
 }
