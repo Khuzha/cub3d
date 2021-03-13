@@ -82,8 +82,6 @@ typedef struct	s_wall
 	int	color;
 }				t_wall;
 
-
-
 typedef struct	s_rc
 {
 	t_dxy	pos;

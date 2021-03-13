@@ -137,7 +137,10 @@ int		make_trgb(int t, int r, int g, int b)
 
 void	define_color(t_rc *rc)
 {
-	
+	if (rc->side)
+		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00);
+	else
+		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00) / 2;
 }
 
 void	init_windows(char **arr, t_map *data)
