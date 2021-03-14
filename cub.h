@@ -84,7 +84,7 @@ typedef struct	s_wall
 
 typedef struct	s_rc
 {
-	t_dxy	pos;
+	t_dxy	player_pos;
 	t_dxy	ray_dir;
 	t_dxy	wens;
 	t_ixy	ray_square;
