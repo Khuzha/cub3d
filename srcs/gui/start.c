@@ -4,6 +4,9 @@ void	put_pixel(t_img img, int x, int y, int color)
 {
 	char	*pos;
 
+	// if (x < 0 || x > data->res.x || y < 0 || y > data->res.y)
+	// 	error("Ты уебан");
+
 	pos = img.addr + (y * img.length + x * (img.bpp / 8));
 	*((unsigned int	*)pos) = color;
 }
@@ -135,7 +138,7 @@ int		make_trgb(int t, int r, int g, int b)
 void	define_color(t_rc *rc)
 {
 	if (rc->side)
-		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00);
+		rc->wall.color = make_trgb(0, 0xFF, 0xFF, 0x00);
 	else
 		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00) / 2;
 }
@@ -144,9 +147,11 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 {
 	int	y;
 
+	// printf("x = %d, res.y = %d, dist = %lf, start = %d, finish = %d, h = %d\n", x, data->res.y, rc->dist_to_wall, rc->wall.start, rc->wall.finish, rc->wall.height);
 	y = 0;
 	while (y < data->res.y)
 	{
+		printf("x = %d, y = %d\n", x, y);
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, 0x00FFFFFF);
 		else if (y < rc->wall.finish)
@@ -155,6 +160,7 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 			put_pixel(rc->img, x, y, 0x00000000);
 		y++;
 	}
+	printf("success\n");
 }
 
 void	init_windows(char **arr, t_map *data)
@@ -164,10 +170,9 @@ void	init_windows(char **arr, t_map *data)
 
 	if (!(rc = malloc(sizeof(t_dxy))))
 		error("Malloc error\n");
-	init_rc(rc, data);
 	rc->mlx = mlx_init();
-	rc->win = mlx_new_window(rc->mlx, data->res.y, data->res.x, "21");
-	rc->img.ptr = mlx_new_image(rc->mlx, data->res.y, data->res.x);
+	rc->win = mlx_new_window(rc->mlx, data->res.x, data->res.y, "21");
+	rc->img.ptr = mlx_new_image(rc->mlx, data->res.x, data->res.y);
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr, &rc->img.bpp, &rc->img.length, &rc->img.endian);
 	rc->pos.x = data->pos.x;
 	rc->pos.y = data->pos.y;
@@ -176,12 +181,12 @@ void	init_windows(char **arr, t_map *data)
 	printf("bef loop\n");
 	while (x <= data->res.x)
 	{
+		init_rc(rc, data);
 		handle_rc(rc, data, x);
 		run_dda(rc, arr);
 		calc_wall(rc, data);
 		define_color(rc);
-		printf("side = %d, square.y = %d, pos.y = %lf, step.y = %d, dir.y = %lf, cam = %lf\n", rc->side, rc->ray_square.y, rc->pos.y, rc->ray_step.y, rc->ray_dir.y, rc->cam);
-		// printf("res.y = %d, dist = %lf, start = %d, finish = %d, h = %d\n", data->res.y, rc->dist_to_wall, rc->wall.start, rc->wall.finish, rc->wall.height);
+		// printf("side = %d, square.y = %d, pos.y = %lf, step.y = %d, dir.y = %lf, cam = %lf\n", rc->side, rc->ray_square.y, rc->pos.y, rc->ray_step.y, rc->ray_dir.y, rc->cam);
 		draw_line(rc, data, x);
 		x++;
 	}
