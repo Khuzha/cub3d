@@ -11,19 +11,36 @@ void	put_pixel(t_img img, int x, int y, int color)
 	*((unsigned int	*)pos) = color;
 }
 
+void	handle_player_dir(t_rc *rc, t_map *data)
+{
+	rc->wens.x = 0;
+	rc->wens.y = 0;
+	rc->plane.x = 0;
+	rc->plane.y = 0;
+	if (data->player == 'N')
+		rc->wens.y = -1;
+	if (data->player == 'S')
+		rc->wens.y = 1;
+	if (data->player == 'W')
+		rc->wens.x = -1;
+	if (data->player == 'E')
+		rc->wens.x = 1;
+	if (ft_strchr("NS", data->player))
+		rc->plane.x = 0.66;
+	if (ft_strchr("WE", data->player))
+		rc->plane.y = 0.66;
+}
+
 void	init_rc(t_rc *rc, t_map *data)
 {
+	handle_player_dir(rc, data);
 	rc->player_pos.x = (double)data->pos.x + 0.5;
 	rc->player_pos.y = (double)data->pos.y + 0.5;
-	rc->wens.x = 0;
-	rc->wens.y = 1;
 	rc->ray_square.x = 0;
 	rc->ray_square.y = 0;
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
 	rc->cam = 0;
-	rc->plane.x = 0.66;
-	rc->plane.y = 0;
 	rc->speed.y = 0;
 	rc->speed.rot = 0;
 	rc->was_hit = 0;
@@ -87,18 +104,18 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	rc->ray_square.x = (int)rc->player_pos.x;
 	rc->ray_square.y = (int)rc->player_pos.y;
 
-	printf("rc->wens.y = %lf, rc->plane.y = %lf, rc->cam = %lf, rc->ray_dir.y in handle_rc = %lf\n", rc->wens.y, rc->plane.y, rc->cam, rc->ray_dir.y);
+	// printf("rc->wens.x = %d, rc->plane.x = %lf, rc->cam = %lf, rc->ray_dir.x in handle_rc = %lf\n", rc->wens.x, rc->plane.x, rc->cam, rc->ray_dir.x);
 
 	if (rc->ray_dir.y == 0)
 		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
 	if (rc->ray_dir.x == 0)
 		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
 
-	printf("rc->ray_dir.y in handle_rc = %lf\n", rc->ray_dir.y);
+	// printf("rc->ray_dir.x in handle_rc = %lf\n", rc->ray_dir.x);
 	prepare_rc(rc);
 }
 
-void	run_dda(t_rc *rc, char **arr)
+void	run_dda(t_rc *rc, char **arr, int x)
 {
 	while (!rc->was_hit)
 	{
@@ -116,13 +133,14 @@ void	run_dda(t_rc *rc, char **arr)
 		}
 		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
 			rc->was_hit = 1;
-		printf("ray.y = %d, ray.x = %d, char = %c, was_hit = %d, side = %d\n", rc->ray_square.y, rc->ray_square.x, arr[rc->ray_square.y][rc->ray_square.x], rc->was_hit, rc->side);
+		printf("ray.y = %d, ray.x = %d, char = %c, was_hit = %d, side = %d, clY = %lf, clX = %lf\n", rc->ray_square.y, rc->ray_square.x, arr[rc->ray_square.y][rc->ray_square.x], rc->was_hit, rc->side, rc->closest_line.y, rc->closest_line.x);
 	}
+
 	if (rc->side)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
-		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
-	printf("side = %d, rsy = %d, player.y = %lf, ray_step.y = %d, ray_dir.y = %lf, dist_to_wall = %lf\n", rc->side, rc->ray_square.y, rc->player_pos.y, rc->ray_step.y, rc->ray_dir.y, rc->dist_to_wall);
+		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x; // здесь делю на 0
+	printf("side = %d, rsx = %d, player.x = %lf, ray_step.x = %d, ray_dir.x = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->player_pos.x, rc->ray_step.x, rc->ray_dir.x, rc->dist_to_wall, x);
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
@@ -181,13 +199,13 @@ void	init_windows(char **arr, t_map *data)
 	rc->player_pos.x = data->pos.x;
 	rc->player_pos.y = data->pos.y;
 
-	x = 0;
+	x = 000;
 	printf("bef loop\n");
 	while (x < data->res.x)
 	{
 		init_rc(rc, data);
 		handle_rc(rc, data, x);
-		run_dda(rc, arr);
+		run_dda(rc, arr, x);
 		calc_wall(rc, data);
 		define_color(rc);
 		// printf("side = %d, square.y = %d, pos.y = %lf, step.y = %d, dir.y = %lf, cam = %lf\n", rc->side, rc->ray_square.y, rc->player_pos.y, rc->ray_step.y, rc->ray_dir.y, rc->cam);

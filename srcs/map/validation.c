@@ -1,6 +1,6 @@
 #include "../../cub.h"
 
-void	find_player(char **arr, size_t *pos_x, size_t *pos_y)
+void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 {
 	size_t	x;
 	size_t	y;
@@ -17,6 +17,7 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y)
 			{
 				*pos_x = x;
 				*pos_y = y;
+				data->player = arr[y][x];
 				counter++;
 			}
 			if (counter > 1)
@@ -69,7 +70,7 @@ void	validate_map(char **arr, t_map *data)
 	size_t	x;
 	size_t	y;
 
-	find_player(arr, &x, &y);
+	find_player(arr, &x, &y, data);
 	// printf("bef flood_fill\n");
 	flood_fill(arr, x, y);
 	// printf("aft flood_fill\n");

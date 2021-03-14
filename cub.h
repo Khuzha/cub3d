@@ -39,6 +39,7 @@ typedef struct	s_map
 	t_colors	f_colors;
 	t_res		res;
 	t_pos		pos;
+	char		player;
 	char		*we;
 	char		*ea;
 	char		*so;
@@ -86,7 +87,7 @@ typedef struct	s_rc
 {
 	t_dxy	player_pos;
 	t_dxy	ray_dir;
-	t_dxy	wens;
+	t_ixy	wens;
 	t_ixy	ray_square;
 	// t_dxy	dirlen;
 	// t_dxy	dirdiff;
