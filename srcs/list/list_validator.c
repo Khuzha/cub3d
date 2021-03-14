@@ -42,7 +42,9 @@ void		iterate_list(t_map *map)
 		{
 			// printf("map started, str = %s\n", map->list->content);
 			was_map = 1;
+			// printf("before convert_to_array\n");
 			convert_to_array(map->list, map);
+			// printf("after convert_to_array\n");
 			break ;
 		}
 		fill_struct(map, arr, map->list->content); // TODO: free ft_split
@@ -52,6 +54,7 @@ void		iterate_list(t_map *map)
 	// printf("iterate_list bef call check_map\n");
 	if (!was_map)
 		error("No map found");
+	// printf("bef check_map\n");
 	check_map(map);
 	// free(arr);
 }

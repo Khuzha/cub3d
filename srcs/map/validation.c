@@ -70,7 +70,9 @@ void	validate_map(char **arr, t_map *data)
 	size_t	y;
 
 	find_player(arr, &x, &y);
+	// printf("bef flood_fill\n");
 	flood_fill(arr, x, y);
+	// printf("aft flood_fill\n");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
 	init_windows(arr, data);

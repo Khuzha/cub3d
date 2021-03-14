@@ -18,10 +18,6 @@ void	init_rc(t_rc *rc, t_map *data)
 	rc->ray_square.y = 0;
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
-	// rc->dirlen.x = 0;
-	// rc->dirlen.y = 0;
-	// rc->dirdiff.x = 0;
-	// rc->dirdiff.y = 0;
 	rc->cam = 0;
 	rc->plane.x = 0;
 	rc->plane.y = 0.66;
@@ -95,7 +91,7 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	prepare_rc(rc);
 }
 
-void	run_dda(t_rc *rc, char **arr, t_map *data)
+void	run_dda(t_rc *rc, char **arr)
 {
 	while (!rc->was_hit)
 	{
@@ -166,7 +162,9 @@ void	init_windows(char **arr, t_map *data)
 	t_rc	*rc;
 	int		x;
 
-	init(rc);
+	if (!(rc = malloc(sizeof(t_dxy))))
+		error("Malloc error\n");
+	init_rc(rc, data);
 	rc->mlx = mlx_init();
 	rc->win = mlx_new_window(rc->mlx, data->res.y, data->res.x, "21");
 	rc->img.ptr = mlx_new_image(rc->mlx, data->res.y, data->res.x);
@@ -174,11 +172,12 @@ void	init_windows(char **arr, t_map *data)
 	rc->pos.x = data->pos.x;
 	rc->pos.y = data->pos.y;
 
-
+	x = 0;
+	printf("bef loop\n");
 	while (x < data->res.x)
 	{
 		handle_rc(rc, data, x);
-		run_dda(rc, arr, data);
+		run_dda(rc, arr);
 		calc_wall(rc, data);
 		define_color(rc);
 		draw_line(rc, data, x);
