@@ -4,9 +4,6 @@ void	put_pixel(t_img img, int x, int y, int color)
 {
 	char	*pos;
 
-	// if (x < 0 || x > data->res.x || y < 0 || y > data->res.y)
-	// 	error("Ты уебан");
-
 	pos = img.addr + (y * img.length + x * (img.bpp / 8));
 	*((unsigned int	*)pos) = color;
 }
