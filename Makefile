@@ -15,7 +15,7 @@ $(NAME): $(SRCOBJS)
 	make bonus -C libft
 	make -C minilibx
 	ar -rcs $(NAME) $(SRCOBJS) libft/*.o 
-	gcc $(NAME) -framework OpenGL -framework AppKit minilibx/libmlx.a -g -o $(FINALNAME) 
+	gcc $(NAME) -framework OpenGL -framework AppKit minilibx/libmlx.a -g -o $(FINALNAME)
 
 all: $(NAME)
 

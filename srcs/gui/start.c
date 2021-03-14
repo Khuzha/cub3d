@@ -14,7 +14,7 @@ void	put_pixel(t_img img, int x, int y, int color)
 void	init_rc(t_rc *rc, t_map *data)
 {
 	rc->pos.x = 10;
-	rc->pos.y = 3;
+	rc->pos.y = 2;
 	rc->wens.x = 0;
 	rc->wens.y = 1;
 	rc->ray_square.x = 0;
@@ -117,12 +117,13 @@ void	run_dda(t_rc *rc, char **arr)
 		rc->dist_to_wall = (rc->ray_square.y - rc->pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
+	printf("side = %d, rsy = %d, pos.y = %lf, step.y = %d, rdir.y = %lf\n", rc->side, rc->ray_square.y, rc->pos.y, rc->ray_step.y, rc->ray_dir.y);
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
 {
 	rc->wall.height = (int)(data->res.y / rc->dist_to_wall);
-	rc->wall.start = -(int)(rc->wall.height / 2 + data->res.y / 2);
+	rc->wall.start = (int)(-rc->wall.height / 2 + data->res.y / 2);
 	rc->wall.finish = (int)(rc->wall.height / 2 + data->res.y / 2);
 	if (rc->wall.start < 0)
 		rc->wall.start = 0;
@@ -147,11 +148,10 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 {
 	int	y;
 
-	// printf("x = %d, res.y = %d, dist = %lf, start = %d, finish = %d, h = %d\n", x, data->res.y, rc->dist_to_wall, rc->wall.start, rc->wall.finish, rc->wall.height);
+	printf("x = %d, res.y = %d, dist = %lf, start = %d, finish = %d, h = %d\n", x, data->res.y, rc->dist_to_wall, rc->wall.start, rc->wall.finish, rc->wall.height);
 	y = 0;
 	while (y < data->res.y)
 	{
-		printf("x = %d, y = %d\n", x, y);
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, 0x00FFFFFF);
 		else if (y < rc->wall.finish)
@@ -160,7 +160,6 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 			put_pixel(rc->img, x, y, 0x00000000);
 		y++;
 	}
-	printf("success\n");
 }
 
 void	init_windows(char **arr, t_map *data)
@@ -179,7 +178,7 @@ void	init_windows(char **arr, t_map *data)
 
 	x = 0;
 	printf("bef loop\n");
-	while (x <= data->res.x)
+	while (x < data->res.x)
 	{
 		init_rc(rc, data);
 		handle_rc(rc, data, x);
