@@ -90,8 +90,8 @@ typedef struct	s_rc
 	t_ixy	ray_square;
 	// t_dxy	dirlen;
 	// t_dxy	dirdiff;
-	t_dxy	delta_dist;
-	t_dxy	abs_dist;
+	t_dxy	closest_line;
+	t_dxy	next_line;
 	t_dxy	plane;
 	t_ixy	ray_step;
 	t_img	img;

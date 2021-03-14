@@ -19,8 +19,8 @@ void	init_rc(t_rc *rc, t_map *data)
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
 	rc->cam = 0;
-	rc->plane.x = 0;
-	rc->plane.y = 0.66;
+	rc->plane.x = 0.66;
+	rc->plane.y = 0;
 	rc->speed.y = 0;
 	rc->speed.rot = 0;
 	rc->was_hit = 0;
@@ -54,22 +54,22 @@ void	prepare_rc(t_rc *rc)
 	if (rc->ray_dir.x < 0)
 	{
 		rc->ray_step.x = -1;
-		rc->abs_dist.x = (rc->pos.x - rc->ray_square.x) * rc->delta_dist.x;
+		rc->closest_line.x = (rc->pos.x - rc->ray_square.x) * rc->next_line.x;
 	}
 	else
 	{
 		rc->ray_step.x = 1;
-		rc->abs_dist.x = (rc->ray_square.x + 1 - rc->pos.x) * rc->delta_dist.x;
+		rc->closest_line.x = (rc->ray_square.x + 1 - rc->pos.x) * rc->next_line.x;
 	}
 	if (rc->ray_dir.y < 0)
 	{
 		rc->ray_step.y = -1;
-		rc->abs_dist.y = (rc->pos.y - rc->ray_square.y) * rc->delta_dist.y;
+		rc->closest_line.y = (rc->pos.y - rc->ray_square.y) * rc->next_line.y;
 	}
 	else
 	{
 		rc->ray_step.y = 1;
-		rc->abs_dist.y = (rc->ray_square.y + 1 - rc->pos.y) * rc->delta_dist.y;
+		rc->closest_line.y = (rc->ray_square.y + 1 - rc->pos.y) * rc->next_line.y;
 	}
 }
 
@@ -84,9 +84,9 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	rc->ray_square.y = (int)rc->pos.y;
 
 	if (rc->ray_dir.y == 0)
-		rc->delta_dist.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
+		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
 	if (rc->ray_dir.x == 0)
-		rc->delta_dist.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
+		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
 
 	prepare_rc(rc);
 }
@@ -95,15 +95,15 @@ void	run_dda(t_rc *rc, char **arr)
 {
 	while (!rc->was_hit)
 	{
-		if (rc->abs_dist.x < rc->abs_dist.y)
+		if (rc->closest_line.x < rc->closest_line.y)
 		{
-			rc->abs_dist.x += rc->delta_dist.x;
+			rc->closest_line.x += rc->next_line.x;
 			rc->ray_square.x += rc->ray_step.x;
 			rc->side = 0;
 		}
 		else
 		{
-			rc->abs_dist.y += rc->delta_dist.y;
+			rc->closest_line.y += rc->next_line.y;
 			rc->ray_square.y += rc->ray_step.y;
 			rc->side = 1;
 		}
@@ -174,12 +174,14 @@ void	init_windows(char **arr, t_map *data)
 
 	x = 0;
 	printf("bef loop\n");
-	while (x < data->res.x)
+	while (x <= data->res.x)
 	{
 		handle_rc(rc, data, x);
 		run_dda(rc, arr);
 		calc_wall(rc, data);
 		define_color(rc);
+		printf("side = %d, square.y = %d, pos.y = %lf, step.y = %d, dir.y = %lf, cam = %lf\n", rc->side, rc->ray_square.y, rc->pos.y, rc->ray_step.y, rc->ray_dir.y, rc->cam);
+		// printf("res.y = %d, dist = %lf, start = %d, finish = %d, h = %d\n", data->res.y, rc->dist_to_wall, rc->wall.start, rc->wall.finish, rc->wall.height);
 		draw_line(rc, data, x);
 		x++;
 	}
