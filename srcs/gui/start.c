@@ -117,7 +117,7 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	prepare_rc(rc);
 }
 
-void	run_dda(t_rc *rc, char **arr, int x)
+void	run_dda(t_rc *rc, char **arr)
 {
 	while (!rc->was_hit)
 	{
@@ -142,13 +142,14 @@ void	run_dda(t_rc *rc, char **arr, int x)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x; // здесь делю на 0
-	printf("side = %d, rsx = %d, rsy = %d, ray_step.x = %d, ray_step.y = %d, ray_dir.x = %lf, ray_dir.y = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->ray_square.y, rc->ray_step.x, rc->ray_step.y, rc->ray_dir.x, rc->ray_dir.y, rc->dist_to_wall, x);
+	// printf("side = %d, rsx = %d, rsy = %d, ray_step.x = %d, ray_step.y = %d, ray_dir.x = %lf, ray_dir.y = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->ray_square.y, rc->ray_step.x, rc->ray_step.y, rc->ray_dir.x, rc->ray_dir.y, rc->dist_to_wall, x);
 	// printf("side = %d, rsx = %d, player.x = %lf, ray_step.x = %d, ray_dir.x = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->player_pos.x, rc->ray_step.x, rc->ray_dir.x, rc->dist_to_wall, x);
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
 {
-	rc->wall.height = (int)(data->res.y / rc->dist_to_wall);
+	rc->wall.height = (int)(data->res.x / rc->dist_to_wall * 0.75);
+	// rc->wall.height = (int)(data->res.y / rc->dist_to_wall);
 	rc->wall.start = (int)(-rc->wall.height / 2 + data->res.y / 2);
 	rc->wall.finish = (int)(rc->wall.height / 2 + data->res.y / 2);
 	if (rc->wall.start < 0)
@@ -208,7 +209,7 @@ void	init_windows(char **arr, t_map *data)
 	{
 		init_rc(rc, data);
 		handle_rc(rc, data, x);
-		run_dda(rc, arr, x);
+		run_dda(rc, arr);
 		calc_wall(rc, data);
 		define_color(rc);
 		// printf("side = %d, square.y = %d, pos.y = %lf, step.y = %d, dir.y = %lf, cam = %lf\n", rc->side, rc->ray_square.y, rc->player_pos.y, rc->ray_step.y, rc->ray_dir.y, rc->cam);
