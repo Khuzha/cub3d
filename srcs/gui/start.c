@@ -94,7 +94,7 @@ void	prepare_rc(t_rc *rc)
 void	handle_rc(t_rc *rc, t_map *data, int x)
 {
 	rc->cam = 2 * x / (double)data->res.x - 1;
-			
+
 	rc->ray_dir.x = rc->wens.x + rc->plane.x * rc->cam;
 	rc->ray_dir.y = rc->wens.y + rc->plane.y * rc->cam;
 
@@ -104,8 +104,13 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	// printf("rc->wens.x = %d, rc->plane.x = %lf, rc->cam = %lf, rc->ray_dir.x in handle_rc = %lf\n", rc->wens.x, rc->plane.x, rc->cam, rc->ray_dir.x);
 
 	if (rc->ray_dir.y == 0)
+		rc->next_line.x = 0;
+	else
 		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
+
 	if (rc->ray_dir.x == 0)
+		rc->next_line.y = 0;
+	else
 		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
 
 	// printf("rc->ray_dir.x in handle_rc = %lf\n", rc->ray_dir.x);
@@ -130,13 +135,14 @@ void	run_dda(t_rc *rc, char **arr, int x)
 		}
 		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
 			rc->was_hit = 1;
-		// printf("ray.y = %d, ray.x = %d, char = %c, was_hit = %d, side = %d, clY = %lf, clX = %lf\n", rc->ray_square.y, rc->ray_square.x, arr[rc->ray_square.y][rc->ray_square.x], rc->was_hit, rc->side, rc->closest_line.y, rc->closest_line.x);
+		// printf("x = %d, side = %d, ray.y = %d, ray.x = %d, char = %c, was_hit = %d, side = %d, clY = %lf, clX = %lf\n", x, rc->side, rc->ray_square.y, rc->ray_square.x, arr[rc->ray_square.y][rc->ray_square.x], rc->was_hit, rc->side, rc->closest_line.y, rc->closest_line.x);
 	}
 
 	if (rc->side)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x; // здесь делю на 0
+	printf("side = %d, rsx = %d, rsy = %d, ray_step.x = %d, ray_step.y = %d, ray_dir.x = %lf, ray_dir.y = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->ray_square.y, rc->ray_step.x, rc->ray_step.y, rc->ray_dir.x, rc->ray_dir.y, rc->dist_to_wall, x);
 	// printf("side = %d, rsx = %d, player.x = %lf, ray_step.x = %d, ray_dir.x = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->player_pos.x, rc->ray_step.x, rc->ray_dir.x, rc->dist_to_wall, x);
 }
 
