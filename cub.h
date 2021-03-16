@@ -7,6 +7,12 @@
 
 # include <stdio.h>
 
+typedef enum {
+	ONE,
+	SCHOOL = 21,
+	THREE
+} t_enum;
+
 /*
  *	Structures
  */
