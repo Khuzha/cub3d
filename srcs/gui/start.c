@@ -188,22 +188,33 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 	}
 }
 
+int		key_hook(int code, t_rc *rc)
+{
+	printf("code = %d\n", code);
+	puts("h");
+	rc++;
+	return (0);
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
 	int		x;
 
-	if (!(rc = malloc(sizeof(t_dxy))))
+	if (!(rc = malloc(sizeof(t_rc))))
 		error("Malloc error\n");
 	rc->mlx = mlx_init();
+	setbuf(stdout, NULL);
+	printf("x = %d, y = %d\n", data->res.x, data->res.y);
 	rc->win = mlx_new_window(rc->mlx, data->res.x, data->res.y, "21");
 	rc->img.ptr = mlx_new_image(rc->mlx, data->res.x, data->res.y);
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr, &rc->img.bpp, &rc->img.length, &rc->img.endian);
 	rc->player_pos.x = data->pos.x;
 	rc->player_pos.y = data->pos.y;
 
-	x = 000;
+	x = 0;
 	printf("bef loop\n");
+	arr++;
 	while (x < data->res.x)
 	{
 		init_rc(rc, data);
@@ -216,5 +227,6 @@ void	init_windows(char **arr, t_map *data)
 		x++;
 	}
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
+	// mlx_hook(rc->mlx, 1, 0, key_hook, NULL);
 	mlx_loop(rc->mlx);
 }

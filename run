@@ -1,1 +1,1 @@
-make re && echo ======== && ./cub3D maps/map.cub > cub.log && make clean &> /dev/null
+make re && echo ======== && ./cub3D maps/map.cub && make clean &> /dev/null
