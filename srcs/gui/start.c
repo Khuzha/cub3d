@@ -179,7 +179,7 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
-			put_pixel(rc->img, x, y, 0x00FFFFFF);
+			put_pixel(rc->img, x, y, 255);
 		else if (y < rc->wall.finish)
 			put_pixel(rc->img, x, y, rc->wall.color);
 		else
