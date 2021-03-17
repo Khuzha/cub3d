@@ -190,8 +190,7 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 
 int		key_hook(int code, t_rc *rc)
 {
-	printf("code = %d, enum one = %d, sch = %d, th = %d\n", code, ONE, SCHOOL, THREE);
-	puts("h");
+	printf("key = %d\n", code);
 	rc++;
 	return (0);
 }

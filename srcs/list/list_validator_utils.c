@@ -2,6 +2,7 @@
 
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
+	printf("res in fill_resolution: x = %s, y = %s\n", res_x, res_y);
 	if (ft_strlen(res_x) > 5)
 		map->res.x_max = 1;
 	if (ft_strlen(res_y) > 5)
@@ -10,13 +11,14 @@ void	fill_resolution(t_map *map, char *res_x, char *res_y)
 		return error("Invalid map (resolution)");
 	map->res.x = ft_atoi(res_x);
 	map->res.y = ft_atoi(res_y);
+	printf("aft atoi: x = %d, y = %d\n", map->res.x, map->res.y);
 }
 
 void	define_file(t_map *map, char *type, char *file)
 {
 	int fd = open(file, O_RDONLY);
 	if (fd < 0)
-		error("Invalid map (file didn't open)");
+		error("Invalid map (file couldn't be open)");
 	if (!ft_strncmp(type, "WE", 3) && !map->we)
 		map->we = file;
 	else if (!ft_strncmp(type, "EA", 3) && !map->ea)
