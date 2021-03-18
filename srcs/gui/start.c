@@ -15,13 +15,13 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 	rc->plane.x = 0;
 	rc->plane.y = 0;
 	if (data->player == 'N')
-		rc->wens.y = -1;
-	if (data->player == 'S')
 		rc->wens.y = 1;
+	if (data->player == 'S')
+		rc->wens.y = -1;
 	if (data->player == 'W')
-		rc->wens.x = -1;
-	if (data->player == 'E')
 		rc->wens.x = 1;
+	if (data->player == 'E')
+		rc->wens.x = -1;
 	if (ft_strchr("NS", data->player))
 		rc->plane.x = 0.66;
 	if (ft_strchr("WE", data->player))
@@ -31,8 +31,6 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 void	init_rc(t_rc *rc, t_map *data)
 {
 	handle_player_dir(rc, data);
-	rc->player_pos.x = (double)data->pos.x + 0.5;
-	rc->player_pos.y = (double)data->pos.y + 0.5;
 	rc->ray_square.x = 0;
 	rc->ray_square.y = 0;
 	rc->ray_dir.x = 0;
@@ -172,9 +170,13 @@ void	define_color(t_rc *rc)
 
 void	draw_line(t_rc *rc, t_map *data, int x)
 {
+	t_colors	ceiling;
+	t_colors	floor;
 	int	y;
 
 	y = 0;
+	ceiling = rc->data->c_colors;
+	floor = rc->data->f_colors;
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
@@ -190,10 +192,9 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 int		drawer(t_rc *rc)
 {
 	int		x;
+	printf("called drawer\n");
 
 	x = 0;
-	rc->player_pos.x = rc->data->pos.x;
-	rc->player_pos.y = rc->data->pos.y;
 	while (x < rc->data->res.x)
 	{
 		init_rc(rc, rc->data);
@@ -210,9 +211,11 @@ int		drawer(t_rc *rc)
 
 int		key_hook(int code, t_rc *rc)
 {
-	if (code == KEY_A)
-		printf("pressed A\n");
-	rc++;
+	if (code == KEY_W)
+		rc->player_pos.y += 0.05;
+	if (code == KEY_S)
+		rc->player_pos.y -= 0.05;
+	drawer(rc);
 	return (0);
 }
 
@@ -228,6 +231,8 @@ void	init_windows(char **arr, t_map *data)
 	rc->win = mlx_new_window(rc->mlx, rc->data->res.x, rc->data->res.y, "21");
 	rc->img.ptr = mlx_new_image(rc->mlx, rc->data->res.x, rc->data->res.y);
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr, &rc->img.bpp, &rc->img.length, &rc->img.endian);
+	rc->player_pos.x = (double)data->pos.x + 0.5;
+	rc->player_pos.y = (double)data->pos.y + 0.5;
 
 	drawer(rc);
 	mlx_hook(rc->win, 2, 0, key_hook, rc);
