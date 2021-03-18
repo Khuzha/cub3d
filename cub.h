@@ -8,10 +8,16 @@
 # include <stdio.h>
 
 typedef enum {
-	ONE,
-	SCHOOL = 21,
-	THREE
-} t_enum;
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2,
+	KEY_W = 13,
+	KEY_AL = 123,
+	KEY_AR = 124,
+	KEY_AD = 125,
+	KEY_AT = 126,
+	KEY_ESC = 53
+} t_keys;
 
 /*
  *	Structures
@@ -91,6 +97,8 @@ typedef struct	s_wall
 
 typedef struct	s_rc
 {
+	char	**arr;
+	t_map	*data;
 	t_dxy	player_pos;
 	t_dxy	ray_dir;
 	t_ixy	wens;
