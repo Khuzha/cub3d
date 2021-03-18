@@ -170,21 +170,21 @@ void	define_color(t_rc *rc)
 
 void	draw_line(t_rc *rc, t_map *data, int x)
 {
-	t_colors	ceiling;
-	t_colors	floor;
+	t_colors	c;
+	t_colors	f;
 	int	y;
 
 	y = 0;
-	ceiling = rc->data->c_colors;
-	floor = rc->data->f_colors;
+	c = rc->data->c_colors;
+	f = rc->data->f_colors;
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
-			put_pixel(rc->img, x, y, 255);
+			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 			put_pixel(rc->img, x, y, rc->wall.color);
 		else
-			put_pixel(rc->img, x, y, 0x00000000);
+			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
 		y++;
 	}
 }
