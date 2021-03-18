@@ -211,10 +211,13 @@ int		drawer(t_rc *rc)
 
 int		key_hook(int code, t_rc *rc)
 {
+	double	step;
+
+	step = 0.05;
 	if (code == KEY_W)
-		rc->player_pos.y += 0.05;
+		rc->player_pos.y += step;
 	if (code == KEY_S)
-		rc->player_pos.y -= 0.05;
+		rc->player_pos.y -= step;
 	drawer(rc);
 	return (0);
 }
