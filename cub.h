@@ -6,6 +6,7 @@
 # include "minilibx/mlx.h"
 
 # include <stdio.h>
+# include <math.h>
 
 typedef enum {
 	KEY_A = 0,
@@ -101,7 +102,7 @@ typedef struct	s_rc
 	t_map	*data;
 	t_dxy	player_pos;
 	t_dxy	ray_dir;
-	t_ixy	wens;
+	t_dxy	wens;
 	t_ixy	ray_square;
 	// t_dxy	dirlen;
 	// t_dxy	dirdiff;
@@ -118,6 +119,7 @@ typedef struct	s_rc
 	void	*win;
 	int		was_hit;
 	int		side;
+	int		wens_defined;
 }				t_rc;
 
 /*

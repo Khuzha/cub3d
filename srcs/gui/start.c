@@ -26,18 +26,20 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 		rc->plane.x = 0.66;
 	if (ft_strchr("WE", data->player))
 		rc->plane.y = 0.66;
+	rc->wens_defined = 1;
 }
 
 void	init_rc(t_rc *rc, t_map *data)
 {
-	handle_player_dir(rc, data);
+	if (!rc->wens_defined)
+		handle_player_dir(rc, data);
 	rc->ray_square.x = 0;
 	rc->ray_square.y = 0;
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
 	rc->cam = 0;
 	rc->speed.forward = 0.05;
-	rc->speed.rot = 0;
+	rc->speed.rot = 0.05;
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
@@ -192,7 +194,7 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 int		drawer(t_rc *rc)
 {
 	int		x;
-	printf("called drawer\n");
+	// printf("called drawer\n");
 
 	x = 0;
 	while (x < rc->data->res.x)
@@ -225,8 +227,25 @@ void	step_back(t_rc *rc)
 		rc->player_pos.x -= rc->wens.x * rc->speed.forward;
 }
 
+void	rot_right(t_rc *rc)
+{
+	double	wens_y;
+	double	plane_y;
+	
+	wens_y = rc->wens.y;
+	printf("bef: rc->wens.y = %lf, rc->wens.y = %lf\n", rc->wens.y, rc->wens.x);
+	rc->wens.y = rc->wens.y * cos(-rc->speed.rot) - rc->wens.x * sin(-rc->speed.rot);
+	printf("aft: rc->wens.y = %lf, rc->wens.y = %lf\n", rc->wens.y, rc->wens.x);
+	rc->wens.x = wens_y * sin(-rc->speed.rot) + rc->wens.x * cos(-rc->speed.rot);
+	plane_y = rc->plane.y;
+	rc->plane.y = rc->plane.y * cos(-rc->speed.rot) - rc->plane.x * sin(-rc->speed.rot);
+	rc->plane.x = plane_y * sin(-rc->speed.rot) + rc->plane.x * cos(-rc->speed.rot);
+}
+
 int		key_hook(int code, t_rc *rc)
 {
+	printf("key code = %d\n", code);
+
 	if (code == KEY_W)
 		step_forward(rc);
 	if (code == KEY_S)
@@ -235,6 +254,8 @@ int		key_hook(int code, t_rc *rc)
 		rc->player_pos.x -= rc->speed.forward;
 	if (code == KEY_D)
 		rc->player_pos.x += rc->speed.forward;
+	if (code == KEY_AR)
+		rot_right(rc);
 	
 	drawer(rc);
 	return (0);
@@ -254,6 +275,7 @@ void	init_windows(char **arr, t_map *data)
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr, &rc->img.bpp, &rc->img.length, &rc->img.endian);
 	rc->player_pos.x = (double)data->pos.x + 0.5;
 	rc->player_pos.y = (double)data->pos.y + 0.5;
+	rc->wens_defined = 0;
 
 	drawer(rc);
 	mlx_hook(rc->win, 2, 0, key_hook, rc);
