@@ -83,7 +83,7 @@ typedef struct	s_ixy
 
 typedef struct	s_speed
 {
-	double	y;
+	double	forward;
 	double	rot;
 }				t_speed;
 

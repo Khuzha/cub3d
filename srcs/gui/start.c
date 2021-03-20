@@ -36,7 +36,7 @@ void	init_rc(t_rc *rc, t_map *data)
 	rc->ray_dir.x = 0;
 	rc->ray_dir.y = 0;
 	rc->cam = 0;
-	rc->speed.y = 0;
+	rc->speed.forward = 0.05;
 	rc->speed.rot = 0;
 	rc->was_hit = 0;
 	rc->side = -1;
@@ -209,19 +209,26 @@ int		drawer(t_rc *rc)
 	return (0);
 }
 
+void	step_forward(t_rc *rc)
+{
+	printf("next y = %c\n", rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x]);
+	printf("next x = %c\n", rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)]);
+	if (rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
+		rc->player_pos.y += rc->ray_dir.y * rc->speed.forward;
+	if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)] == '@')
+		rc->player_pos.x += rc->wens.x * rc->speed.forward;
+}
+
 int		key_hook(int code, t_rc *rc)
 {
-	double	step;
-
-	step = 0.03;
 	if (code == KEY_W)
-		rc->player_pos.y += step;
+		step_forward(rc);
 	if (code == KEY_S)
-		rc->player_pos.y -= step;
+		rc->player_pos.y -= rc->speed.forward;
 	if (code == KEY_A)
-		rc->player_pos.x -= step;
+		rc->player_pos.x -= rc->speed.forward;
 	if (code == KEY_D)
-		rc->player_pos.x += step;
+		rc->player_pos.x += rc->speed.forward;
 	
 	drawer(rc);
 	return (0);
