@@ -211,11 +211,9 @@ int		drawer(t_rc *rc)
 
 void	step_forward(t_rc *rc)
 {
-	printf("next y = %c\n", rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x]);
-	printf("next x = %c\n", rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)]);
 	if (rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
 		rc->player_pos.y += rc->ray_dir.y * rc->speed.forward;
-	if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)] == '@')
+	if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x + rc->wens.x * rc->speed.forward)] == '@')
 		rc->player_pos.x += rc->wens.x * rc->speed.forward;
 }
 
