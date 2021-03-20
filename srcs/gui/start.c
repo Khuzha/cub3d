@@ -217,12 +217,20 @@ void	step_forward(t_rc *rc)
 		rc->player_pos.x += rc->wens.x * rc->speed.forward;
 }
 
+void	step_back(t_rc *rc)
+{
+	if (rc->arr[(int)(rc->player_pos.y - rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
+		rc->player_pos.y -= rc->ray_dir.y * rc->speed.forward;
+	if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)] == '@')
+		rc->player_pos.x -= rc->wens.x * rc->speed.forward;
+}
+
 int		key_hook(int code, t_rc *rc)
 {
 	if (code == KEY_W)
 		step_forward(rc);
 	if (code == KEY_S)
-		rc->player_pos.y -= rc->speed.forward;
+		step_back(rc);
 	if (code == KEY_A)
 		rc->player_pos.x -= rc->speed.forward;
 	if (code == KEY_D)
