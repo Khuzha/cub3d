@@ -126,15 +126,12 @@ void	run_dda(t_rc *rc, char **arr)
 		}
 		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
 			rc->was_hit = 1;
-		// printf("x = %d, side = %d, ray.y = %d, ray.x = %d, char = %c, was_hit = %d, side = %d, clY = %lf, clX = %lf\n", x, rc->side, rc->ray_square.y, rc->ray_square.x, arr[rc->ray_square.y][rc->ray_square.x], rc->was_hit, rc->side, rc->closest_line.y, rc->closest_line.x);
 	}
 
 	if (rc->side)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
-		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x; // здесь делю на 0
-	// printf("side = %d, rsx = %d, rsy = %d, ray_step.x = %d, ray_step.y = %d, ray_dir.x = %lf, ray_dir.y = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->ray_square.y, rc->ray_step.x, rc->ray_step.y, rc->ray_dir.x, rc->ray_dir.y, rc->dist_to_wall, x);
-	// printf("side = %d, rsx = %d, player.x = %lf, ray_step.x = %d, ray_dir.x = %lf, dist_to_wall = %lf, x = %d\n", rc->side, rc->ray_square.x, rc->player_pos.x, rc->ray_step.x, rc->ray_dir.x, rc->dist_to_wall, x);
+		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
@@ -185,10 +182,8 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 int		drawer(t_rc *rc)
 {
 	int		x;
-	// printf("called drawer\n");
 
 	x = 0;
-	printf("wens: y = %lf, x = %lfб raydir: y = %lf, x = %lf\n", rc->wens.y, rc->wens.x, rc->ray_dir.y, rc->ray_dir.x);
 	while (x < rc->data->res.x)
 	{
 		init_rc(rc, rc->data);
@@ -205,7 +200,6 @@ int		drawer(t_rc *rc)
 
 void	step_forward(t_rc *rc)
 {
-	printf("raydir: y = %lf, x = %lf\n", rc->ray_dir.y, rc->ray_dir.x);
 	if (rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
 		rc->player_pos.y += rc->wens.y * rc->speed.forward;
 	if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x + rc->wens.x * rc->speed.forward)] == '@')
@@ -271,11 +265,6 @@ void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
 
-	int i = 0;
-	while(arr[i]) {
-		printf("i = %d, map: |%s|\n", i, arr[i]);
-		i++;
-	}
 	if (!(rc = malloc(sizeof(t_rc))))
 		error("Malloc error\n");
 	rc->arr = arr;
