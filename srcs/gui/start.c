@@ -40,6 +40,30 @@ void	init_rc(t_rc *rc, t_map *data)
 	data++;
 }
 
+void	prepare_rc(t_rc *rc)
+{
+	if (rc->ray_dir.x < 0)
+	{
+		rc->ray_step.x = -1;
+		rc->closest_line.x = (rc->player_pos.x - rc->ray_square.x) * rc->next_line.x;
+	}
+	else
+	{
+		rc->ray_step.x = 1;
+		rc->closest_line.x = (rc->ray_square.x + 1 - rc->player_pos.x) * rc->next_line.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->ray_step.y = -1;
+		rc->closest_line.y = (rc->player_pos.y - rc->ray_square.y) * rc->next_line.y;
+	}
+	else
+	{
+		rc->ray_step.y = 1;
+		rc->closest_line.y = (rc->ray_square.y + 1 - rc->player_pos.y) * rc->next_line.y;
+	}
+}
+
 void	handle_rc(t_rc *rc, t_map *data, int x)
 {
 	rc->cam = 2 * x / (double)data->res.x - 1;
@@ -82,30 +106,6 @@ double	get_up(double num)
 		return ((double)tmp);
 	else
 		return ((double)tmp + 1);
-}
-
-void	prepare_rc(t_rc *rc)
-{
-	if (rc->ray_dir.x < 0)
-	{
-		rc->ray_step.x = -1;
-		rc->closest_line.x = (rc->player_pos.x - rc->ray_square.x) * rc->next_line.x;
-	}
-	else
-	{
-		rc->ray_step.x = 1;
-		rc->closest_line.x = (rc->ray_square.x + 1 - rc->player_pos.x) * rc->next_line.x;
-	}
-	if (rc->ray_dir.y < 0)
-	{
-		rc->ray_step.y = -1;
-		rc->closest_line.y = (rc->player_pos.y - rc->ray_square.y) * rc->next_line.y;
-	}
-	else
-	{
-		rc->ray_step.y = 1;
-		rc->closest_line.y = (rc->ray_square.y + 1 - rc->player_pos.y) * rc->next_line.y;
-	}
 }
 
 void	run_dda(t_rc *rc, char **arr)
