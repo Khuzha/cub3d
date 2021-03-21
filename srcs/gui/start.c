@@ -231,9 +231,20 @@ void	rot_right(t_rc *rc)
 	double	plane_y;
 	
 	wens_y = rc->wens.y;
-	printf("bef: rc->wens.y = %lf, rc->wens.y = %lf\n", rc->wens.y, rc->wens.x);
+	rc->wens.y = rc->wens.y * cos(rc->speed.rot) - rc->wens.x * sin(rc->speed.rot);
+	rc->wens.x = wens_y * sin(rc->speed.rot) + rc->wens.x * cos(rc->speed.rot);
+	plane_y = rc->plane.y;
+	rc->plane.y = rc->plane.y * cos(rc->speed.rot) - rc->plane.x * sin(rc->speed.rot);
+	rc->plane.x = plane_y * sin(rc->speed.rot) + rc->plane.x * cos(rc->speed.rot);
+}
+
+void	rot_left(t_rc *rc)
+{
+	double	wens_y;
+	double	plane_y;
+	
+	wens_y = rc->wens.y;
 	rc->wens.y = rc->wens.y * cos(-rc->speed.rot) - rc->wens.x * sin(-rc->speed.rot);
-	printf("aft: rc->wens.y = %lf, rc->wens.y = %lf\n", rc->wens.y, rc->wens.x);
 	rc->wens.x = wens_y * sin(-rc->speed.rot) + rc->wens.x * cos(-rc->speed.rot);
 	plane_y = rc->plane.y;
 	rc->plane.y = rc->plane.y * cos(-rc->speed.rot) - rc->plane.x * sin(-rc->speed.rot);
@@ -254,6 +265,8 @@ int		key_hook(int code, t_rc *rc)
 		rc->player_pos.x += rc->speed.forward;
 	if (code == KEY_AR)
 		rot_right(rc);
+	if (code == KEY_AL)
+		rot_left(rc);
 	
 	drawer(rc);
 	return (0);
