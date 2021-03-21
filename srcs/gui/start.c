@@ -33,16 +33,33 @@ void	init_rc(t_rc *rc, t_map *data)
 {
 	if (!rc->wens_defined)
 		handle_player_dir(rc, data);
-	rc->ray_square.x = 0;
-	rc->ray_square.y = 0;
-	rc->ray_dir.x = 0;
-	rc->ray_dir.y = 0;
-	rc->cam = 0;
 	rc->speed.forward = 0.05;
 	rc->speed.rot = 0.02;
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
+}
+
+void	handle_rc(t_rc *rc, t_map *data, int x)
+{
+	rc->cam = 2 * x / (double)data->res.x - 1;
+
+	rc->ray_dir.y = rc->wens.y + rc->plane.y * rc->cam;
+	rc->ray_dir.x = rc->wens.x + rc->plane.x * rc->cam;
+
+	rc->ray_square.x = (int)rc->player_pos.x;
+	rc->ray_square.y = (int)rc->player_pos.y;
+
+	if (rc->ray_dir.y == 0)
+		rc->next_line.x = 0;
+	else
+		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
+
+	if (rc->ray_dir.x == 0)
+		rc->next_line.y = 0;
+	else
+		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
+	prepare_rc(rc);
 }
 
 double	get_floor(double num)
@@ -89,28 +106,6 @@ void	prepare_rc(t_rc *rc)
 		rc->ray_step.y = 1;
 		rc->closest_line.y = (rc->ray_square.y + 1 - rc->player_pos.y) * rc->next_line.y;
 	}
-}
-
-void	handle_rc(t_rc *rc, t_map *data, int x)
-{
-	rc->cam = 2 * x / (double)data->res.x - 1;
-
-	rc->ray_dir.y = rc->wens.y + rc->plane.y * rc->cam;
-	rc->ray_dir.x = rc->wens.x + rc->plane.x * rc->cam;
-
-	rc->ray_square.x = (int)rc->player_pos.x;
-	rc->ray_square.y = (int)rc->player_pos.y;
-
-	if (rc->ray_dir.y == 0)
-		rc->next_line.x = 0;
-	else
-		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
-
-	if (rc->ray_dir.x == 0)
-		rc->next_line.y = 0;
-	else
-		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
-	prepare_rc(rc);
 }
 
 void	run_dda(t_rc *rc, char **arr)
@@ -193,6 +188,7 @@ int		drawer(t_rc *rc)
 	// printf("called drawer\n");
 
 	x = 0;
+	printf("wens: y = %lf, x = %lfб raydir: y = %lf, x = %lf\n", rc->wens.y, rc->wens.x, rc->ray_dir.y, rc->ray_dir.x);
 	while (x < rc->data->res.x)
 	{
 		init_rc(rc, rc->data);
@@ -200,8 +196,6 @@ int		drawer(t_rc *rc)
 		run_dda(rc, rc->arr);
 		calc_wall(rc, rc->data);
 		define_color(rc);
-		printf("wens: y = %lf, x = %lf\n", rc->wens.y, rc->wens.x);
-		printf("raydir: y = %lf, x = %lf\n", rc->ray_dir.y, rc->ray_dir.x);
 		draw_line(rc, rc->data, x);
 		x++;
 	}
