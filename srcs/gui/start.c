@@ -19,9 +19,9 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 	if (data->player == 'S')
 		rc->wens.y = -1;
 	if (data->player == 'W')
-		rc->wens.x = 1;
-	if (data->player == 'E')
 		rc->wens.x = -1;
+	if (data->player == 'E')
+		rc->wens.x = 1;
 	if (ft_strchr("NS", data->player))
 		rc->plane.x = 0.66;
 	if (ft_strchr("WE", data->player))
@@ -39,7 +39,7 @@ void	init_rc(t_rc *rc, t_map *data)
 	rc->ray_dir.y = 0;
 	rc->cam = 0;
 	rc->speed.forward = 0.05;
-	rc->speed.rot = 0.05;
+	rc->speed.rot = 0.02;
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
@@ -95,13 +95,11 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 {
 	rc->cam = 2 * x / (double)data->res.x - 1;
 
-	rc->ray_dir.x = rc->wens.x + rc->plane.x * rc->cam;
 	rc->ray_dir.y = rc->wens.y + rc->plane.y * rc->cam;
+	rc->ray_dir.x = rc->wens.x + rc->plane.x * rc->cam;
 
 	rc->ray_square.x = (int)rc->player_pos.x;
 	rc->ray_square.y = (int)rc->player_pos.y;
-
-	// printf("rc->wens.x = %d, rc->plane.x = %lf, rc->cam = %lf, rc->ray_dir.x in handle_rc = %lf\n", rc->wens.x, rc->plane.x, rc->cam, rc->ray_dir.x);
 
 	if (rc->ray_dir.y == 0)
 		rc->next_line.x = 0;
@@ -112,8 +110,6 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 		rc->next_line.y = 0;
 	else
 		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
-
-	// printf("rc->ray_dir.x in handle_rc = %lf\n", rc->ray_dir.x);
 	prepare_rc(rc);
 }
 
@@ -204,6 +200,8 @@ int		drawer(t_rc *rc)
 		run_dda(rc, rc->arr);
 		calc_wall(rc, rc->data);
 		define_color(rc);
+		printf("wens: y = %lf, x = %lf\n", rc->wens.y, rc->wens.x);
+		printf("raydir: y = %lf, x = %lf\n", rc->ray_dir.y, rc->ray_dir.x);
 		draw_line(rc, rc->data, x);
 		x++;
 	}
@@ -265,6 +263,11 @@ void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
 
+	int i = 0;
+	while(arr[i]) {
+		printf("i = %d, map: |%s|\n", i, arr[i]);
+		i++;
+	}
 	if (!(rc = malloc(sizeof(t_rc))))
 		error("Malloc error\n");
 	rc->arr = arr;
