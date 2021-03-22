@@ -77,12 +77,12 @@ void	handle_rc(t_rc *rc, t_map *data, int x)
 	if (rc->ray_dir.y == 0)
 		rc->next_line.x = 0;
 	else
-		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 0;
+		rc->next_line.x = rc->ray_dir.x != 0 ? ft_abs_dbl(1 / rc->ray_dir.x) : 1;
 
 	if (rc->ray_dir.x == 0)
 		rc->next_line.y = 0;
 	else
-		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 0;
+		rc->next_line.y = rc->ray_dir.y != 0 ? ft_abs_dbl(1 / rc->ray_dir.y) : 1;
 	prepare_rc(rc);
 }
 
