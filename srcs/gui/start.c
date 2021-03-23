@@ -15,9 +15,9 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 	rc->plane.x = 0;
 	rc->plane.y = 0;
 	if (data->player == 'N')
-		rc->wens.y = 1;
-	if (data->player == 'S')
 		rc->wens.y = -1;
+	if (data->player == 'S')
+		rc->wens.y = 1;
 	if (data->player == 'W')
 		rc->wens.x = -1;
 	if (data->player == 'E')
@@ -33,7 +33,7 @@ void	init_rc(t_rc *rc, t_map *data)
 {
 	if (!rc->wens_defined)
 		handle_player_dir(rc, data);
-	rc->speed.forward = 0.05;
+	rc->speed.forward = 0.06;
 	rc->speed.rot = 0.02;
 	rc->was_hit = 0;
 	rc->side = -1;
@@ -214,6 +214,16 @@ void	step_back(t_rc *rc)
 		rc->player_pos.x -= rc->wens.x * rc->speed.forward;
 }
 
+void	step_left(t_rc *rc)
+{
+    int	x = (int)(rc->player_pos.x + rc->plane.x * rc->speed.forward);
+    int	y = (int)(rc->player_pos.y + rc->plane.y * rc->speed.forward);
+    if (rc->arr[(int)x][(int)rc->player_pos.y] != '1')
+        rc->player_pos.x += rc->plane.x * rc->speed.forward;
+    if (rc->arr[(int)rc->player_pos.x][(int)y] != '1')
+        rc->player_pos.x += rc->plane.y * rc->speed.forward;
+}
+
 void	rot_right(t_rc *rc)
 {
 	double	wens_y;
@@ -249,7 +259,7 @@ int		key_hook(int code, t_rc *rc)
 	if (code == KEY_S)
 		step_back(rc);
 	if (code == KEY_A)
-		rc->player_pos.x -= rc->speed.forward;
+		step_left(rc);
 	if (code == KEY_D)
 		rc->player_pos.x += rc->speed.forward;
 	if (code == KEY_AR)
