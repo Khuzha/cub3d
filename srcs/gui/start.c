@@ -214,14 +214,20 @@ void	step_back(t_rc *rc)
 		rc->player_pos.x -= rc->wens.x * rc->speed.forward;
 }
 
+void	step_right(t_rc *rc)
+{
+    if (rc->arr[(int)(rc->player_pos.y + rc->plane.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
+        rc->player_pos.x += rc->plane.x * rc->speed.forward;
+    if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x + rc->plane.x * rc->speed.forward)] == '@')
+        rc->player_pos.y += rc->plane.y * rc->speed.forward;
+}
+
 void	step_left(t_rc *rc)
 {
-    int	x = (int)(rc->player_pos.x + rc->plane.x * rc->speed.forward);
-    int	y = (int)(rc->player_pos.y + rc->plane.y * rc->speed.forward);
-    if (rc->arr[(int)x][(int)rc->player_pos.y] != '1')
-        rc->player_pos.x += rc->plane.x * rc->speed.forward;
-    if (rc->arr[(int)rc->player_pos.x][(int)y] != '1')
-        rc->player_pos.x += rc->plane.y * rc->speed.forward;
+    if (rc->arr[(int)(rc->player_pos.y + rc->plane.y * rc->speed.forward)][(int)rc->player_pos.x] == '@')
+        rc->player_pos.x -= rc->plane.x * rc->speed.forward;
+    if (rc->arr[(int)rc->player_pos.y][(int)(rc->player_pos.x + rc->plane.x * rc->speed.forward)] == '@')
+        rc->player_pos.y -= rc->plane.y * rc->speed.forward;
 }
 
 void	rot_right(t_rc *rc)
@@ -260,12 +266,12 @@ int		key_hook(int code, t_rc *rc)
 		step_back(rc);
 	if (code == KEY_A)
 		step_left(rc);
-	if (code == KEY_D)
-		rc->player_pos.x += rc->speed.forward;
 	if (code == KEY_AR)
 		rot_right(rc);
 	if (code == KEY_AL)
 		rot_left(rc);
+	if (code == KEY_D)
+		step_right(rc);
 	
 	drawer(rc);
 	return (0);
