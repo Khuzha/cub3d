@@ -328,6 +328,13 @@ int		handle_loop(t_rc	*rc)
 	return (0);
 }
 
+int		finish(t_rc *rc)
+{
+	rc->speed.forward = 0;
+	exit(0);
+	return (0);
+}
+
 void	init_windows(char **arr, t_map *data)
 {
 	t_rc	*rc;
@@ -348,6 +355,7 @@ void	init_windows(char **arr, t_map *data)
 	drawer(rc);
 	mlx_hook(rc->win, 2, 0, key_press, rc);
 	mlx_hook(rc->win, 3, 0, key_unpress, rc);
+	mlx_hook(rc->win, 17, 0, finish, rc);
 	mlx_loop_hook(rc->mlx, handle_loop, rc);
 	mlx_loop(rc->mlx);
 }
