@@ -29,6 +29,18 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 	rc->wens_defined = 1;
 }
 
+void	init_keys(t_rc	*rc)
+{
+	rc->keys.a = 0;
+	rc->keys.d = 0;
+	rc->keys.s = 0;
+	rc->keys.w = 0;
+	rc->keys.arr_l = 0;
+	rc->keys.arr_r = 0;
+	rc->keys.arr_t = 0;
+	rc->keys.arr_d = 0;
+}
+
 void	init_rc(t_rc *rc, t_map *data)
 {
 	if (!rc->wens_defined)
@@ -256,22 +268,22 @@ void	rot_left(t_rc *rc)
 	rc->plane.x = plane_y * sin(-rc->speed.rot) + rc->plane.x * cos(-rc->speed.rot);
 }
 
-int		key_hook(int code, t_rc *rc)
+int		key_press(int code, t_rc *rc)
 {
 	printf("key code = %d\n", code);
 
 	if (code == KEY_W)
-		step_forward(rc);
+		rc->keys.w = 1;
 	if (code == KEY_S)
-		step_back(rc);
+		rc->keys.s = 1;
 	if (code == KEY_A)
-		step_left(rc);
-	if (code == KEY_AR)
-		rot_right(rc);
-	if (code == KEY_AL)
-		rot_left(rc);
+		rc->keys.a = 1;
 	if (code == KEY_D)
-		step_right(rc);
+		rc->keys.d = 1;
+	if (code == KEY_AR)
+		rc->keys.arr_r = 1;
+	if (code == KEY_AL)
+		rc->keys.arr_l = 1;
 	
 	drawer(rc);
 	return (0);
@@ -285,6 +297,7 @@ void	init_windows(char **arr, t_map *data)
 		error("Malloc error\n");
 	rc->arr = arr;
 	rc->data = data;
+	init_keys(rc);
 	rc->mlx = mlx_init();
 	rc->win = mlx_new_window(rc->mlx, rc->data->res.x, rc->data->res.y, "21");
 	rc->img.ptr = mlx_new_image(rc->mlx, rc->data->res.x, rc->data->res.y);
@@ -294,6 +307,6 @@ void	init_windows(char **arr, t_map *data)
 	rc->wens_defined = 0;
 
 	drawer(rc);
-	mlx_hook(rc->win, 2, 0, key_hook, rc);
+	mlx_hook(rc->win, 2, 0, key_press, rc);
 	mlx_loop(rc->mlx);
 }

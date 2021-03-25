@@ -20,6 +20,19 @@ typedef enum {
 	KEY_ESC = 53
 } t_keys;
 
+typedef struct	s_keys
+{
+	char	a;
+	char	d;
+	char	s;
+	char	w;
+	char	arr_l;
+	char	arr_r;
+	char	arr_t;
+	char	arr_d;
+}				t_keys;
+
+
 /*
  *	Structures
  */
@@ -113,6 +126,7 @@ typedef struct	s_rc
 	t_img	img;
 	t_wall	wall;
 	t_speed	speed;
+	t_keys	keys;
 	double	dist_to_wall;
 	double	cam;
 	void	*mlx;
