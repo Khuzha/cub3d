@@ -46,7 +46,7 @@ void	init_rc(t_rc *rc, t_map *data)
 	if (!rc->wens_defined)
 		handle_player_dir(rc, data);
 	rc->speed.forward = 0.06;
-	rc->speed.rot = 0.02;
+	rc->speed.rot = 0.015;
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
@@ -270,7 +270,7 @@ void	rot_left(t_rc *rc)
 
 int		key_press(int code, t_rc *rc)
 {
-	printf("key code = %d\n", code);
+	printf("press key code = %d\n", code);
 
 	if (code == KEY_W)
 		rc->keys.w = 1;
@@ -285,6 +285,45 @@ int		key_press(int code, t_rc *rc)
 	if (code == KEY_AL)
 		rc->keys.arr_l = 1;
 	
+	return (0);
+}
+
+int		key_unpress(int code, t_rc *rc)
+{
+	printf("unpress key code = %d\n", code);
+
+	if (code == KEY_W)
+		rc->keys.w = 0;
+	if (code == KEY_S)
+		rc->keys.s = 0;
+	if (code == KEY_A)
+		rc->keys.a = 0;
+	if (code == KEY_D)
+		rc->keys.d = 0;
+	if (code == KEY_AR)
+		rc->keys.arr_r = 0;
+	if (code == KEY_AL)
+		rc->keys.arr_l = 0;
+	
+	return (0);
+}
+
+int		handle_loop(t_rc	*rc)
+{
+	// mlx_do_sync(rc->mlx);
+	if (rc->keys.w)
+		step_forward(rc);
+	if (rc->keys.s)
+		step_back(rc);
+	if (rc->keys.a)
+		step_left(rc);
+	if (rc->keys.d)
+		step_right(rc);
+	if (rc->keys.arr_l)
+		rot_left(rc);
+	if (rc->keys.arr_r)
+		rot_right(rc);
+
 	drawer(rc);
 	return (0);
 }
@@ -308,5 +347,7 @@ void	init_windows(char **arr, t_map *data)
 
 	drawer(rc);
 	mlx_hook(rc->win, 2, 0, key_press, rc);
+	mlx_hook(rc->win, 3, 0, key_unpress, rc);
+	mlx_loop_hook(rc->mlx, handle_loop, rc);
 	mlx_loop(rc->mlx);
 }

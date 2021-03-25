@@ -18,7 +18,7 @@ typedef enum {
 	KEY_AD = 125,
 	KEY_AT = 126,
 	KEY_ESC = 53
-} t_keys;
+}	t_buttons;
 
 typedef struct	s_keys
 {
