@@ -268,10 +268,19 @@ void	rot_left(t_rc *rc)
 	rc->plane.x = plane_y * sin(-rc->speed.rot) + rc->plane.x * cos(-rc->speed.rot);
 }
 
+int		finish(t_rc *rc)
+{
+	rc->speed.forward = 0;
+	exit(0);
+	return (0);
+}
+
 int		key_press(int code, t_rc *rc)
 {
 	printf("press key code = %d\n", code);
 
+	if (code == KEY_ESC)
+		finish(rc);
 	if (code == KEY_W)
 		rc->keys.w = 1;
 	if (code == KEY_S)
@@ -325,13 +334,6 @@ int		handle_loop(t_rc	*rc)
 		rot_right(rc);
 
 	drawer(rc);
-	return (0);
-}
-
-int		finish(t_rc *rc)
-{
-	rc->speed.forward = 0;
-	exit(0);
 	return (0);
 }
 
