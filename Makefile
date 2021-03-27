@@ -9,7 +9,7 @@ SRCS =	main.c gnl/get_next_line.c \
 
 SRCOBJS = $(SRCS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 $(NAME): $(SRCOBJS)
 	make bonus -C libft
