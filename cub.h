@@ -109,6 +109,23 @@ typedef struct	s_wall
 	int	color;
 }				t_wall;
 
+typedef struct s_txtr
+{
+	t_img	img;
+	int		h;
+	int		w;
+}				t_txtr;
+
+typedef struct	s_all_txtrs
+{
+	t_txtr	so;
+	t_txtr	no;
+	t_txtr	ea;
+	t_txtr	we;
+	t_txtr	s;
+}				t_all_txtrs;
+
+
 typedef struct	s_rc
 {
 	char	**arr;
@@ -134,6 +151,7 @@ typedef struct	s_rc
 	int		was_hit;
 	int		side;
 	int		wens_defined;
+	t_all_txtrs	t;
 }				t_rc;
 
 /*
