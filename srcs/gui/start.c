@@ -1,14 +1,15 @@
 #include "../../cub.h"
 
-int		get_pixel(t_txtr txtr, int x, int y)
+int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 {
 	char	*pos;
-	// int		h;
-	// int		w;
+	int		h;
+	int		w;
 
-	// h = 
-	printf("txtr h = %d, w = %d\n", txtr.h, txtr.w);
-	pos = txtr.img.addr + (y * txtr.img.length + x * (txtr.img.bpp / 8));
+	h = (int)(y * txtr.h / rc->data->res.y);
+	w = (int)(x * txtr.w / rc->data->res.x);
+	pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
+	// printf("txtr.h = %d, txtr.w = %d, res.y = %d, res.x = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->data->res.y = %d\n", txtr.h, txtr.w, rc->data->res.y, rc->data->res.x, y, x, h, w, (txtr.h / rc->data->res.y));
 	return *((unsigned int	*)pos);
 }
 
@@ -198,9 +199,10 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			// int color = get_pixel(rc->t.so, x, y);
+			int color = get_pixel(rc->t.so, rc, x, y);
+			// color++;
 			// printf("color = %d\n", color);
-			put_pixel(rc->img, x, y, rc->wall.color);
+			put_pixel(rc->img, x, y, color);
 		}
 		else
 			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
