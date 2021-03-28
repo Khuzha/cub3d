@@ -1,15 +1,29 @@
 #include "../../cub.h"
 
+double	get_decimal(double num)
+{
+	int	integer;
+
+	// printf("number = %lf\n", num);
+	if ((num < 1 && num > 0) || (num > -1 && num < 0))
+		return (num);
+	integer = (int)num;
+	return (num - integer);
+}
+
 int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 {
 	char	*pos;
 	int		h;
 	int		w;
+	double div = (double)x / (double)rc->wall.height;
 
-	h = (int)(y * txtr.h / rc->data->res.y);
-	w = (int)(x * txtr.w / rc->data->res.x);
+	h = (int)((y - rc->wall.start) * txtr.h / rc->wall.height);
+	w = (int)(get_decimal(div) * (double)txtr.w);
+	// printf("w = %d\n", w);
+	// printf("w = %d, dec = %lf, div = %lf, x = %d, height = %d\n", w, get_decimal(div), div, x, rc->wall.height);
+	// printf("txtr.h = %d, txtr.w = %d, wall.h = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->wall.height = %d\n", txtr.h, txtr.w, rc->wall.height, y, x, h, w, txtr.h / rc->wall.height);
 	pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
-	// printf("txtr.h = %d, txtr.w = %d, res.y = %d, res.x = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->data->res.y = %d\n", txtr.h, txtr.w, rc->data->res.y, rc->data->res.x, y, x, h, w, (txtr.h / rc->data->res.y));
 	return *((unsigned int	*)pos);
 }
 
