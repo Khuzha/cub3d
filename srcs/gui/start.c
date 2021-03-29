@@ -11,20 +11,33 @@ double	get_decimal(double num)
 	return (num - integer);
 }
 
+// int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
+// {
+// 	char	*pos;
+// 	int		h;
+// 	int		w;
+// 	double div = (double)x / (double)rc->wall.height;
+
+// 	h = (int)((y - rc->wall.start) * txtr.h / rc->wall.height);
+// 	// double kf = (double)txtr.w / (double)rc->wall.height;
+// 	// w = (int)(x * kf - 1);
+// 	// printf("h = %d, w = %d, kf = %lf\n", h, w, kf);
+// 	w = (int)(get_decimal(div) * (double)txtr.w);
+// 	// printf("w = %d\n", w);
+// 	// printf("w = %d, dec = %lf, div = %lf, x = %d, height = %d\n", w, get_decimal(div), div, x, rc->wall.height);
+// 	// printf("txtr.h = %d, txtr.w = %d, wall.h = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->wall.height = %d\n", txtr.h, txtr.w, rc->wall.height, y, x, h, w, txtr.h / rc->wall.height);
+// 	pos = (*(int *)(txtr.img.addr + ((p->tex_x + (p->tex_y *
+// all->we->width)) * (all->we->bits_per_pixel / 8))));
+// 	// pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
+// 	return *((unsigned int	*)pos);
+// }
+
 int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 {
-	char	*pos;
-	int		h;
-	int		w;
-	double div = (double)x / (double)rc->wall.height;
-
-	h = (int)((y - rc->wall.start) * txtr.h / rc->wall.height);
-	w = (int)(get_decimal(div) * (double)txtr.w);
-	// printf("w = %d\n", w);
-	// printf("w = %d, dec = %lf, div = %lf, x = %d, height = %d\n", w, get_decimal(div), div, x, rc->wall.height);
-	// printf("txtr.h = %d, txtr.w = %d, wall.h = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->wall.height = %d\n", txtr.h, txtr.w, rc->wall.height, y, x, h, w, txtr.h / rc->wall.height);
-	pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
-	return *((unsigned int	*)pos);
+	double	step = txtr.h / rc->data->res.y;
+	double	tex_pos = (rc->wall.start - rc->data->res.y / 2) * step;
+	double	tex_y = (int)tex_pos & (txtr.h - 1);
+	char	*pos = (*(int *)txtr.img.addr + (()))
 }
 
 void	put_pixel(t_img img, int x, int y, int color)
