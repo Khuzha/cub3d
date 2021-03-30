@@ -13,29 +13,27 @@ double	get_decimal(double num)
 
 int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 {
-	char	*pos;
-	int		h;
-	int		w;
-
-	h = (int)((y - rc->wall.start) * txtr.h / rc->wall.height);
-	w = (int)(x % txtr.w);
-	pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
+	x++;
+	y++;
+	// int texNum = rc->arr[rc->ray_square.y][rc->ray_square.x] - 1;
+	double wallY;
+	if (rc->side == 0)
+		wallY = rc->player_pos.x + rc->dist_to_wall * rc->ray_dir.x;
+	else
+		wallY = rc->player_pos.y + rc->dist_to_wall * rc->ray_dir.y;
+	wallY -= floor(wallY);
+	int texX = (int)(wallY * (double)(txtr.w));
+	if (rc->side == 0 && rc->ray_dir.y > 0)
+		texX = txtr.w - texX - 1;
+	if (rc->side == 1 && rc->ray_dir.x < 0)
+		texX = txtr.w - texX - 1;
+	double step = (double)txtr.h / (double)rc->data->res.y;
+	double texPos = (rc->wall.start - rc->wall.height / 2 + rc->data->res.y / 2) * step;
+	int texY = (int)texPos & (txtr.h - 1);
+	texPos += step;
+	char	*pos = txtr.img.addr + (texX * txtr.img.length + texY * (txtr.img.bpp / 8));
 	return *((unsigned int	*)pos);
 }
-
-// int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
-// {
-// 	double	step = txtr.h / rc->data->res.y;
-// 	double	tex_pos = (rc->wall.start - rc->data->res.y / 2) * step;
-// 	double	tex_y = (int)tex_pos & (txtr.h - 1);
-// 	double	tex_x = (int)(rc->wall.height * (double)(txtr.w));
-// 	if (!rc->side && rc->ray_dir.x > 0)
-// 		tex_x = txtr.w - tex_x - 1;
-// 	if (rc->side && rc->ray_dir.x < 0)
-// 		tex_x = txtr.w - tex_x - 1;
-// 	void	*pos = txtr.img.addr + ((tex_y * txtr.w)) + (tex_x * (txtr.img.bpp / 8));
-// 	return *pos;
-// }
 
 void	put_pixel(t_img img, int x, int y, int color)
 {
