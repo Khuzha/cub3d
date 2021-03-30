@@ -31,7 +31,8 @@ int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 	double texPos = (rc->wall.start - rc->wall.height / 2 + rc->data->res.y / 2) * step;
 	int texY = (int)texPos & (txtr.h - 1);
 	texPos += step;
-	char	*pos = txtr.img.addr + (texX * txtr.img.length + texY * (txtr.img.bpp / 8));
+	char *pos = txtr.img.addr + ((texY + (texX * txtr.w)) * (txtr.img.bpp / 8));
+	// char	*pos = txtr.img.addr + (texX * txtr.img.length + texY * (txtr.img.bpp / 8));
 	return *((unsigned int	*)pos);
 }
 
