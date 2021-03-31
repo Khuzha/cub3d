@@ -125,6 +125,13 @@ typedef struct	s_all_txtrs
 	t_txtr	s;
 }				t_all_txtrs;
 
+typedef struct	s_txtr_rc
+{
+	double	s;
+	double	p;
+}				t_txtr_rc;
+
+
 typedef struct	s_rc
 {
 	char	**arr;
