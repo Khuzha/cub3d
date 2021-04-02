@@ -4,7 +4,6 @@ double	get_decimal(double num)
 {
 	int	integer;
 
-	// printf("number = %lf\n", num);
 	if ((num < 1 && num > 0) || (num > -1 && num < 0))
 		return (num);
 	integer = (int)num;
@@ -15,7 +14,6 @@ int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 {
 	x++;
 	y++;
-	// int texNum = rc->arr[rc->ray_square.y][rc->ray_square.x] - 1;
 	double wallY;
 	if (rc->side == 0)
 		wallY = rc->player_pos.x + rc->dist_to_wall * rc->ray_dir.x;
@@ -31,7 +29,6 @@ int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
 	double texPos = (rc->wall.start - rc->wall.height / 2 + rc->data->res.y / 2) * step;
 	int texY = (int)texPos & (txtr.h - 1);
 	texPos += step;
-	// char *pos = txtr.img.addr + ((texY + (texX * txtr.w)) * (txtr.img.bpp / 8));
 	char	*pos = txtr.img.addr + (texX * txtr.img.length + texY * (txtr.img.bpp / 8));
 	return *((unsigned int	*)pos);
 }
@@ -172,7 +169,6 @@ void	run_dda(t_rc *rc, char **arr)
 			rc->ray_square.y += rc->ray_step.y;
 			rc->side = 1;
 		}
-		// printf("run_dda: ray_square.y = %d, ray_square.x = %d, wens: y = %lf, x = %lf, char = %c\n", rc->ray_square.y, rc->ray_square.x, rc->wens.y, rc->wens.x, rc->arr[rc->ray_square.y][rc->ray_square.x]);
 		if (arr[rc->ray_square.y][rc->ray_square.x] == '1')
 			rc->was_hit = 1;
 	}
@@ -223,8 +219,6 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 		else if (y < rc->wall.finish)
 		{
 			int color = get_pixel(rc->t.so, rc, x, y);
-			// color++;
-			// printf("color = %d\n", color);
 			put_pixel(rc->img, x, y, color);
 		}
 		else
@@ -256,42 +250,34 @@ int		drawer(t_rc *rc)
 
 void	step_forward(t_rc *rc)
 {
-	// printf("step_forward, BEF - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 	if (rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)(rc->player_pos.x)] == '@')
 		rc->player_pos.y += rc->wens.y * rc->speed.forward;
 	if (rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x + rc->wens.x * rc->speed.forward)] == '@')
 		rc->player_pos.x += rc->wens.x * rc->speed.forward;
-	// printf("step forward, AFT - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 }
 
 void	step_back(t_rc *rc)
 {
-	// printf("step_back, BEF - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 	if (rc->arr[(int)(rc->player_pos.y - rc->wens.y * rc->speed.forward)][(int)(rc->player_pos.x)] == '@')
 		rc->player_pos.y -= rc->wens.y * rc->speed.forward;
 	if (rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x - rc->wens.x * rc->speed.forward)] == '@')
 		rc->player_pos.x -= rc->wens.x * rc->speed.forward;
-	// printf("step_back, AFT - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 }
 
 void	step_right(t_rc *rc)
 {
-	// printf("step_right, BEF - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
     if (rc->arr[(int)(rc->player_pos.y + rc->plane.y * rc->speed.forward)][(int)(rc->player_pos.x)] == '@')
         rc->player_pos.y += rc->plane.y * rc->speed.forward;
     if (rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x + rc->plane.x * rc->speed.forward)] == '@')
         rc->player_pos.x += rc->plane.x * rc->speed.forward;
-	// printf("step_right, AFT - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 }
 
 void	step_left(t_rc *rc)
 {
-	// printf("step_left, BEF - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
     if (rc->arr[(int)(rc->player_pos.y - rc->plane.y * rc->speed.forward)][(int)(rc->player_pos.x)] == '@')
         rc->player_pos.y -= rc->plane.y * rc->speed.forward;
     if (rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x - rc->plane.x * rc->speed.forward)] == '@')
         rc->player_pos.x -= rc->plane.x * rc->speed.forward;
-	// printf("step_left, AFT - player_pos: y = %lf, x = %lf, char = %c\n", rc->player_pos.y, rc->player_pos.x, rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x)]);
 }
 
 void	rot_right(t_rc *rc)
@@ -329,8 +315,6 @@ int		finish(t_rc *rc)
 
 int		key_press(int code, t_rc *rc)
 {
-	printf("press key code = %d\n", code);
-
 	if (code == KEY_ESC)
 		finish(rc);
 	if (code == KEY_W)
@@ -351,8 +335,6 @@ int		key_press(int code, t_rc *rc)
 
 int		key_unpress(int code, t_rc *rc)
 {
-	printf("unpress key code = %d\n", code);
-
 	if (code == KEY_W)
 		rc->keys.w = 0;
 	if (code == KEY_S)
@@ -411,7 +393,6 @@ void	init_mlx(t_rc *rc)
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr, &rc->img.bpp, &rc->img.length, &rc->img.endian);
 	rc->player_pos.x = (double)rc->data->pos.x + 0.5;
 	rc->player_pos.y = (double)rc->data->pos.y + 0.5;
-	printf("S = %s\n", rc->data->so);
 	init_txtr_imgs(rc);
 	rc->wens_defined = 0;
 }
