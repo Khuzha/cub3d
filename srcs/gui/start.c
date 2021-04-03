@@ -49,14 +49,14 @@ void	init_keys(t_rc	*rc)
 	rc->keys.arr_r = 0;
 	rc->keys.arr_t = 0;
 	rc->keys.arr_d = 0;
+	rc->speed.forward = 0.06;
+	rc->speed.rot = 0.015;
 }
 
 void	init_rc(t_rc *rc, t_map *data)
 {
 	if (!rc->wens_defined)
 		handle_player_dir(rc, data);
-	rc->speed.forward = 0.06;
-	rc->speed.rot = 0.015;
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
@@ -325,6 +325,7 @@ int		finish(t_rc *rc)
 
 int		key_press(int code, t_rc *rc)
 {
+	printf("key pressed: %d\n", code);
 	if (code == KEY_ESC)
 		finish(rc);
 	if (code == KEY_W)
@@ -339,6 +340,11 @@ int		key_press(int code, t_rc *rc)
 		rc->keys.arr_r = 1;
 	if (code == KEY_AL)
 		rc->keys.arr_l = 1;
+	if (code == KEY_SHIFT_L || code == KEY_SHIFT_R)
+	{
+		rc->speed.forward *= 2;
+		rc->speed.rot *= 2;
+	}
 	
 	return (0);
 }
@@ -357,6 +363,11 @@ int		key_unpress(int code, t_rc *rc)
 		rc->keys.arr_r = 0;
 	if (code == KEY_AL)
 		rc->keys.arr_l = 0;
+	if (code == KEY_SHIFT_L || code == KEY_SHIFT_R)
+	{
+		rc->speed.forward /= 2;
+		rc->speed.rot /= 2;
+	}
 
 	return (0);
 }

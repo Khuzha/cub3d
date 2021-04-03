@@ -17,6 +17,8 @@ typedef enum {
 	KEY_AR = 124,
 	KEY_AD = 125,
 	KEY_AT = 126,
+	KEY_SHIFT_L = 257,
+	KEY_SHIFT_R = 258,
 	KEY_ESC = 53
 }	t_buttons;
 
