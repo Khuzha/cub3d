@@ -160,6 +160,17 @@ typedef struct	s_rc
 	t_all_txtrs	t;
 }				t_rc;
 
+typedef struct	s_txtr_data
+{
+	double	wall_x;
+	double	tex_y;
+	double	tex_x;
+	double	step;
+	double	tex_pos;
+	
+}				t_txtr_data;
+
+
 /*
  *	Kinda general functions
  */
