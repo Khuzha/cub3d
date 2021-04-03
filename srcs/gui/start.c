@@ -11,22 +11,6 @@ double	get_decimal(double num)
 	return (num - integer);
 }
 
-int		get_pixel(t_txtr txtr, t_rc *rc, int x, int y)
-{
-	char	*pos;
-	int		h;
-	int		w;
-	double div = (double)x / (double)rc->wall.height;
-
-	h = (int)((y - rc->wall.start) * txtr.h / rc->wall.height);
-	w = (int)(get_decimal(div) * (double)txtr.w);
-	// printf("w = %d\n", w);
-	// printf("w = %d, dec = %lf, div = %lf, x = %d, height = %d\n", w, get_decimal(div), div, x, rc->wall.height);
-	// printf("txtr.h = %d, txtr.w = %d, wall.h = %d, y = %d, x = %d, h = %d, w = %d, txtr.h / rc->wall.height = %d\n", txtr.h, txtr.w, rc->wall.height, y, x, h, w, txtr.h / rc->wall.height);
-	pos = txtr.img.addr + (h * txtr.img.length + w * (txtr.img.bpp / 8));
-	return *((unsigned int	*)pos);
-}
-
 void	put_pixel(t_img img, int x, int y, int color)
 {
 	char	*pos;
@@ -198,24 +182,55 @@ void	define_color(t_rc *rc)
 		rc->wall.color = make_trgb(0, 0xFF, 0x00, 0x00) / 2;
 }
 
+void	calcs_for_txtr(t_rc *rc, t_txtr_data *data)
+{
+	if (rc->side == 0)
+		data->wall_x = rc->player_pos.y + rc->dist_to_wall * rc->ray_dir.y;
+	else
+		data->wall_x = rc->player_pos.x + rc->dist_to_wall * rc->ray_dir.x;
+	data->wall_x -= floor(data->wall_x);
+
+	data->tex_x = (int)(data->wall_x * (double)(rc->t.so.w));
+
+	if (rc->side == 0 && rc->ray_dir.x > 0)
+		data->tex_x = rc->t.so.w - data->tex_x - 1;
+	if (rc->side == 1 && rc->ray_dir.y < 0)
+		data->tex_x = rc->t.so.w - data->tex_x - 1;
+
+	data->step = 1.0 * rc->t.so.h / rc->wall.height;
+	data->tex_pos = (rc->wall.start - rc->data->res.y / 2 + rc->wall.height / 2) * data->step;
+}
+
+int		get_pixel(t_txtr txtr, t_rc *rc, t_txtr_data *data)
+{
+	char *pos;
+
+	data->tex_y = (int)data->tex_pos & (rc->t.so.h - 1);
+	data->tex_pos += data->step;
+	pos = txtr.img.addr + (int)(data->tex_y * txtr.img.length + data->tex_x * (txtr.img.bpp / 8));
+	return *((unsigned int	*)pos);
+}
+
 void	draw_line(t_rc *rc, t_map *data, int x)
 {
 	t_colors	c;
 	t_colors	f;
+	t_txtr_data	*txtr_data;
 	int	y;
 
 	y = 0;
 	c = rc->data->c_colors;
 	f = rc->data->f_colors;
+	if (!(txtr_data = malloc(sizeof(t_txtr_data))))
+		error("Malloc error");
+	calcs_for_txtr(rc, txtr_data);
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			int color = get_pixel(rc->t.so, rc, x, y);
-			// color++;
-			// printf("color = %d\n", color);
+			int color = get_pixel(rc->t.so, rc, txtr_data);
 			put_pixel(rc->img, x, y, color);
 		}
 		else
