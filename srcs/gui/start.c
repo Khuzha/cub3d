@@ -158,7 +158,8 @@ void	run_dda(t_rc *rc, char **arr)
 
 void	calc_wall(t_rc *rc, t_map *data)
 {
-	rc->wall.height = (int)(data->res.x / rc->dist_to_wall * 0.75);
+	rc->wall.height = (int)(data->res.y / rc->dist_to_wall);
+	// rc->wall.height = (int)(data->res.x / rc->dist_to_wall * 0.75);
 	rc->wall.start = (int)(-rc->wall.height / 2 + data->res.y / 2);
 	rc->wall.finish = (int)(rc->wall.height / 2 + data->res.y / 2);
 	if (rc->wall.start < 0)
@@ -209,6 +210,26 @@ int		get_pixel(t_txtr txtr, t_rc *rc, t_txtr_data *data)
 	return *((unsigned int	*)pos);
 }
 
+void	define_side(t_rc *rc)
+{
+	if (!(rc->cur_side = ft_calloc(3, 3)))
+		error("Malloc ft_calloc in define_side) error");
+	if (rc->side)
+	{
+		if (rc->ray_dir.y > 0)
+			rc->cur_side = &rc->t.so;
+		else
+			rc->cur_side = &rc->t.no;
+	}
+	else
+	{
+		if (rc->ray_dir.x > 0)
+			rc->cur_side = &rc->t.ea;
+		else
+			rc->cur_side = &rc->t.we;
+	}
+}
+
 void	draw_line(t_rc *rc, t_map *data, int x)
 {
 	t_colors	c;
@@ -222,13 +243,15 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 	if (!(txtr_data = malloc(sizeof(t_txtr_data))))
 		error("Malloc error");
 	calcs_for_txtr(rc, txtr_data);
+	define_side(rc);
+	// printf("cur_side = %s\n", rc->cur_side);
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			int color = get_pixel(rc->t.so, rc, txtr_data);
+			int color = get_pixel(*rc->cur_side, rc, txtr_data);
 			put_pixel(rc->img, x, y, color);
 		}
 		else

@@ -160,6 +160,7 @@ typedef struct	s_rc
 	int		side;
 	int		wens_defined;
 	t_all_txtrs	t;
+	t_txtr	*cur_side;
 }				t_rc;
 
 typedef struct	s_txtr_data
