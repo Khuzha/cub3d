@@ -134,6 +134,12 @@ typedef struct	s_txtr_rc
 	double	p;
 }				t_txtr_rc;
 
+typedef struct	s_sprite
+{
+	double	y;
+	double	x;
+	int		dist;
+}				t_sprite;
 
 typedef struct	s_rc
 {

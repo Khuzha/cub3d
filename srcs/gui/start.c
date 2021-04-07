@@ -158,8 +158,7 @@ void	run_dda(t_rc *rc, char **arr)
 
 void	calc_wall(t_rc *rc, t_map *data)
 {
-	rc->wall.height = (int)(data->res.y / rc->dist_to_wall);
-	// rc->wall.height = (int)(data->res.x / rc->dist_to_wall * 0.75);
+	rc->wall.height = (int)(data->res.x / rc->dist_to_wall * 0.75);
 	rc->wall.start = (int)(-rc->wall.height / 2 + data->res.y / 2);
 	rc->wall.finish = (int)(rc->wall.height / 2 + data->res.y / 2);
 	if (rc->wall.start < 0)
