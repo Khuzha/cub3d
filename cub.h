@@ -67,6 +67,7 @@ typedef struct	s_map
 	t_colors	f_colors;
 	t_res		res;
 	t_pos		pos;
+	size_t		sprites;
 	char		player;
 	char		*we;
 	char		*ea;

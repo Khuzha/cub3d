@@ -1,5 +1,11 @@
 #include "../../cub.h"
 
+void	check_sprite(char **arr, int y, int x, t_map *data)
+{
+	if (arr[y][x] == '2')
+		data->sprites++;
+}
+
 void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 {
 	size_t	x;
@@ -22,6 +28,7 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 			}
 			if (counter > 1)
 				error("Wrong players count");
+			check_sprite(arr, y, x, data);
 			x++;
 		}
 		x = 0;
@@ -49,7 +56,8 @@ void	flood_fill(char **arr, size_t x, size_t y)
 {
 	if (x < 0 || y < 0)
 		error("Map validation failed");
-	if (arr[y] && arr[y][x] != '1' && arr[y][x] != '0' && arr[y][x] != '@')
+	if (arr[y] && arr[y][x] != '0' && arr[y][x] != '1'
+		&& arr[y][x] != '2' && arr[y][x] != '@')
 		check_char(arr[y][x]);
 	if (arr[y] && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
 	{
@@ -76,5 +84,6 @@ void	validate_map(char **arr, t_map *data)
 	// printf("aft flood_fill\n");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
+	printf("found %lu sprites\n", data->sprites);
 	init_windows(arr, data);
 }
