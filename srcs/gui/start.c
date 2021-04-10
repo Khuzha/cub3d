@@ -154,6 +154,7 @@ void	run_dda(t_rc *rc, char **arr)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
+	
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
@@ -272,6 +273,7 @@ int		drawer(t_rc *rc)
 		calc_wall(rc, rc->data);
 		define_color(rc);
 		draw_line(rc, rc->data, x);
+		rc->zb[x] = rc->dist_to_wall;
 		x++;
 	}
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
@@ -438,6 +440,7 @@ void	init_mlx(t_rc *rc)
 	rc->player_pos.y = (double)rc->data->pos.y + 0.5;
 	init_txtr_imgs(rc);
 	rc->wens_defined = 0;
+	rc->zb = malloc(sizeof(int) * rc->data->res.x);
 }
 
 void	init_windows(char **arr, t_map *data)

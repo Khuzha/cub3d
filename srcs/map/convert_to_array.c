@@ -68,6 +68,4 @@ void	convert_to_array(t_list *list, t_map *data)
 	// printf("bef validate_map\n");
 	validate_map(arr, data);
 	// printf("aft validate_map\n");
-	data++;
-	width = 0;
 }

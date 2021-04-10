@@ -3,7 +3,7 @@
 void	check_sprite(char **arr, int y, int x, t_map *data)
 {
 	if (arr[y][x] == '2')
-		data->sprites++;
+		data->s_count++;
 }
 
 void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
@@ -84,6 +84,7 @@ void	validate_map(char **arr, t_map *data)
 	// printf("aft flood_fill\n");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
-	printf("found %lu sprites\n", data->sprites);
+	printf("found %lu sprites\n", data->s_count);
+	init_sprites(arr, data);
 	init_windows(arr, data);
 }

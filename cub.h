@@ -60,6 +60,13 @@ typedef struct	s_pos
 	double y;
 }				t_pos;
 
+typedef struct	s_sprite
+{
+	double	y;
+	double	x;
+	int		dist;
+}				t_sprite;
+
 typedef struct	s_map
 {
 	t_list		*list;
@@ -67,13 +74,14 @@ typedef struct	s_map
 	t_colors	f_colors;
 	t_res		res;
 	t_pos		pos;
-	size_t		sprites;
+	size_t		s_count;
 	char		player;
 	char		*we;
 	char		*ea;
 	char		*so;
 	char		*no;
 	char		*s;
+	t_sprite	*sprites;
 }				t_map;
 
 typedef struct	s_img
@@ -134,24 +142,15 @@ typedef struct	s_txtr_rc
 	double	p;
 }				t_txtr_rc;
 
-typedef struct	s_sprite
-{
-	double	y;
-	double	x;
-	int		dist;
-}				t_sprite;
-
 typedef struct	s_rc
 {
-	char	**arr;
-	t_map	*data;
-	t_dxy	player_pos;
-	t_dxy	ray_dir;
-	t_dxy	wens;
-	t_ixy	ray_square;
-	// t_dxy	dirlen;
-	// t_dxy	dirdiff;
-	t_dxy	closest_line;
+	char		**arr;
+	t_map		*data;
+	t_dxy		player_pos;
+	t_dxy		ray_dir;
+	t_dxy		wens;
+	t_ixy		ray_square;
+	t_dxy		closest_line;
 	t_dxy	next_line;
 	t_dxy	plane;
 	t_ixy	ray_step;
@@ -159,6 +158,10 @@ typedef struct	s_rc
 	t_wall	wall;
 	t_speed	speed;
 	t_keys	keys;
+	t_all_txtrs	t;
+	t_txtr	*cur_side;
+	t_sprite *sprites;
+	int		*zb;
 	double	dist_to_wall;
 	double	cam;
 	void	*mlx;
@@ -166,8 +169,6 @@ typedef struct	s_rc
 	int		was_hit;
 	int		side;
 	int		wens_defined;
-	t_all_txtrs	t;
-	t_txtr	*cur_side;
 }				t_rc;
 
 typedef struct	s_txtr_data
@@ -206,6 +207,11 @@ int		is_param(char *str);
  */
 void	convert_to_array(t_list *map_list, t_map *data);
 void	validate_map(char **arr, t_map *data);
+
+/*
+ *	Sprites
+ */
+void	init_sprites(char **arr, t_map *data);
 
 /*
  *	GUI functions
