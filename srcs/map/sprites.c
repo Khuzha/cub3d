@@ -17,8 +17,8 @@ void	init_sprites(char **arr, t_map *data)
 		{
 			if (arr[y][x] == '2')
 			{
-				data->sprites[i].y = y;
-				data->sprites[i].x = x;
+				data->sprites[i].y = y + 0.5;
+				data->sprites[i].x = x + 0.5;
 				printf("sprite found: y = %f, x = %f\n", data->sprites[i].y, data->sprites[i].x);	
 			}
 			x++;
