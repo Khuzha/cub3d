@@ -64,7 +64,7 @@ typedef struct	s_sprite
 {
 	double	y;
 	double	x;
-	int		dist;
+	double	dist;
 }				t_sprite;
 
 typedef struct	s_map
