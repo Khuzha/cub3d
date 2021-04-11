@@ -84,7 +84,7 @@ void	validate_map(char **arr, t_map *data)
 	// printf("aft flood_fill\n");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
-	printf("found %lu sprites\n", data->s_count);
+	printf("found %d sprites\n", data->s_count);
 	init_sprites(arr, data);
 	init_windows(arr, data);
 }

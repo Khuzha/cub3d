@@ -4,7 +4,7 @@ SRCS =	main.c gnl/get_next_line.c \
 		srcs/list/utils.c srcs/list/list_validator.c \
 		srcs/list/list_validator_utils.c srcs/list/list_validator_utils2.c \
 		srcs/map/convert_to_array.c srcs/map/validation.c \
-		srcs/utils/lib_utils.c srcs/utils/error.c \
+		srcs/utils/lib_utils.c srcs/utils/error.c srcs/utils/quicksort.c \
 		srcs/gui/start.c srcs/map/sprites.c
 
 SRCOBJS = $(SRCS:.c=.o)

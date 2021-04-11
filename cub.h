@@ -74,7 +74,7 @@ typedef struct	s_map
 	t_colors	f_colors;
 	t_res		res;
 	t_pos		pos;
-	size_t		s_count;
+	int			s_count;
 	char		player;
 	char		*we;
 	char		*ea;
@@ -224,5 +224,6 @@ void	init_windows(char **arr, t_map *data);
 int		ft_isnumber(char *str);
 size_t	get_max(size_t a, size_t b);
 double	ft_abs_dbl(double num);
+void	quicksort(t_sprite *arr, int first, int last);
 
 #endif
