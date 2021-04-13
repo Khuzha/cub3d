@@ -38,14 +38,6 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 		error("No player found");
 }
 
-char	emp(char c)
-{
-	if (c == ' ' || c == 0)
-		return (1);
-	else
-		return (0);
-}
-
 void	check_char(char c)
 {
 	if (!c || !ft_strchr("WENS", c))
@@ -79,9 +71,7 @@ void	validate_map(char **arr, t_map *data)
 	size_t	y;
 
 	find_player(arr, &x, &y, data);
-	// printf("bef flood_fill\n");
 	flood_fill(arr, x, y);
-	// printf("aft flood_fill\n");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
 	printf("found %d sprites\n", data->s_count);

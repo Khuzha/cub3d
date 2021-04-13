@@ -154,7 +154,7 @@ void	run_dda(t_rc *rc, char **arr)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
-	
+	recalc_sprites(rc);
 }
 
 void	calc_wall(t_rc *rc, t_map *data)

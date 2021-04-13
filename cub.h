@@ -212,6 +212,7 @@ void	validate_map(char **arr, t_map *data);
  *	Sprites
  */
 void	init_sprites(char **arr, t_map *data);
+void	recalc_sprites(t_rc *rc);
 
 /*
  *	GUI functions
