@@ -413,6 +413,7 @@ int		handle_loop(t_rc	*rc)
 		rot_right(rc);
 
 	drawer(rc);
+	draw_sprites(rc);
 	return (0);
 }
 
@@ -455,6 +456,7 @@ void	init_windows(char **arr, t_map *data)
 	init_mlx(rc);
 
 	drawer(rc);
+	draw_sprites(rc);
 	mlx_hook(rc->win, 2, 0, key_press, rc);
 	mlx_hook(rc->win, 3, 0, key_unpress, rc);
 	mlx_hook(rc->win, 17, 0, finish, rc);

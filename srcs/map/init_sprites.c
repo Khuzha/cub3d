@@ -45,8 +45,8 @@ void	init_sprites(char **arr, t_map *data)
 
 	if (!(data->sprites = ft_calloc(sizeof(t_sprite) * data->s_count, sizeof(t_sprite) * data->s_count)))
 		error("Malloc error");
-	pos.y = (double)data->pos.y;
-	pos.x = (double)data->pos.x;
+	pos.y = (double)data->pos.y + 0.5;
+	pos.x = (double)data->pos.x + 0.5;
 	calc_sprites(arr, data->sprites, pos, 0);
 }
 

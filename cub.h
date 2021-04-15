@@ -218,6 +218,8 @@ void	recalc_sprites(t_rc *rc);
  *	GUI functions
  */
 void	init_windows(char **arr, t_map *data);
+void	draw_sprites(t_rc *rc);
+void	put_pixel(t_img img, int x, int y, int color);
 
 /*
  *	Additional utils
