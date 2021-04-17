@@ -276,7 +276,6 @@ int		drawer(t_rc *rc)
 		rc->zb[x] = rc->dist_to_wall;
 		x++;
 	}
-	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }
 
@@ -414,6 +413,7 @@ int		handle_loop(t_rc	*rc)
 
 	drawer(rc);
 	draw_sprites(rc);
+	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }
 
