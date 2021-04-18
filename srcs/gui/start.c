@@ -154,7 +154,6 @@ void	run_dda(t_rc *rc, char **arr)
 		rc->dist_to_wall = (rc->ray_square.y - rc->player_pos.y + (1 - rc->ray_step.y) / 2) / rc->ray_dir.y;
 	else
 		rc->dist_to_wall = (rc->ray_square.x - rc->player_pos.x + (1 - rc->ray_step.x) / 2) / rc->ray_dir.x;
-	recalc_sprites(rc);
 }
 
 void	calc_wall(t_rc *rc, t_map *data)
@@ -413,6 +412,9 @@ int		handle_loop(t_rc	*rc)
 
 	drawer(rc);
 	draw_sprites(rc);
+	recalc_sprites(rc);
+	quicksort(rc->data->sprites, 0, rc->data->s_count - 1);
+	print_sprites(rc->data);
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }

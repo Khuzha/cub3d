@@ -10,6 +10,7 @@ void	print_sprites(t_map *data)
 		printf("i = %d, sprite: y = %f, x = %f, dist = %f\n", i, data->sprites[i].y, data->sprites[i].x, data->sprites[i].dist);
 		i++;
 	}
+	printf("\n");
 }
 
 static void	calc_sprites(char **arr, t_sprite *sprites, t_dxy pos, int need_dist)
@@ -52,5 +53,12 @@ void	init_sprites(char **arr, t_map *data)
 
 void	recalc_sprites(t_rc *rc)
 {
-	calc_sprites(rc->arr, rc->data->sprites, rc->player_pos, 1);
+	int i;
+	
+	i = 0;
+	while (i < rc->data->s_count)
+	{
+		rc->data->sprites[i].dist = ((rc->player_pos.x - rc->data->sprites[i].x) * (rc->player_pos.x - rc->data->sprites[i].x) + (rc->player_pos.y - rc->data->sprites[i].y) * (rc->player_pos.y - rc->data->sprites[i].y));
+		i++;
+	}
 }
