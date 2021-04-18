@@ -2,7 +2,7 @@ R 1920 1000
 
 NO     ./img/grass.xpm   
 SO   ./img/neon.xpm
-S ./img/barrel.xpm
+S ./img/neon.xpm
 
 EA ./img/bricks.xpm
 

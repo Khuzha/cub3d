@@ -3,8 +3,8 @@
 void	draw_sprites(t_rc *rc)
 {
 	int i;
-	double	sprite_y;
 	double	sprite_x;
+	double	sprite_y;
 	double	inv_det;
 	double	transform_y;
 	double	transform_x;
@@ -21,8 +21,8 @@ void	draw_sprites(t_rc *rc)
 	i = 0;
 	while (i < rc->data->s_count)
 	{
-		sprite_y = rc->data->sprites[i].y;
-		sprite_x = rc->data->sprites[i].x;
+		sprite_x = rc->data->sprites[i].x - rc->player_pos.x;
+		sprite_y = rc->data->sprites[i].y - rc->player_pos.y;
 
 		inv_det = (double)1 / (rc->plane.x * rc->wens.y - rc->plane.y * rc->wens.x);
 		transform_x = inv_det * (rc->wens.y * sprite_x - rc->wens.x * sprite_y);
@@ -57,7 +57,7 @@ void	draw_sprites(t_rc *rc)
 				{
 					int d = (y) * 256 - rc->data->res.y * 128 + sprite_height * 128;
 					int tex_y = ((d * rc->t.s.h) / sprite_height) / 256;
-					char *pos = rc->t.s.img.addr + rc->t.s.w * tex_y + tex_x;
+					char *pos = rc->t.s.img.addr + rc->t.s.w * tex_y + tex_x * (rc->t.s.img.bpp / 8);
 					// pos++;
 					// int color = make_trgb(0, 255, 0, 0);
 					int color = *((unsigned int	*)pos);
