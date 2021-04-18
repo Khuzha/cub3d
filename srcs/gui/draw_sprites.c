@@ -47,7 +47,7 @@ void	draw_sprites(t_rc *rc)
 		while (stripe < draw_end_x)
 		{
 			int tex_x = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screen_x)) * rc->t.s.w / sprite_width) / 256;
-			if (transform_y > 0 && stripe > 0 && stripe < rc->data->res.x && transform_y < rc->zb[stripe])
+			if (transform_y > 0 && stripe > 0 && stripe < rc->data->res.x && transform_y < (double)rc->zb[stripe])
 			{
 				int y = draw_start_y;
 				while (y < draw_end_y)
