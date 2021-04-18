@@ -161,7 +161,7 @@ typedef struct	s_rc
 	t_all_txtrs	t;
 	t_txtr	*cur_side;
 	t_sprite *sprites;
-	int		*zb;
+	double	*zb;
 	double	dist_to_wall;
 	double	cam;
 	void	*mlx;

@@ -443,7 +443,7 @@ void	init_mlx(t_rc *rc)
 	rc->player_pos.y = (double)rc->data->pos.y + 0.5;
 	init_txtr_imgs(rc);
 	rc->wens_defined = 0;
-	rc->zb = malloc(sizeof(int) * rc->data->res.x);
+	rc->zb = malloc(sizeof(double) * rc->data->res.x);
 }
 
 void	init_windows(char **arr, t_map *data)
