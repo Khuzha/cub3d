@@ -229,6 +229,6 @@ int		ft_isnumber(char *str);
 size_t	get_max(size_t a, size_t b);
 double	ft_abs_dbl(double num);
 void	quicksort(t_sprite *arr, int first, int last);
-void	print_sprites(t_map *data);
+void	print_sprites(t_map *data, t_dxy player_pos);
 
 #endif

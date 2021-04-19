@@ -414,7 +414,7 @@ int		handle_loop(t_rc	*rc)
 	draw_sprites(rc);
 	recalc_sprites(rc);
 	quicksort(rc->data->sprites, 0, rc->data->s_count - 1);
-	print_sprites(rc->data);
+	// print_sprites(rc->data, rc->player_pos);
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }
