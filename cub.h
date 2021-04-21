@@ -82,6 +82,7 @@ typedef struct	s_map
 	char		*no;
 	char		*s;
 	t_sprite	*sprites;
+	int			is_scnsht;
 }				t_map;
 
 typedef struct	s_img
@@ -221,6 +222,11 @@ void	init_windows(char **arr, t_map *data);
 void	draw_sprites(t_rc *rc);
 void	put_pixel(t_img img, int x, int y, int color);
 int		make_trgb(int t, int r, int g, int b);
+
+/*
+ *	Screenshots
+ */
+void	make_scrsht(t_rc *rc);
 
 /*
  *	Additional utils

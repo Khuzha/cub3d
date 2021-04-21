@@ -459,6 +459,8 @@ void	init_windows(char **arr, t_map *data)
 
 	drawer(rc);
 	draw_sprites(rc);
+	if (data->is_scnsht)
+		return (make_scrsht(rc));
 	mlx_hook(rc->win, 2, 0, key_press, rc);
 	mlx_hook(rc->win, 3, 0, key_unpress, rc);
 	mlx_hook(rc->win, 17, 0, finish, rc);
