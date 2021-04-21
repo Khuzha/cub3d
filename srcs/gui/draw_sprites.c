@@ -7,19 +7,7 @@
 void	draw_sprites(t_rc *rc)
 {
 	int i;
-	double	sprite_x;
-	double	sprite_y;
-	double	inv_det;
-	double	transform_y;
-	double	transform_x;
-	int		sprite_screen_x;
-	int		sprite_height;
-	int		draw_start_y;
-	int		draw_end_y;
-	int		sprite_width;
-	int		draw_start_x;
-	int		draw_end_x;
-	int mv_scr;
+
 	
 	i = 0;
 	while (i < rc->data->s_count)

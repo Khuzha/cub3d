@@ -243,7 +243,6 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 		error("Malloc error");
 	calcs_for_txtr(rc, txtr_data);
 	define_side(rc);
-	// printf("cur_side = %s\n", rc->cur_side);
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
@@ -396,7 +395,6 @@ int		key_unpress(int code, t_rc *rc)
 
 int		handle_loop(t_rc	*rc)
 {
-	// mlx_do_sync(rc->mlx);
 	if (rc->keys.w)
 		step_forward(rc);
 	if (rc->keys.s)
