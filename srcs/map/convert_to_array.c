@@ -53,12 +53,11 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 
 void	convert_to_array(t_list *list, t_map *data)
 {
-	size_t	width;
 	size_t	height;
 	char	**arr;
 
 	height = get_height(list);
-	width = get_width(list, height);
+	data->l_width = get_width(list, height);
 	if (!(arr = ft_calloc(sizeof(char *) * (height + 1), height + 1)))
 		error("Malloc error");
 	// printf("bef init_lines\n");

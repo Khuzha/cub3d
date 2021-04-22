@@ -15,11 +15,7 @@ int	main(int argc, char **argv)
 	if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
 		map->is_scnsht = 1;
 	while(get_next_line(fd, &str) > 0)
-	{
 		ft_lstadd_back(&(map->list), ft_lstnew(str));
-	}
 	ft_lstadd_back(&(map->list), ft_lstnew(str));
 	iterate_list(map);
-	// printf("res_x = %d, res_y = %d, x_max = %d, y_max = %d \nwe = %s, ea = %s, so = %s, no = %s, \nsprite = %s \n", map.res.x, map.res.y, map.res.x_max, map.res.y_max, map.we, map.ea, map.so, map.no, map.s);
-	// printf("c = %d,%d,%d; f = %d,%d,%d\n", map.c_colors.r, map.c_colors.g, map.c_colors.b, map.f_colors.r, map.f_colors.g, map.f_colors.b);
 }

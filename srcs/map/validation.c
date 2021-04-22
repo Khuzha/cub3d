@@ -65,15 +65,36 @@ void	flood_fill(char **arr, size_t x, size_t y)
 	}
 }
 
+void	ff_middleware(char **arr, t_map *data)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	x = 0;	
+	while (arr && arr[y])
+	{
+		while (arr[y][x])
+		{
+			if (ft_strchr("0WESN", arr[y][x]))
+				flood_fill(arr, x, y);
+			x++;
+		}
+		y++;
+	}
+
+}
+
 void	validate_map(char **arr, t_map *data)
 {
 	size_t	x;
 	size_t	y;
 
 	find_player(arr, &x, &y, data);
-	flood_fill(arr, x, y);
+
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
+	ff_middleware(arr, data);
 	printf("found %d sprites\n", data->s_count);
 	init_sprites(arr, data);
 	init_windows(arr, data);

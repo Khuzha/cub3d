@@ -49,8 +49,8 @@ void	init_keys(t_rc	*rc)
 	rc->keys.arr_r = 0;
 	rc->keys.arr_t = 0;
 	rc->keys.arr_d = 0;
-	rc->speed.forward = 0.06;
-	rc->speed.rot = 0.015;
+	rc->speed.forward = 0.08;
+	rc->speed.rot = 0.02;
 }
 
 void	init_rc(t_rc *rc, t_map *data)
@@ -187,14 +187,11 @@ void	calcs_for_txtr(t_rc *rc, t_txtr_data *data)
 	else
 		data->wall_x = rc->player_pos.x + rc->dist_to_wall * rc->ray_dir.x;
 	data->wall_x -= floor(data->wall_x);
-
 	data->tex_x = (int)(data->wall_x * (double)(rc->t.so.w));
-
 	if (rc->side == 0 && rc->ray_dir.x > 0)
 		data->tex_x = rc->t.so.w - data->tex_x - 1;
 	if (rc->side == 1 && rc->ray_dir.y < 0)
 		data->tex_x = rc->t.so.w - data->tex_x - 1;
-
 	data->step = 1.0 * rc->t.so.h / rc->wall.height;
 	data->tex_pos = (rc->wall.start - rc->data->res.y / 2 + rc->wall.height / 2) * data->step;
 }

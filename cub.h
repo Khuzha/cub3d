@@ -83,6 +83,7 @@ typedef struct	s_map
 	char		*s;
 	t_sprite	*sprites;
 	int			is_scnsht;
+	size_t		l_width;
 }				t_map;
 
 typedef struct	s_img
@@ -179,7 +180,6 @@ typedef struct	s_txtr_data
 	double	tex_x;
 	double	step;
 	double	tex_pos;
-	
 }				t_txtr_data;
 
 typedef struct	s_s_rc
@@ -197,6 +197,9 @@ typedef struct	s_s_rc
 	int		draw_start_x;
 	int		draw_end_x;
 	int		mv_scr;
+	int		d;
+	int		tex_y;
+	int		tex_x;
 }				t_s_rc;
 
 /*
