@@ -51,9 +51,10 @@ void	flood_fill(char **arr, size_t x, size_t y)
 	if (arr[y] && arr[y][x] != '0' && arr[y][x] != '1'
 		&& arr[y][x] != '2' && arr[y][x] != '@')
 		check_char(arr[y][x]);
-	if (arr[y] && (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])))
+	if (arr[y] && (arr[y][x] == '0' || ft_strchr("2WENS", arr[y][x])))
 	{
-		arr[y][x] = '@';
+		if (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x]))
+			arr[y][x] = '@';
 		flood_fill(arr, x + 1, y - 1);
 		flood_fill(arr, x + 1, y);
 		flood_fill(arr, x + 1, y + 1);
@@ -76,10 +77,8 @@ void	ff_middleware(char **arr)
 		x = 0;
 		while (arr[y][x])
 		{
-			if (ft_strchr("0WESN", arr[y][x]))
-			{
+			if (ft_strchr("02WESN", arr[y][x]))
 				flood_fill(arr, x, y);
-			}
 			x++;
 		}
 		y++;
