@@ -278,6 +278,7 @@ int		drawer(t_rc *rc)
 
 void	step_forward(t_rc *rc)
 {
+	printf("next square = %c\n", rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)(rc->player_pos.x)]);
 	if (rc->arr[(int)(rc->player_pos.y + rc->wens.y * rc->speed.forward)][(int)(rc->player_pos.x)] == '@')
 		rc->player_pos.y += rc->wens.y * rc->speed.forward;
 	if (rc->arr[(int)(rc->player_pos.y)][(int)(rc->player_pos.x + rc->wens.x * rc->speed.forward)] == '@')
@@ -386,7 +387,6 @@ int		key_unpress(int code, t_rc *rc)
 		rc->speed.forward /= 2;
 		rc->speed.rot /= 2;
 	}
-
 	return (0);
 }
 

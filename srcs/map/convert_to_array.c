@@ -61,7 +61,7 @@ void	convert_to_array(t_list *list, t_map *data)
 	if (!(arr = ft_calloc(sizeof(char *) * (height + 1), height + 1)))
 		error("Malloc error");
 	// printf("bef init_lines\n");
-	init_lines(arr, width);
+	init_lines(arr, data->l_width);
 	// printf("bef fill_lines\n");
 	fill_lines(arr, list, height);
 	// printf("bef validate_map\n");
