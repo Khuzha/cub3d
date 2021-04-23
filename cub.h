@@ -48,8 +48,6 @@ typedef struct	s_colors
 
 typedef struct	s_res
 {
-	int x_max;
-	int y_max;
 	int	x;
 	int	y;
 }				t_res;

@@ -49,12 +49,11 @@ void	flood_fill(char **arr, size_t x, size_t y)
 	if (x < 0 || y < 0)
 		error("Map validation failed");
 	if (arr[y] && arr[y][x] != '0' && arr[y][x] != '1'
-		&& arr[y][x] != '2' && arr[y][x] != '@')
+		&& !ft_strchr("2@$", arr[y][x]))
 		check_char(arr[y][x]);
 	if (arr[y] && (arr[y][x] == '0' || ft_strchr("2WENS", arr[y][x])))
 	{
-		if (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x]))
-			arr[y][x] = '@';
+		arr[y][x] = (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])) ? '@' : '$';
 		flood_fill(arr, x + 1, y - 1);
 		flood_fill(arr, x + 1, y);
 		flood_fill(arr, x + 1, y + 1);

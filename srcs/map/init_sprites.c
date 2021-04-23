@@ -27,7 +27,7 @@ static void	calc_sprites(char **arr, t_sprite *sprites)
 		x = 0;
 		while (arr[y][x])
 		{
-			if (arr[y][x] == '2')
+			if (arr[y][x] == '$')
 			{
 				sprites[i].y = y + 0.5;
 				sprites[i].x = x + 0.5;

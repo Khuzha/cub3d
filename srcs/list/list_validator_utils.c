@@ -2,16 +2,16 @@
 
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
-	// printf("res in fill_resolution: x = %s, y = %s\n", res_x, res_y);
+	int trash;
+
 	if (ft_strlen(res_x) > 5)
-		map->res.x_max = 1;
+		mlx_get_screen_size(&map->res.x, &trash);
+	else
+		map->res.x = ft_atoi(res_x);
 	if (ft_strlen(res_y) > 5)
-		map->res.y_max = 1;
-	if (map->res.x || map->res.y)
-		return error("Invalid map (resolution)");
-	map->res.x = ft_atoi(res_x);
-	map->res.y = ft_atoi(res_y);
-	// printf("aft atoi: x = %d, y = %d\n", map->res.x, map->res.y);
+		mlx_get_screen_size(&trash, &map->res.y);
+	else
+		map->res.y = ft_atoi(res_y);
 }
 
 void	define_file(t_map *map, char *type, char *file)
