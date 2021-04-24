@@ -240,6 +240,26 @@ void	init_windows(char **arr, t_map *data);
 void	draw_sprites(t_rc *rc);
 void	put_pixel(t_img img, int x, int y, int color);
 int		make_trgb(int t, int r, int g, int b);
+int		drawer(t_rc *rc);
+void	handle_player_dir(t_rc *rc, t_map *data);
+void	handle_rc(t_rc *rc, t_map *data, int x);
+void	init_keys(t_rc *rc);
+void	init_rc(t_rc *rc, t_map *data);
+void	init_mlx(t_rc *rc);
+int		key_press(int code, t_rc *rc);
+int		key_unpress(int code, t_rc *rc);
+int		handle_loop(t_rc *rc);
+int		get_pixel(t_txtr txtr, t_rc *rc, t_txtr_data *data);
+void	put_pixel(t_img img, int x, int y, int color);
+void	rot_right(t_rc *rc);
+void	rot_left(t_rc *rc);
+void	step_forward(t_rc *rc);
+void	step_back(t_rc *rc);
+void	step_right(t_rc *rc);
+void	step_left(t_rc *rc);
+void	calc_wall(t_rc *rc, t_map *data);
+void	define_color(t_rc *rc);
+void	calcs_for_txtr(t_rc *rc, t_txtr_data *data);
 
 /*
  *	Screenshots
@@ -254,5 +274,10 @@ size_t	get_max(size_t a, size_t b);
 double	ft_abs_dbl(double num);
 void	quicksort(t_sprite *arr, int first, int last);
 void	print_sprites(t_map *data, t_dxy player_pos);
+double	get_decimal(double num);
+double	get_floor(double num);
+double	get_up(double num);
+int		make_trgb(int t, int r, int g, int b);
+int		finish(t_rc *rc);
 
 #endif
