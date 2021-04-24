@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:08:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 20:08:31 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/24 20:38:26 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,14 @@ void	init_windows(char **arr, t_map *data)
 
 	if (!(rc = malloc(sizeof(t_rc))))
 		error("Malloc error\n");
+	printf("init_windows started\n");
 	rc->arr = arr;
 	rc->data = data;
+	printf("bef init_keys\n");
 	init_keys(rc);
+	printf("bef init_mlx\n");
 	init_mlx(rc);
+	printf("bef drawer\n");
 	drawer(rc);
 	draw_sprites(rc);
 	if (data->is_scnsht)

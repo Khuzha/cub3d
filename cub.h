@@ -260,6 +260,9 @@ void	step_left(t_rc *rc);
 void	calc_wall(t_rc *rc, t_map *data);
 void	define_color(t_rc *rc);
 void	calcs_for_txtr(t_rc *rc, t_txtr_data *data);
+void	prepare_rc(t_rc *rc);
+void	run_dda(t_rc *rc, char **arr);
+void	define_side(t_rc *rc);
 
 /*
  *	Screenshots

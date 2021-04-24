@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 20:57:47 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/23 21:24:30 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/24 20:38:31 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void		draw_sprites(t_rc *rc)
 	t_s_rc	*s;
 	int		i;
 
+	printf("draw_sprites started\n");
 	i = 0;
 	if (!(s = malloc(sizeof(t_s_rc))))
 		error("Malloc error\n");
