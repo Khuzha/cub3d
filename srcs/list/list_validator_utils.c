@@ -8,19 +8,29 @@ void	miss_zeros(char **res_x, char**res_y)
 		(*res_y)++;
 }
 
+int		get_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
+}
+
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
-	int trash;
+	int	max_y;
+	int	max_x;
 
+	mlx_get_screen_size(&max_x, &max_y);
 	miss_zeros(&res_x, &res_y);
 	if (ft_strlen(res_x) > 5)
-		mlx_get_screen_size(&map->res.x, &trash);
+		map->res.x = max_x;
 	else
-		map->res.x = ft_atoi(res_x);
+		map->res.x = get_min(ft_atoi(res_x), max_x);
 	if (ft_strlen(res_y) > 5)
-		mlx_get_screen_size(&trash, &map->res.y);
+		map->res.y = max_y;
 	else
-		map->res.y = ft_atoi(res_y);
+		map->res.y = get_min(ft_atoi(res_y), max_y);
 }
 
 void	define_file(t_map *map, char *type, char *file)
