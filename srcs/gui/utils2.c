@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/24 20:21:28 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/24 20:21:37 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void	calc_wall(t_rc *rc, t_map *data)
@@ -32,5 +44,6 @@ void	calcs_for_txtr(t_rc *rc, t_txtr_data *data)
 	if (rc->side == 1 && rc->ray_dir.y < 0)
 		data->tex_x = rc->t.so.w - data->tex_x - 1;
 	data->step = 1.0 * rc->t.so.h / rc->wall.height;
-	data->tex_pos = (rc->wall.start - rc->data->res.y / 2 + rc->wall.height / 2) * data->step;
+	data->tex_pos = (rc->wall.start - rc->data->res.y / 2 +
+		rc->wall.height / 2) * data->step;
 }
