@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   drawer.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/24 20:11:32 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void	draw_line(t_rc *rc, t_map *data, int x)
 {
+	t_txtr_data	*txtr_data;
 	t_colors	c;
 	t_colors	f;
-	t_txtr_data	*txtr_data;
-	int	y;
+	int			y;
+	int			color;
 
 	y = 0;
 	c = rc->data->c_colors;
@@ -14,18 +27,17 @@ void	draw_line(t_rc *rc, t_map *data, int x)
 		error("Malloc error");
 	calcs_for_txtr(rc, txtr_data);
 	define_side(rc);
-	while (y < data->res.y)
+	while (y++ < data->res.y)
 	{
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			int color = get_pixel(*rc->cur_side, rc, txtr_data);
+			color = get_pixel(*rc->cur_side, rc, txtr_data);
 			put_pixel(rc->img, x, y, color);
 		}
 		else
 			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
-		y++;
 	}
 }
 
