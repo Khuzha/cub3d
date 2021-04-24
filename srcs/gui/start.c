@@ -32,8 +32,10 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 		rc->wens.x = -1;
 	if (data->player == 'E')
 		rc->wens.x = 1;
-	if (ft_strchr("NS", data->player))
+	if (data->player == 'N')
 		rc->plane.x = 0.66;
+	if (data->player == 'S')
+		rc->plane.x = -0.66;
 	if (ft_strchr("WE", data->player))
 		rc->plane.y = 0.66;
 	rc->wens_defined = 1;
@@ -314,11 +316,12 @@ void	rot_right(t_rc *rc)
 	double	plane_y;
 	
 	wens_y = rc->wens.y;
-	rc->wens.y = rc->wens.y * cos(rc->speed.rot) - rc->wens.x * sin(rc->speed.rot);
-	rc->wens.x = wens_y * sin(rc->speed.rot) + rc->wens.x * cos(rc->speed.rot);
+	rc->wens.y = rc->wens.y * cos(-rc->speed.rot) - rc->wens.x * sin(-rc->speed.rot);
+	rc->wens.x = wens_y * sin(-rc->speed.rot) + rc->wens.x * cos(-rc->speed.rot);
 	plane_y = rc->plane.y;
-	rc->plane.y = rc->plane.y * cos(rc->speed.rot) - rc->plane.x * sin(rc->speed.rot);
-	rc->plane.x = plane_y * sin(rc->speed.rot) + rc->plane.x * cos(rc->speed.rot);
+	rc->plane.y = rc->plane.y * cos(-rc->speed.rot) - rc->plane.x * sin(-rc->speed.rot);
+	rc->plane.x = plane_y * sin(-rc->speed.rot) + rc->plane.x * cos(-rc->speed.rot);
+
 }
 
 void	rot_left(t_rc *rc)
@@ -327,11 +330,11 @@ void	rot_left(t_rc *rc)
 	double	plane_y;
 	
 	wens_y = rc->wens.y;
-	rc->wens.y = rc->wens.y * cos(-rc->speed.rot) - rc->wens.x * sin(-rc->speed.rot);
-	rc->wens.x = wens_y * sin(-rc->speed.rot) + rc->wens.x * cos(-rc->speed.rot);
+	rc->wens.y = rc->wens.y * cos(rc->speed.rot) - rc->wens.x * sin(rc->speed.rot);
+	rc->wens.x = wens_y * sin(rc->speed.rot) + rc->wens.x * cos(rc->speed.rot);
 	plane_y = rc->plane.y;
-	rc->plane.y = rc->plane.y * cos(-rc->speed.rot) - rc->plane.x * sin(-rc->speed.rot);
-	rc->plane.x = plane_y * sin(-rc->speed.rot) + rc->plane.x * cos(-rc->speed.rot);
+	rc->plane.y = rc->plane.y * cos(rc->speed.rot) - rc->plane.x * sin(rc->speed.rot);
+	rc->plane.x = plane_y * sin(rc->speed.rot) + rc->plane.x * cos(rc->speed.rot);
 }
 
 int		finish(t_rc *rc)
@@ -408,7 +411,6 @@ int		handle_loop(t_rc	*rc)
 	draw_sprites(rc);
 	recalc_sprites(rc);
 	quicksort(rc->data->sprites, 0, rc->data->s_count - 1);
-	// print_sprites(rc->data, rc->player_pos);
 	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }

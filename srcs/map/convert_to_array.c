@@ -45,6 +45,7 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 	while (i < height)
 	{
 		arr[i] = list->content;
+		printf("str = |%s|\n", arr[i]);
 		i++;
 		list = list->next;
 	}

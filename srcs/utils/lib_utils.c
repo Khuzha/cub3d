@@ -2,7 +2,6 @@
 
 int		ft_isnumber(char *str)
 {
-	printf("str = |%s|\n", str);
 	int was_space;
 	int	was_num;
 
@@ -21,7 +20,6 @@ int		ft_isnumber(char *str)
 		ft_isdigit(*str) ? was_num = 1 : 0;
 		str++;
 	}
-	printf("isnumber = %d\n", was_num);
 	return (was_num);
 }
 
