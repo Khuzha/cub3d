@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/24 20:16:02 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/24 20:16:11 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 int		key_press(int code, t_rc *rc)
@@ -46,7 +58,7 @@ int		key_unpress(int code, t_rc *rc)
 	return (0);
 }
 
-int		handle_loop(t_rc	*rc)
+int		handle_loop(t_rc *rc)
 {
 	if (rc->keys.w)
 		step_forward(rc);
