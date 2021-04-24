@@ -6,13 +6,13 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 20:11:32 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/24 20:22:45 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub.h"
 
-void	draw_line(t_rc *rc, t_map *data, int x)
+static void	draw_line(t_rc *rc, t_map *data, int x)
 {
 	t_txtr_data	*txtr_data;
 	t_colors	c;
