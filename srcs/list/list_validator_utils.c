@@ -1,9 +1,18 @@
 #include "../../cub.h"
 
+void	miss_zeros(char **res_x, char**res_y)
+{
+	while (**res_x == '0')
+		(*res_x)++;
+	while (**res_y == '0')
+		(*res_y)++;
+}
+
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
 	int trash;
 
+	miss_zeros(&res_x, &res_y);
 	if (ft_strlen(res_x) > 5)
 		mlx_get_screen_size(&map->res.x, &trash);
 	else
