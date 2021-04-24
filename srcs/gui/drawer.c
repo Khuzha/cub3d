@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 20:38:23 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:04:42 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	draw_line(t_rc *rc, t_map *data, int x)
 	t_colors	c;
 	t_colors	f;
 	int			y;
-	int			color;
 
 	y = 0;
 	c = rc->data->c_colors;
@@ -27,25 +26,24 @@ static void	draw_line(t_rc *rc, t_map *data, int x)
 		error("Malloc error");
 	calcs_for_txtr(rc, txtr_data);
 	define_side(rc);
-	while (y++ < data->res.y)
+	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			color = get_pixel(*rc->cur_side, rc, txtr_data);
-			put_pixel(rc->img, x, y, color);
+			put_pixel(rc->img, x, y, get_pixel(*rc->cur_side, rc, txtr_data));
 		}
 		else
 			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
+		y++;
 	}
 }
 
-int		drawer(t_rc *rc)
+int			drawer(t_rc *rc)
 {
 	int		x;
-	
-	printf("init_windows started\n");
+
 	x = 0;
 	while (x < rc->data->res.x)
 	{
