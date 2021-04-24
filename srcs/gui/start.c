@@ -49,8 +49,8 @@ void	init_keys(t_rc	*rc)
 	rc->keys.arr_r = 0;
 	rc->keys.arr_t = 0;
 	rc->keys.arr_d = 0;
-	rc->speed.forward = 0.08;
-	rc->speed.rot = 0.02;
+	rc->speed.forward = 0.1;
+	rc->speed.rot = 0.03;
 }
 
 void	init_rc(t_rc *rc, t_map *data)
@@ -343,7 +343,7 @@ int		finish(t_rc *rc)
 
 int		key_press(int code, t_rc *rc)
 {
-	printf("key pressed: %d\n", code);
+	// printf("key pressed: %d\n", code);
 	if (code == KEY_ESC)
 		finish(rc);
 	if (code == KEY_W)

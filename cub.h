@@ -50,6 +50,7 @@ typedef struct	s_res
 {
 	int	x;
 	int	y;
+	int	defined;
 }				t_res;
 
 typedef struct	s_pos

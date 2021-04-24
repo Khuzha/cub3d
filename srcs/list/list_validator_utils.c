@@ -66,6 +66,10 @@ void	store_colors(t_map *map, char type, char *str)
 	if (count_commas(str) != 2)
 		error("Invalid map (commas in colors)");
 	set = ft_split(str, ',');
+	if (!ft_strlen(*set) || !ft_strlen(set[1]) || !ft_strlen(set[2]))
+		error("Colors are wrong");
+	// printf("set: 0 = |%s| (%lu), 1 = |%s| (%lu), 2 = |%s| - %d (%lu)\n", *set, ft_strlen(*set), set[1], ft_strlen(set[1]), set[2], ft_atoi(set[2]), ft_strlen(set[2]));
+	printf("set[2] = |%s|, num = %d\n", set[2], ft_isnumber(set[2]));
 	if (type == 'C')
 	{
 		if (map->c_colors.defined)
