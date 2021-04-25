@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_validator_utils2.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 13:26:25 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/25 13:27:05 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
-int		is_wside(char *str)
+int	is_wside(char *str)
 {
 	if (!str || !(*str) ||
 		(ft_strncmp(str, "WE", 3) &&
@@ -11,7 +23,7 @@ int		is_wside(char *str)
 	return (1);
 }
 
-int		is_xpm_file(char *str)
+int	is_xpm_file(char *str)
 {
 	if (!str ||
 		ft_strncmp(ft_substr(str, ft_strlen(str) - 4, 4), ".xpm", 5))
@@ -21,8 +33,8 @@ int		is_xpm_file(char *str)
 
 int	is_colors_set_1(char *str)
 {
-	char **set;
-	int i;
+	char	**set;
+	int		i;
 
 	i = 0;
 	set = ft_split(str, ',');
@@ -36,7 +48,7 @@ int	is_colors_set_1(char *str)
 	return (i == 3);
 }
 
-int is_colors_set(char *str)
+int	is_colors_set(char *str)
 {
 	int i;
 
