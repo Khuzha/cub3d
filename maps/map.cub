@@ -1,19 +1,22 @@
-R  1000 1000
+R  1920 1080
 
-NO     ./img/grass.xpm
-SO   ./img/neon.xpm
+NO     ./img/barrel.xpm
+SO   ./img/cartoon.xpm
 S ./img/barrel.xpm
 
 EA ./img/bricks.xpm
 
-WE ./img/craft.xpm
+WE ./img/neon.xpm
 C 56, 4294967395, 2
-F 2, 2, 4
+F 255, 2, 4
 
 111111111
 100000001
 100000001
 1000S0001
+111111111
+
+111111111
 100000001
 100000021
 111111111

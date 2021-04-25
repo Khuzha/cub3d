@@ -249,7 +249,7 @@ void	init_mlx(t_rc *rc);
 int		key_press(int code, t_rc *rc);
 int		key_unpress(int code, t_rc *rc);
 int		handle_loop(t_rc *rc);
-int		get_pixel(t_txtr txtr, t_rc *rc, t_txtr_data *data);
+int		get_pixel(t_txtr txtr, t_txtr_data *data);
 void	put_pixel(t_img img, int x, int y, int color);
 void	rot_right(t_rc *rc);
 void	rot_left(t_rc *rc);

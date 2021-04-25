@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 22:04:42 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 11:37:25 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ static void	draw_line(t_rc *rc, t_map *data, int x)
 	f = rc->data->f_colors;
 	if (!(txtr_data = malloc(sizeof(t_txtr_data))))
 		error("Malloc error");
-	calcs_for_txtr(rc, txtr_data);
 	define_side(rc);
+	calcs_for_txtr(rc, txtr_data);
 	while (y < data->res.y)
 	{
 		if (y < rc->wall.start)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			put_pixel(rc->img, x, y, get_pixel(*rc->cur_side, rc, txtr_data));
+			put_pixel(rc->img, x, y, get_pixel(*rc->cur_side, txtr_data));
 		}
 		else
 			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
