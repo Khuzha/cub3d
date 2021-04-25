@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:02 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:37:02 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:59:39 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 	list++;
 }
 
+void	free_list(t_list *list)
+{
+	t_list	*tmp;
+
+	while (list->next)
+	{
+		tmp = list;
+		list = list->next;
+		free(tmp);
+	}
+}
+
 void	convert_to_array(t_list *list, t_map *data)
 {
 	size_t	height;
@@ -77,5 +89,6 @@ void	convert_to_array(t_list *list, t_map *data)
 		error("Malloc error");
 	init_lines(arr, data->l_width);
 	fill_lines(arr, list, height);
+	free_list(data->backup);
 	validate_map(arr, data);
 }

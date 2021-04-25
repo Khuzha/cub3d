@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:13:48 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:56:39 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ void	iterate_list(t_map *map)
 	char	**arr;
 	char	was_map;
 
+	map->backup = map->list;
 	was_map = 0;
 	while (map->list->next)
 	{
+		printf("str = |%s|\n", map->list->content);
 		arr = ft_split(map->list->content, ' ');
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) &&
 			!is_map_line(map->list->content))
@@ -62,6 +64,7 @@ void	iterate_list(t_map *map)
 		fill_struct(map, arr, map->list->content);
 		map->list = map->list->next;
 		free(arr);
+		arr = NULL;
 	}
 	if (!was_map)
 		error("No map found");

@@ -83,6 +83,7 @@ typedef struct	s_map
 	t_sprite	*sprites;
 	int			is_scnsht;
 	size_t		l_width;
+	t_list		*backup;
 }				t_map;
 
 typedef struct	s_img

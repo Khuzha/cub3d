@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:26:25 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:27:05 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:49:17 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int	is_colors_set_1(char *str)
 
 	i = 0;
 	set = ft_split(str, ',');
-	while (set && *set)
+	while (set && set[i])
 	{
-		if (!set || !(*set) || !ft_isnumber(*set))
+		if (!set || !(set[i]) || !ft_isnumber(set[i]))
 			return (0);
-		set++;
 		i++;
 	}
+	set ? free(set) : 0;
+	set = NULL;
 	return (i == 3);
 }
 

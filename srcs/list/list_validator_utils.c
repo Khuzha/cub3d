@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:34:57 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:49:04 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	store_colors(t_map *map, char type, char *str)
 		map->f_colors.g = ft_atoi(set[1]);
 		map->f_colors.b = ft_atoi(set[2]);
 	}
+	set ? free(set) : 0;
+	set = NULL;
 }
 
 int		is_param(char *str)
