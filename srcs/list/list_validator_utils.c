@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_validator_utils.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/25 13:33:48 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
-
-void	miss_zeros(char **res_x, char**res_y)
-{
-	while (**res_x == '0')
-		(*res_x)++;
-	while (**res_y == '0')
-		(*res_y)++;
-}
-
-int		get_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	else
-		return (b);
-}
 
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
@@ -35,7 +31,9 @@ void	fill_resolution(t_map *map, char *res_x, char *res_y)
 
 void	define_file(t_map *map, char *type, char *file)
 {
-	int fd = open(file, O_RDONLY);
+	int fd;
+
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error("Invalid map (file couldn't be open)");
 	if (!ft_strncmp(type, "WE", 3) && !map->we)
@@ -52,31 +50,6 @@ void	define_file(t_map *map, char *type, char *file)
 		error("Invalid map (textures)");
 }
 
-int		count_commas(char *str)
-{
-	int res;
-
-	res = 0;
-	while (*str)
-	{
-		if (*str == ',')
-			res++;
-		str++;
-	}
-	return (res);
-}
-
-// void	validate_colors(char **arr)
-// {
-// 	while (*arr)
-// 	{
-// 		printf("*arr = |%s|\n", *arr);
-// 		if (!ft_isnumber(*arr))
-// 			error("Invalid map (colors)");
-// 		arr++;
-// 	}
-// }
-
 void	store_colors(t_map *map, char type, char *str)
 {
 	char	**set;
@@ -85,10 +58,7 @@ void	store_colors(t_map *map, char type, char *str)
 	if (count_commas(str) != 2)
 		error("Invalid map (commas in colors)");
 	set = ft_split(str, ',');
-	if (!ft_strlen(*set) || !ft_strlen(set[1]) || !ft_strlen(set[2]))
-		error("Colors are wrong");
-	// printf("set: 0 = |%s| (%lu), 1 = |%s| (%lu), 2 = |%s| - %d (%lu)\n", *set, ft_strlen(*set), set[1], ft_strlen(set[1]), set[2], ft_atoi(set[2]), ft_strlen(set[2]));
-	printf("set[2] = |%s|, num = %d\n", set[2], ft_isnumber(set[2]));
+	check_colors(set);
 	if (type == 'C')
 	{
 		if (map->c_colors.defined)
@@ -123,4 +93,12 @@ int		is_param(char *str)
 		return (0);
 	}
 	return (1);
+}
+
+void	check_colors(char **set)
+{
+	if (!ft_strlen(*set) || ft_strlen_without_spaces(*set) > 3 ||
+		!ft_strlen(set[1]) || ft_strlen_without_spaces(set[1]) > 3 ||
+		!ft_strlen(set[2]) || ft_strlen_without_spaces(set[2]) > 3)
+		error("Colors are wrong");
 }

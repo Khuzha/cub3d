@@ -282,5 +282,9 @@ double	get_floor(double num);
 double	get_up(double num);
 int		make_trgb(int t, int r, int g, int b);
 int		finish(t_rc *rc);
+void	miss_zeros(char **res_x, char **res_y);
+int		get_min(int a, int b);
+int		count_commas(char *str);
+size_t	ft_strlen_without_spaces(char *str);
 
 #endif
