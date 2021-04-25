@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:16:02 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 19:25:03 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:03:43 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int		handle_loop(t_rc *rc)
 	draw_sprites(rc);
 	recalc_sprites(rc);
 	bubblesort(rc->data->sprites, rc->data->s_count);
-	mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
+	if (!rc->data->is_scnsht)
+		mlx_put_image_to_window(rc->mlx, rc->win, rc->img.ptr, 0, 0);
 	return (0);
 }
