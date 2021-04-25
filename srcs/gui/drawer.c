@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:48:56 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:51:40 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	draw_line(t_rc *rc, t_map *data, int x)
 		y++;
 	}
 	free(txtr_data);
-	txtr_data = NULL;
 }
 
 int			drawer(t_rc *rc)

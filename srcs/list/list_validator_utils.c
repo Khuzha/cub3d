@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:37:24 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:56:06 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ void	store_colors(t_map *map, char type, char *str)
 	if (count_commas(str) != 2)
 		error("Invalid map (commas in colors)");
 	set = ft_split(str, ',');
+	if ((type == 'C' && map->c_colors.defined) ||
+		(type == 'F' && map->f_colors.defined))
+		error("Colors are repeating");
 	check_colors(set);
 	if (type == 'C')
 	{
-		if (map->c_colors.defined)
-			error("Ceiling colors are repeating");
 		map->c_colors.defined = 1;
 		map->c_colors.r = ft_atoi(set[0]);
 		map->c_colors.g = ft_atoi(set[1]);
@@ -78,15 +79,12 @@ void	store_colors(t_map *map, char type, char *str)
 	}
 	if (type == 'F')
 	{
-		if (map->f_colors.defined)
-			error("Floor colors are repeating");
 		map->f_colors.defined = 1;
 		map->f_colors.r = ft_atoi(set[0]);
 		map->f_colors.g = ft_atoi(set[1]);
 		map->f_colors.b = ft_atoi(set[2]);
 	}
 	set ? clean_arr(set) : 0;
-	set = NULL;
 }
 
 int		is_param(char *str)

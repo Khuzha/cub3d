@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:18:08 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:56:56 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		init_rc(t_rc *rc, t_map *data)
 	data++;
 }
 
-void	free_file_paths(t_map *data)
+void		free_file_paths(t_map *data)
 {
 	free(data->so);
 	free(data->no);

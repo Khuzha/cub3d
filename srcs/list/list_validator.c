@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:38:05 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:56:31 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	fill_struct(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
-	printf("res: y = %d, x = %d\n", map->res.y, map->res.x);
-	printf("we = %s, ea = %s, so = %s, no = %s\n", map->we, map->ea, map->so, map->no);
-	
 	if ((map->res.x <= 0) || (map->res.y <= 0) ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
@@ -67,7 +64,6 @@ void	iterate_list(t_map *map)
 	was_map = 0;
 	while (map->list->next)
 	{
-		printf("str = |%s|\n", map->list->content);
 		arr = ft_split(map->list->content, ' ');
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) &&
 			!is_map_line(map->list->content))
