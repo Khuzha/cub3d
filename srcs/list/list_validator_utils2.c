@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:26:25 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:49:17 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:24:34 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ int	is_wside(char *str)
 
 int	is_xpm_file(char *str)
 {
-	if (!str ||
-		ft_strncmp(ft_substr(str, ft_strlen(str) - 4, 4), ".xpm", 5))
+	char	*ext;
+
+	ext = ft_substr(str, ft_strlen(str) - 4, 4);
+	if (!str || ft_strncmp(ext, ".xpm", 5))
 		return (0);
+	free(ext);
 	return (1);
 }
 
@@ -44,7 +47,7 @@ int	is_colors_set_1(char *str)
 			return (0);
 		i++;
 	}
-	set ? free(set) : 0;
+	set ? clean_arr(set) : 0;
 	set = NULL;
 	return (i == 3);
 }

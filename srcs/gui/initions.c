@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:55:45 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:18:08 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void		init_rc(t_rc *rc, t_map *data)
 	data++;
 }
 
+void	free_file_paths(t_map *data)
+{
+	free(data->so);
+	free(data->no);
+	free(data->we);
+	free(data->ea);
+	free(data->s);
+}
+
 static void	init_txtr_imgs(t_rc *rc)
 {
 	rc->t.so.img.ptr = mlx_xpm_file_to_image(rc->mlx,
@@ -57,6 +66,7 @@ static void	init_txtr_imgs(t_rc *rc)
 		rc->data->s, &rc->t.s.h, &rc->t.s.w);
 	rc->t.s.img.addr = mlx_get_data_addr(rc->t.s.img.ptr,
 		&rc->t.s.img.bpp, &rc->t.s.img.length, &rc->t.s.img.endian);
+	free_file_paths(rc->data);
 }
 
 void		init_mlx(t_rc *rc)

@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:49:04 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:37:24 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ void	define_file(t_map *map, char *type, char *file)
 	if (fd < 0)
 		error("Invalid map (file couldn't be open)");
 	if (!ft_strncmp(type, "WE", 3) && !map->we)
-		map->we = file;
+		map->we = ft_strdup(file);
 	else if (!ft_strncmp(type, "EA", 3) && !map->ea)
-		map->ea = file;
+		map->ea = ft_strdup(file);
 	else if (!ft_strncmp(type, "SO", 3) && !map->so)
-		map->so = file;
+		map->so = ft_strdup(file);
 	else if (!ft_strncmp(type, "NO", 3) && !map->no)
-		map->no = file;
+		map->no = ft_strdup(file);
 	else if (!ft_strncmp(type, "S", 2) && !map->s)
-		map->s = file;
+		map->s = ft_strdup(file);
 	else
 		error("Invalid map (textures)");
 }
@@ -85,7 +85,7 @@ void	store_colors(t_map *map, char type, char *str)
 		map->f_colors.g = ft_atoi(set[1]);
 		map->f_colors.b = ft_atoi(set[2]);
 	}
-	set ? free(set) : 0;
+	set ? clean_arr(set) : 0;
 	set = NULL;
 }
 

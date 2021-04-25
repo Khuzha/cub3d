@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:55:36 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:03:43 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	main(int argc, char **argv)
 		map->is_scnsht = 1;
 	while (get_next_line(fd, &str) > 0)
 	{
-		ft_lstadd_back(&(map->list), ft_lstnew(str));
+		ft_lstadd_back(&(map->list), ft_lstnew(ft_strdup(str)));
+		free(str);
 	}
-	ft_lstadd_back(&(map->list), ft_lstnew(str));
+	ft_lstadd_back(&(map->list), ft_lstnew(ft_strdup(str)));
+	free(str);
 	iterate_list(map);
 }

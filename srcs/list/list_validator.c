@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:56:39 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:38:05 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	fill_struct(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
+	printf("res: y = %d, x = %d\n", map->res.y, map->res.x);
+	printf("we = %s, ea = %s, so = %s, no = %s\n", map->we, map->ea, map->so, map->no);
+	
 	if ((map->res.x <= 0) || (map->res.y <= 0) ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
@@ -40,6 +43,19 @@ void	check_map(t_map *map)
 		map->c_colors.b > 255 || map->f_colors.r > 255 ||
 		map->f_colors.g > 255 || map->f_colors.b > 255)
 		error("Invalid map");
+}
+
+void	clean_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr && arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
 void	iterate_list(t_map *map)
@@ -59,11 +75,12 @@ void	iterate_list(t_map *map)
 			was_map = 1;
 			check_map(map);
 			convert_to_array(map->list, map);
+			clean_arr(arr);
 			break ;
 		}
 		fill_struct(map, arr, map->list->content);
 		map->list = map->list->next;
-		free(arr);
+		clean_arr(arr);
 		arr = NULL;
 	}
 	if (!was_map)
