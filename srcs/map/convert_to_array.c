@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_to_array.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 13:37:02 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/25 13:37:02 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 size_t	get_width(t_list *list, size_t height)
@@ -27,13 +39,13 @@ size_t	get_height(t_list *list)
 	return (counter);
 }
 
-void	init_lines(char **arr, size_t width)
+void	check_line(char *str)
 {
-	while (*arr)
+	while (*str)
 	{
-		if (!(*arr = ft_calloc(sizeof(char) * width, width)))
-			error("Malloc error");
-		arr++;
+		if (!ft_strchr("012WESN ", *str))
+			error("Wrong map: extra sybmols");
+		str++;
 	}
 }
 
@@ -44,8 +56,10 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 	i = 0;
 	while (i < height)
 	{
+		if (!ft_strlen(list->content))
+			error("Wrong map: it has empty lines");
+		check_line(list->content);
 		arr[i] = list->content;
-		printf("str = |%s|\n", arr[i]);
 		i++;
 		list = list->next;
 	}
@@ -61,11 +75,7 @@ void	convert_to_array(t_list *list, t_map *data)
 	data->l_width = get_width(list, height);
 	if (!(arr = ft_calloc(sizeof(char *) * (height + 1), height + 1)))
 		error("Malloc error");
-	// printf("bef init_lines\n");
 	init_lines(arr, data->l_width);
-	// printf("bef fill_lines\n");
 	fill_lines(arr, list, height);
-	// printf("bef validate_map\n");
 	validate_map(arr, data);
-	// printf("aft validate_map\n");
 }
