@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:56:06 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:41:51 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	fill_resolution(t_map *map, char *res_x, char *res_y)
 	int	max_y;
 	int	max_x;
 
-	mlx_get_screen_size(&max_x, &max_y);
 	miss_zeros(&res_x, &res_y);
+	if (map->res.defined || !res_x || !res_y ||
+		!ft_strlen(res_x) || !ft_strlen(res_y))
+		error("Wrong resolution");
+	mlx_get_screen_size(&max_x, &max_y);
 	if (ft_strlen(res_x) > 5)
 		map->res.x = max_x;
 	else
@@ -35,6 +38,7 @@ void	fill_resolution(t_map *map, char *res_x, char *res_y)
 		map->res.y = max_y;
 	else
 		map->res.y = get_min(ft_atoi(res_y), max_y);
+	map->res.defined = 1;
 }
 
 void	define_file(t_map *map, char *type, char *file)

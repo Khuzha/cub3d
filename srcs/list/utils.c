@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:25:26 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:33:55 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:22:20 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_str_and_map(char **str, t_map *map)
 	map->list = NULL;
 	map->res.x = 0;
 	map->res.y = 0;
+	map->res.defined = 0;
 	map->we = NULL;
 	map->ea = NULL;
 	map->so = NULL;

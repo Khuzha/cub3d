@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:56:31 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:40:02 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	fill_struct(t_map *map, char **arr, char *str)
 		return ;
 	if (!arr[0] && *str == ' ')
 		error("Invalid map (empty line contains spaces)");
-	if (arr[0] && arr[0][0] == 'R' && !arr[0][1] &&
+	if (arr[0] && arr[0][0] == 'R' &&
 		ft_isnumber(arr[1]) && ft_isnumber(arr[2]) && !arr[3])
 		fill_resolution(map, arr[1], arr[2]);
 	if ((is_wside(arr[0]) || (arr[0] && arr[0][0] == 'S'))
@@ -31,7 +31,7 @@ void	fill_struct(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
-	if ((map->res.x <= 0) || (map->res.y <= 0) ||
+	if (!map->res.defined || (map->res.x <= 0) || (map->res.y <= 0) ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||
 		!map->s || !ft_strlen(map->s) ||

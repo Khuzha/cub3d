@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 20:57:47 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 19:53:10 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:17:04 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	draw_helper(t_rc *rc, t_s_rc *s, int y, int x)
 		s->d = (y - s->mv_scr) * 256 -
 			rc->data->res.y * 128 + s->sprite_height * 128;
 		s->tex_y = ((s->d * rc->t.s.h) / s->sprite_height) / 256;
-		
-		if (s->tex_x >= 0 && s->tex_y >= 0 && s->tex_y <= rc->t.s.h && s->tex_x <= rc->t.s.w)
+		if (s->tex_x >= 0 && s->tex_y >= 0 && s->tex_y
+			<= rc->t.s.h && s->tex_x <= rc->t.s.w)
 		{
 			pos = rc->t.s.img.addr + rc->t.s.img.length * s->tex_y
 				+ s->tex_x * (rc->t.s.img.bpp / 8);
@@ -94,7 +94,6 @@ void		draw_sprites(t_rc *rc)
 	int		i;
 
 	i = 0;
-	print_sprites(rc->data, rc->player_pos);
 	if (!(s = malloc(sizeof(t_s_rc))))
 		error("Malloc error\n");
 	while (i < rc->data->s_count)

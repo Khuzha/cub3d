@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 20:04:30 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:17:14 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void		init_mlx(t_rc *rc)
 {
 	rc->mlx = mlx_init();
 	if (!rc->data->is_scnsht)
-		rc->win = mlx_new_window(rc->mlx, rc->data->res.x, rc->data->res.y, "21");
+		rc->win = mlx_new_window(rc->mlx,
+			rc->data->res.x, rc->data->res.y, "21");
 	rc->img.ptr = mlx_new_image(rc->mlx, rc->data->res.x, rc->data->res.y);
 	rc->img.addr = mlx_get_data_addr(rc->img.ptr,
 		&rc->img.bpp, &rc->img.length, &rc->img.endian);

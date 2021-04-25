@@ -12,7 +12,6 @@ SRCS =	main.c gnl/get_next_line.c \
 		srcs/map/init_sprites.c srcs/map/utils.c \
 		srcs/screenshot/save.c
 
-
 SRCOBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g

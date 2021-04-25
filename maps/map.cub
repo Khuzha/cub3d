@@ -1,15 +1,14 @@
-R  1920 1080
+R  500 5000
 
-NO ./img/bricks.xpm
+NO     ./img/grass.xpm   
+SO   ./img/neon.xpm
+S ./img/barrel.xpm
 
-SO ./img/neon.xpm
-WE ./img/skeleton.xpm
-EA ./img/eagle.xpm
+EA ./img/bricks.xpm
 
-S ./img/skeleton.xpm
-
-C 56, 13, 255
-F 0, 3, 41
+WE ./img/eagle.xpm
+C 56, 13, 2
+F 2, 3, 41
 
 11111111111111111111111111111111111111111111111111111111111111111111111111111111
 10000000000020000000100000000000000000000000000000000000000000000000000000000001

@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:45:59 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:46:20 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:37:15 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_isnumber(char *str)
 	int was_space;
 	int	was_num;
 
+	if (!str)
+		return (0);
 	was_num = 0;
 	was_space = 0;
 	while (*str == ' ')
