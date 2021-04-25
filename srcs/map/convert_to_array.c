@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:02 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:44:30 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:49:55 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 		if (!ft_strlen(list->content))
 			error("Wrong map: it has empty lines");
 		check_line(list->content);
-		arr[i] = list->content;
+		arr[i] = ft_strdup(list->content);
 		i++;
 		list = list->next;
 	}
@@ -76,8 +76,10 @@ void	free_list(t_list *list)
 	{
 		tmp = list;
 		list = list->next;
+		free(tmp->content);
 		free(tmp);
 	}
+	free(list->content);
 	free(list);
 }
 
