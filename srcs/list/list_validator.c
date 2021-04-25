@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 09:30:23 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 12:06:27 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	fill_struct(t_map *map, char **arr, char *str)
 {
+	if (!ft_strchr("AECFNORSW", ((char *)map->list->content)[0]))
+		return ;
 	if (!arr[0] && *str == ' ')
 		error("Invalid map (empty line contains spaces)");
 	if (arr[0] && arr[0][0] == 'R' && !arr[0][1] &&
