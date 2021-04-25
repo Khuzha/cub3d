@@ -297,5 +297,6 @@ size_t	ft_strlen_without_spaces(char *str);
 void	init_lines(char **arr, size_t width);
 void	check_char(char c);
 void	clean_arr(char **arr);
+void	free_list(t_list *list);
 
 #endif
