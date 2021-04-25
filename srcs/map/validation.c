@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 13:39:20 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/25 13:42:16 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void	check_sprite(char **arr, int y, int x, t_map *data)
@@ -6,17 +18,17 @@ void	check_sprite(char **arr, int y, int x, t_map *data)
 		data->s_count++;
 }
 
-void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
+int		find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 {
 	size_t	x;
 	size_t	y;
-	char	counter;
+	int		counter;
 
-	x = 0;
 	y = 0;
 	counter = 0;
 	while (arr[y])
 	{
+		x = 0;
 		while (arr[y][x])
 		{
 			if (ft_strchr("WENS", arr[y][x]))
@@ -26,22 +38,12 @@ void	find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 				data->player = arr[y][x];
 				counter++;
 			}
-			if (counter > 1)
-				error("Wrong players count");
 			check_sprite(arr, y, x, data);
 			x++;
 		}
-		x = 0;
 		y++;
 	}
-	if (!counter)
-		error("No player found");
-}
-
-void	check_char(char c)
-{
-	if (!c || !ft_strchr("WENS", c))
-		error("Map validation failed");
+	return (counter);
 }
 
 void	flood_fill(char **arr, size_t x, size_t y)
@@ -53,7 +55,8 @@ void	flood_fill(char **arr, size_t x, size_t y)
 		check_char(arr[y][x]);
 	if (arr[y] && (arr[y][x] == '0' || ft_strchr("2WENS", arr[y][x])))
 	{
-		arr[y][x] = (arr[y][x] == '0' || ft_strchr("WENS", arr[y][x])) ? '@' : '$';
+		arr[y][x] = (arr[y][x] == '0' ||
+			ft_strchr("WENS", arr[y][x])) ? '@' : '$';
 		flood_fill(arr, x + 1, y - 1);
 		flood_fill(arr, x + 1, y);
 		flood_fill(arr, x + 1, y + 1);
@@ -89,12 +92,11 @@ void	validate_map(char **arr, t_map *data)
 	size_t	x;
 	size_t	y;
 
-	find_player(arr, &x, &y, data);
-
+	if (find_player(arr, &x, &y, data) != 1)
+		error("Wrong players count");
 	data->pos.x = (double)x;
 	data->pos.y = (double)y;
 	ff_middleware(arr);
-	printf("found %d sprites\n", data->s_count);
 	init_sprites(arr, data);
 	init_windows(arr, data);
 }

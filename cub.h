@@ -286,5 +286,7 @@ void	miss_zeros(char **res_x, char **res_y);
 int		get_min(int a, int b);
 int		count_commas(char *str);
 size_t	ft_strlen_without_spaces(char *str);
+void	init_lines(char **arr, size_t width);
+void	check_char(char c);
 
 #endif
