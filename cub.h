@@ -160,7 +160,7 @@ typedef struct	s_rc
 	t_speed	speed;
 	t_keys	keys;
 	t_all_txtrs	t;
-	t_txtr	*cur_side;
+	t_txtr	cur_side;
 	t_sprite *sprites;
 	double	*zb;
 	double	dist_to_wall;

@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:11:32 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 11:37:25 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:14:58 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ static void	draw_line(t_rc *rc, t_map *data, int x)
 			put_pixel(rc->img, x, y, make_trgb(0, c.r, c.g, c.b));
 		else if (y < rc->wall.finish)
 		{
-			put_pixel(rc->img, x, y, get_pixel(*rc->cur_side, txtr_data));
+			put_pixel(rc->img, x, y, get_pixel(rc->cur_side, txtr_data));
 		}
 		else
 			put_pixel(rc->img, x, y, make_trgb(0, f.r, f.g, f.b));
 		y++;
 	}
+	free(txtr_data);
 }
 
 int			drawer(t_rc *rc)

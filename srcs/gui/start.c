@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:08:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 11:54:04 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:14:27 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,21 @@ void	run_dda(t_rc *rc, char **arr)
 
 void	define_side(t_rc *rc)
 {
-	if (!(rc->cur_side = ft_calloc(3, 3)))
-		error("Malloc ft_calloc in define_side) error");
+	// if (!(rc->cur_side = ft_calloc(3, 3)))
+	// 	error("Malloc ft_calloc in define_side error");
 	if (rc->side)
 	{
 		if (rc->ray_dir.y > 0)
-			rc->cur_side = &rc->t.so;
+			rc->cur_side = rc->t.so;
 		else
-			rc->cur_side = &rc->t.no;
+			rc->cur_side = rc->t.no;
 	}
 	else
 	{
 		if (rc->ray_dir.x > 0)
-			rc->cur_side = &rc->t.ea;
+			rc->cur_side = rc->t.ea;
 		else
-			rc->cur_side = &rc->t.we;
+			rc->cur_side = rc->t.we;
 	}
 }
 

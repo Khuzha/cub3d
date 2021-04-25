@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 20:57:47 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 11:53:48 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:08:39 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ void		draw_sprites(t_rc *rc)
 		draw(rc, s);
 		i++;
 	}
+	free(s);
+	s = NULL;
 }
