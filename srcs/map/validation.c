@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:39:20 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 16:57:13 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:36:54 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int		find_player(char **arr, size_t *pos_x, size_t *pos_y, t_map *data)
 	return (counter);
 }
 
-void	flood_fill(char **arr, size_t x, size_t y)
+void	flood_fill(char **arr, int x, int y)
 {
+	// printf("y = %d, x = %d\n", y, x);
+	// printf("char = %c\n", arr[y][x]);
 	if (x < 0 || y < 0)
 		error("Map validation failed");
 	if (arr[y] && arr[y][x] != '0' && arr[y][x] != '1'
@@ -70,8 +72,8 @@ void	flood_fill(char **arr, size_t x, size_t y)
 
 void	ff_middleware(char **arr)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (arr && arr[y])
