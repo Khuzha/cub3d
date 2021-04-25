@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:37:02 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:59:39 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 16:44:30 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,17 @@ void	fill_lines(char **arr, t_list *list, size_t height)
 
 void	free_list(t_list *list)
 {
+	t_list	*backup;
 	t_list	*tmp;
 
+	backup = list;
 	while (list->next)
 	{
 		tmp = list;
 		list = list->next;
 		free(tmp);
 	}
+	free(list);
 }
 
 void	convert_to_array(t_list *list, t_map *data)
