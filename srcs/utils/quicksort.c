@@ -1,32 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quicksort.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 13:46:43 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/25 13:49:37 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void	quicksort(t_sprite *arr, int first, int last)
 {
 	t_sprite	tmp;
-	int			middle;
-	int			i;
-	int			j;
+	t_qs		data;
 
 	if (first < last)
 	{
-		middle = arr[(first + last) / 2].dist;
-		i = first - 1;
-		j = last + 1;
+		data.middle = arr[(first + last) / 2].dist;
+		data.i = first - 1;
+		data.j = last + 1;
 		while (1)
 		{
-			i++;
-			while (arr[i].dist > middle && i < last)
-				i++;
-			j--;
-			while (arr[j].dist < middle && j > 0)
-				j--;
-			if (i >= j)
-				break;
-			tmp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = tmp;
+			data.i++;
+			while (arr[data.i].dist > data.middle && data.i < last)
+				data.i++;
+			data.j--;
+			while (arr[data.j].dist < data.middle && data.j > 0)
+				data.j--;
+			if (data.i >= data.j)
+				break ;
+			tmp = arr[data.i];
+			arr[data.i] = arr[data.j];
+			arr[data.j] = tmp;
 		}
-		quicksort(arr, first, i - 1);
-		quicksort(arr, j + 1, last);
+		quicksort(arr, first, data.i - 1);
+		quicksort(arr, data.j + 1, last);
 	}
 }
