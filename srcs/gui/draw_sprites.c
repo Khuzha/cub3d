@@ -6,13 +6,11 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 20:57:47 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 14:08:39 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:06:48 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub.h"
-
-#define VMOVE 256.0
 
 static void	make_prep(t_rc *rc, t_s_rc *s, int i)
 {
@@ -26,7 +24,7 @@ static void	make_prep(t_rc *rc, t_s_rc *s, int i)
 		(-rc->plane.y * s->sprite_x + rc->plane.x * s->sprite_y);
 	s->sprite_screen_x = (int)((rc->data->res.x / 2) *
 		(1 + s->transform_x / s->transform_y));
-	s->mv_scr = (int)(VMOVE / s->transform_y);
+	s->mv_scr = 1;
 }
 
 static void	calc_sprite(t_rc *rc, t_s_rc *s)
