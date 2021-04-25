@@ -298,5 +298,6 @@ void	init_lines(char **arr, size_t width);
 void	check_char(char c);
 void	clean_arr(char **arr);
 void	free_list(t_list *list);
+void	bubblesort(t_sprite *arr, int count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/22 20:57:47 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 18:06:48 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:47:46 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void		draw_sprites(t_rc *rc)
 	int		i;
 
 	i = 0;
+	print_sprites(rc->data, rc->player_pos);
 	if (!(s = malloc(sizeof(t_s_rc))))
 		error("Malloc error\n");
 	while (i < rc->data->s_count)

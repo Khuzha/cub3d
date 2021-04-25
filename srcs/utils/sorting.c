@@ -1,16 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort.c                                        :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:46:43 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:49:37 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 19:20:08 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub.h"
+
+void	bubblesort(t_sprite *arr, int count)
+{
+	t_sprite	tmp;
+	int			ready;
+	int			i;
+
+	ready = 0;
+	while (!ready)
+	{
+		i = 0;
+		ready = 1;
+		while (i < count - 1)
+		{
+			if (arr[i].dist < arr[i + 1].dist)
+			{
+				tmp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = tmp;
+				ready = 0;
+			}
+			i++;
+		}
+	}
+}
 
 void	quicksort(t_sprite *arr, int first, int last)
 {
