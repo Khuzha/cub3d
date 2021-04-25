@@ -6,13 +6,13 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 20:24:29 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:55:45 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub.h"
 
-void	init_keys(t_rc *rc)
+void		init_keys(t_rc *rc)
 {
 	rc->keys.a = 0;
 	rc->keys.d = 0;
@@ -26,7 +26,7 @@ void	init_keys(t_rc *rc)
 	rc->speed.rot = 0.03;
 }
 
-void	init_rc(t_rc *rc, t_map *data)
+void		init_rc(t_rc *rc, t_map *data)
 {
 	if (!rc->wens_defined)
 		handle_player_dir(rc, data);
@@ -59,7 +59,7 @@ static void	init_txtr_imgs(t_rc *rc)
 		&rc->t.s.img.bpp, &rc->t.s.img.length, &rc->t.s.img.endian);
 }
 
-void	init_mlx(t_rc *rc)
+void		init_mlx(t_rc *rc)
 {
 	rc->mlx = mlx_init();
 	rc->win = mlx_new_window(rc->mlx, rc->data->res.x, rc->data->res.y, "21");

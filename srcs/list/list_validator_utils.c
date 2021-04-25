@@ -6,11 +6,19 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:27:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 13:33:48 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:34:57 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub.h"
+
+void	check_colors(char **set)
+{
+	if (!ft_strlen(*set) || ft_strlen_without_spaces(*set) > 3 ||
+		!ft_strlen(set[1]) || ft_strlen_without_spaces(set[1]) > 3 ||
+		!ft_strlen(set[2]) || ft_strlen_without_spaces(set[2]) > 3)
+		error("Colors are wrong");
+}
 
 void	fill_resolution(t_map *map, char *res_x, char *res_y)
 {
@@ -93,12 +101,4 @@ int		is_param(char *str)
 		return (0);
 	}
 	return (1);
-}
-
-void	check_colors(char **set)
-{
-	if (!ft_strlen(*set) || ft_strlen_without_spaces(*set) > 3 ||
-		!ft_strlen(set[1]) || ft_strlen_without_spaces(set[1]) > 3 ||
-		!ft_strlen(set[2]) || ft_strlen_without_spaces(set[2]) > 3)
-		error("Colors are wrong");
 }

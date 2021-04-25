@@ -9,7 +9,7 @@ SRCS =	main.c gnl/get_next_line.c \
 		srcs/gui/handlers.c srcs/gui/initions.c srcs/gui/key_hooks.c \
 		srcs/gui/pixels.c srcs/gui/rotations.c srcs/gui/steps.c \
 		srcs/gui/utils.c srcs/gui/utils2.c \
-		srcs/map/init_sprites.c \
+		srcs/map/init_sprites.c srcs/map/utils.c \
 		srcs/screenshot/save.c
 
 

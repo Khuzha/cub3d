@@ -201,6 +201,13 @@ typedef struct	s_s_rc
 	int		tex_x;
 }				t_s_rc;
 
+typedef struct	s_qs
+{
+	int			middle;
+	int			i;
+	int			j;
+}				t_qs;
+
 /*
  *	Kinda general functions
  */

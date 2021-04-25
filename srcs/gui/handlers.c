@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:12:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/24 20:12:32 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:17:42 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	handle_player_dir(t_rc *rc, t_map *data)
 		rc->plane.x = 0.66;
 	if (data->player == 'S')
 		rc->plane.x = -0.66;
-	if (ft_strchr("WE", data->player))
+	if (data->player == 'E')
 		rc->plane.y = 0.66;
+	if (data->player == 'W')
+		rc->plane.y = -0.66;
 	rc->wens_defined = 1;
 }
 
