@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 20:17:14 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/26 21:44:06 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ void		free_file_paths(t_map *data)
 	free(data->s);
 }
 
+static void	check_txtrs(t_rc *rc)
+{
+	if (!rc->t.so.img.ptr || !rc->t.so.img.addr ||
+		!rc->t.no.img.ptr || !rc->t.no.img.addr ||
+		!rc->t.ea.img.ptr || !rc->t.ea.img.addr ||
+		!rc->t.we.img.ptr || !rc->t.we.img.addr ||
+		!rc->t.s.img.ptr || !rc->t.s.img.addr)
+		error("Invalid file entity");
+}
+
 static void	init_txtr_imgs(t_rc *rc)
 {
 	rc->t.so.img.ptr = mlx_xpm_file_to_image(rc->mlx,
@@ -67,6 +77,7 @@ static void	init_txtr_imgs(t_rc *rc)
 	rc->t.s.img.addr = mlx_get_data_addr(rc->t.s.img.ptr,
 		&rc->t.s.img.bpp, &rc->t.s.img.length, &rc->t.s.img.endian);
 	free_file_paths(rc->data);
+	check_txtrs(rc);
 }
 
 void		init_mlx(t_rc *rc)
