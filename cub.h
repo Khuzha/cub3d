@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 20:31:39 by zskeeter          #+#    #+#             */
+/*   Updated: 2021/04/26 20:36:29 by zskeeter         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -34,10 +46,9 @@ typedef struct	s_keys
 	char	arr_d;
 }				t_keys;
 
-
 /*
- *	Structures
- */
+**	Structures
+*/
 typedef struct	s_colors
 {
 	int defined;
@@ -89,10 +100,10 @@ typedef struct	s_map
 typedef struct	s_img
 {
 	void	*ptr;
-    char	*addr;
-    int		bpp;
-    int		length;
-    int		endian;
+	char	*addr;
+	int		bpp;
+	int		length;
+	int		endian;
 }				t_img;
 
 typedef struct	s_dxy
@@ -106,7 +117,6 @@ typedef struct	s_ixy
 	int	x;
 	int	y;
 }				t_ixy;
-
 
 typedef struct	s_speed
 {
@@ -122,7 +132,7 @@ typedef struct	s_wall
 	int	color;
 }				t_wall;
 
-typedef struct s_txtr
+typedef struct	s_txtr
 {
 	t_img	img;
 	int		h;
@@ -153,24 +163,24 @@ typedef struct	s_rc
 	t_dxy		wens;
 	t_ixy		ray_square;
 	t_dxy		closest_line;
-	t_dxy	next_line;
-	t_dxy	plane;
-	t_ixy	ray_step;
-	t_img	img;
-	t_wall	wall;
-	t_speed	speed;
-	t_keys	keys;
+	t_dxy		next_line;
+	t_dxy		plane;
+	t_ixy		ray_step;
+	t_img		img;
+	t_wall		wall;
+	t_speed		speed;
+	t_keys		keys;
 	t_all_txtrs	t;
-	t_txtr	cur_side;
-	t_sprite *sprites;
-	double	*zb;
-	double	dist_to_wall;
-	double	cam;
-	void	*mlx;
-	void	*win;
-	int		was_hit;
-	int		side;
-	int		wens_defined;
+	t_txtr		cur_side;
+	t_sprite	*sprites;
+	double		*zb;
+	double		dist_to_wall;
+	double		cam;
+	void		*mlx;
+	void		*win;
+	int			was_hit;
+	int			side;
+	int			wens_defined;
 }				t_rc;
 
 typedef struct	s_txtr_data
@@ -210,94 +220,94 @@ typedef struct	s_qs
 }				t_qs;
 
 /*
- *	Kinda general functions
- */
-void	error(char *err);
-void	init_str_and_map(char **str, t_map *map);
+** Kinda general functions
+*/
+void			error(char *err);
+void			init_str_and_map(char **str, t_map *map);
 
 /*
- *	List validation functions
- */
-void	iterate_list(t_map *map);
-int		is_map_line(char *str);
-int		is_wside(char *str);
-int		is_xpm_file(char *str);
-void	fill_resolution(t_map *map, char *res_x, char *res_y);
-void	define_file(t_map *map, char *type, char *file);
-void	fill_s_c_f(t_map *map, char c, char *file);
-int		is_colors_set(char *str);
-void	store_colors(t_map *map, char type, char *str);
-int		is_param(char *str);
+**	List validation functions
+*/
+void			iterate_list(t_map *map);
+int				is_map_line(char *str);
+int				is_wside(char *str);
+int				is_xpm_file(char *str);
+void			fill_resolution(t_map *map, char *res_x, char *res_y);
+void			define_file(t_map *map, char *type, char *file);
+void			fill_s_c_f(t_map *map, char c, char *file);
+int				is_colors_set(char *str);
+void			store_colors(t_map *map, char type, char *str);
+int				is_param(char *str);
 
 /*
- *	Map validation functions
- */
-void	convert_to_array(t_list *map_list, t_map *data);
-void	validate_map(char **arr, t_map *data);
+** Map validation functions
+*/
+void			convert_to_array(t_list *map_list, t_map *data);
+void			validate_map(char **arr, t_map *data);
 
 /*
- *	Sprites
- */
-void	init_sprites(char **arr, t_map *data);
-void	recalc_sprites(t_rc *rc);
+**	Sprites
+*/
+void			init_sprites(char **arr, t_map *data);
+void			recalc_sprites(t_rc *rc);
 
 /*
- *	GUI functions
- */
-void	init_windows(char **arr, t_map *data);
-void	draw_sprites(t_rc *rc);
-void	put_pixel(t_img img, int x, int y, int color);
-int		make_trgb(int t, int r, int g, int b);
-int		drawer(t_rc *rc);
-void	handle_player_dir(t_rc *rc, t_map *data);
-void	handle_rc(t_rc *rc, t_map *data, int x);
-void	init_keys(t_rc *rc);
-void	init_rc(t_rc *rc, t_map *data);
-void	init_mlx(t_rc *rc);
-int		key_press(int code, t_rc *rc);
-int		key_unpress(int code, t_rc *rc);
-int		handle_loop(t_rc *rc);
-int		get_pixel(t_txtr txtr, t_txtr_data *data);
-void	put_pixel(t_img img, int x, int y, int color);
-void	rot_right(t_rc *rc);
-void	rot_left(t_rc *rc);
-void	step_forward(t_rc *rc);
-void	step_back(t_rc *rc);
-void	step_right(t_rc *rc);
-void	step_left(t_rc *rc);
-void	calc_wall(t_rc *rc, t_map *data);
-void	define_color(t_rc *rc);
-void	calcs_for_txtr(t_rc *rc, t_txtr_data *data);
-void	prepare_rc(t_rc *rc);
-void	run_dda(t_rc *rc, char **arr);
-void	define_side(t_rc *rc);
+**	GUI functions
+*/
+void			init_windows(char **arr, t_map *data);
+void			draw_sprites(t_rc *rc);
+void			put_pixel(t_img img, int x, int y, int color);
+int				make_trgb(int t, int r, int g, int b);
+int				drawer(t_rc *rc);
+void			handle_player_dir(t_rc *rc, t_map *data);
+void			handle_rc(t_rc *rc, t_map *data, int x);
+void			init_keys(t_rc *rc);
+void			init_rc(t_rc *rc, t_map *data);
+void			init_mlx(t_rc *rc);
+int				key_press(int code, t_rc *rc);
+int				key_unpress(int code, t_rc *rc);
+int				handle_loop(t_rc *rc);
+int				get_pixel(t_txtr txtr, t_txtr_data *data);
+void			put_pixel(t_img img, int x, int y, int color);
+void			rot_right(t_rc *rc);
+void			rot_left(t_rc *rc);
+void			step_forward(t_rc *rc);
+void			step_back(t_rc *rc);
+void			step_right(t_rc *rc);
+void			step_left(t_rc *rc);
+void			calc_wall(t_rc *rc, t_map *data);
+void			define_color(t_rc *rc);
+void			calcs_for_txtr(t_rc *rc, t_txtr_data *data);
+void			prepare_rc(t_rc *rc);
+void			run_dda(t_rc *rc, char **arr);
+void			define_side(t_rc *rc);
 
 /*
- *	Screenshots
- */
-void	make_scrsht(t_rc *rc);
+**	Screenshots
+*/
+void			make_scrsht(t_rc *rc);
 
 /*
- *	Additional utils
- */
-int		ft_isnumber(char *str);
-size_t	get_max(size_t a, size_t b);
-double	ft_abs_dbl(double num);
-void	quicksort(t_sprite *arr, int first, int last);
-void	print_sprites(t_map *data, t_dxy player_pos);
-double	get_decimal(double num);
-double	get_floor(double num);
-double	get_up(double num);
-int		make_trgb(int t, int r, int g, int b);
-int		finish(t_rc *rc);
-void	miss_zeros(char **res_x, char **res_y);
-int		get_min(int a, int b);
-int		count_commas(char *str);
-size_t	ft_strlen_without_spaces(char *str);
-void	init_lines(char **arr, size_t width);
-void	check_char(char c);
-void	clean_arr(char **arr);
-void	free_list(t_list *list);
-void	bubblesort(t_sprite *arr, int count);
+**	Additional utils
+*/
+int				ft_isnumber(char *str);
+size_t			get_max(size_t a, size_t b);
+double			ft_abs_dbl(double num);
+void			quicksort(t_sprite *arr, int first, int last);
+void			print_sprites(t_map *data, t_dxy player_pos);
+double			get_decimal(double num);
+double			get_floor(double num);
+double			get_up(double num);
+int				make_trgb(int t, int r, int g, int b);
+int				finish(t_rc *rc);
+void			miss_zeros(char **res_x, char **res_y);
+int				get_min(int a, int b);
+int				count_commas(char *str);
+size_t			ft_strlen_without_spaces(char *str);
+void			init_lines(char **arr, size_t width);
+void			check_char(char c);
+void			clean_arr(char **arr);
+void			free_list(t_list *list);
+void			bubblesort(t_sprite *arr, int count);
 
 #endif
