@@ -18,6 +18,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 $(NAME): $(SRCOBJS)
 	make bonus -C libft
+	make -C minilibx
 	ar -rcs $(NAME) $(SRCOBJS) libft/*.o 
 	gcc $(NAME) -framework OpenGL -framework AppKit minilibx/libmlx.a -g -o $(FINALNAME)
 

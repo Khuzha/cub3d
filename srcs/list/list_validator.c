@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 20:40:02 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/26 20:17:32 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	iterate_list(t_map *map)
 	while (map->list->next)
 	{
 		arr = ft_split(map->list->content, ' ');
+		// while
 		if (arr[0] && !(is_param(arr[0]) && arr[1]) &&
 			!is_map_line(map->list->content))
 		{
