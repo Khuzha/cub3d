@@ -1,4 +1,4 @@
-R 30000 30000
+R 1920 1080
 
 NO     ./img/grass.xpm   
 SO   ./img/neon.xpm
