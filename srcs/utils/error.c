@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:45:45 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 21:51:48 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/27 20:00:29 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	error(char *err)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(err, 2);
-	ft_putchar_fd('\n', 2);
+	printf("Error\nMessage: %s\n", err);
 	exit(1);
 }
