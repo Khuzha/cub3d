@@ -6,11 +6,21 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/26 20:22:07 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:50:01 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	check_args(int argc, char **argv, t_map *data)
+{
+	if (ft_strncmp(argv[0], "./cub3D", 8))
+		error("Executable file's name should be 'cub3D'");
+	if (argc == 1 || (argc > 2 && ft_strncmp(argv[2], "--save", 7)))
+		error("Wrong arguements");
+	if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
+		data->is_scnsht = 1;
+}
 
 int	main(int argc, char **argv)
 {
@@ -24,10 +34,7 @@ int	main(int argc, char **argv)
 		error("Malloc error");
 	init_str_and_map(&str, map);
 	fd = open(argv[1], O_RDONLY);
-	if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
-		map->is_scnsht = 1;
-	if (argc == 1 || (argc > 2 && ft_strncmp(argv[2], "--save", 7)))
-		error("Wrong arguements");
+	check_args(argc, argv, map);
 	while (get_next_line(fd, &str) > 0)
 	{
 		ft_lstadd_back(&(map->list), ft_lstnew(str));
