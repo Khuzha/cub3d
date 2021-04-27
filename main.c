@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/27 19:50:01 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:52:45 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	check_args(argc, argv, map);
 	while (get_next_line(fd, &str) > 0)
-	{
 		ft_lstadd_back(&(map->list), ft_lstnew(str));
-	}
 	ft_lstadd_back(&(map->list), ft_lstnew(str));
 	iterate_list(map);
 }
