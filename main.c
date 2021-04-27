@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/27 19:52:45 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/27 19:58:58 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	check_args(int argc, char **argv, t_map *data)
 		error("Wrong arguements");
 	if (argc == 3 && !ft_strncmp(argv[2], "--save", 7))
 		data->is_scnsht = 1;
+	if (ft_strncmp(ft_substr(argv[1], ft_strlen(argv[1]) - 4, 4), ".cub", 5))
+		error("Wrong map file format");
 }
 
 int	main(int argc, char **argv)
