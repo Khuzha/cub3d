@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:16:49 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/25 11:35:04 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/28 21:31:52 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int		get_pixel(t_txtr txtr, t_txtr_data *data)
 {
-	char *pos;
+	char			*pos;
+	int	color;
 
-	data->tex_y = (int)data->tex_pos & (txtr.h - 1);
+	data->tex_y = (int)data->tex_pos % (txtr.h - 1);
 	data->tex_pos += data->step;
 	pos = txtr.img.addr + (int)(data->tex_y * txtr.img.length +
 		data->tex_x * (txtr.img.bpp / 8));
-	return (*((unsigned int	*)pos));
+	color = *((int	*)pos);
+	return (color >= 0 ? color : 0);
 }
 
 void	put_pixel(t_img img, int x, int y, int color)
