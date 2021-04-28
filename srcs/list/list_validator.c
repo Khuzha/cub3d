@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 09:29:31 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/26 20:57:28 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:24:11 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	fill_struct(t_map *map, char **arr, char *str)
 
 void	check_map(t_map *map)
 {
-	printf("res.def = %d\n", map->res.defined);
-	printf("map->we = %s, map->ea = %s, map->so = %s, map->no = %s\n", map->we, map->ea, map->so, map->no);
-	printf("map->c_colors.defined = %d\n", map->c_colors.defined);
 	if (!map->res.defined || (map->res.x <= 0) || (map->res.y <= 0) ||
 		!map->we || !ft_strlen(map->we) || !map->ea || !ft_strlen(map->ea) ||
 		!map->so || !ft_strlen(map->so) || !map->no || !ft_strlen(map->no) ||

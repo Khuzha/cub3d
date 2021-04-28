@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:30 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/27 19:58:58 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:29:38 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_args(int argc, char **argv, t_map *data)
 		error("Wrong map file format");
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int		fd;
 	char	*str;

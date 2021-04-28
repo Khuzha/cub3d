@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 20:31:39 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/26 20:36:29 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:36:49 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,5 +309,7 @@ void			check_char(char c);
 void			clean_arr(char **arr);
 void			free_list(t_list *list);
 void			bubblesort(t_sprite *arr, int count);
+void			free_file_paths(t_map *data);
+void			check_txtr(void	*ptr);
 
 #endif

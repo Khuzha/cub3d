@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:14:21 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/27 20:07:15 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/29 01:09:54 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,6 @@ void		init_rc(t_rc *rc, t_map *data)
 	rc->was_hit = 0;
 	rc->side = -1;
 	data++;
-}
-
-void		free_file_paths(t_map *data)
-{
-	free(data->so);
-	free(data->no);
-	free(data->we);
-	free(data->ea);
-	free(data->s);
-}
-
-void		check_txtr(void	*ptr)
-{
-	if (!ptr)
-		error("Invalid file entity");
 }
 
 static void	init_txtr_imgs_2(t_rc *rc)
