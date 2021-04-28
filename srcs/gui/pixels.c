@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:16:49 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/28 21:31:52 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/29 00:00:11 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		get_pixel(t_txtr txtr, t_txtr_data *data)
 {
-	char			*pos;
-	int	color;
+	char	*pos;
+	int		color;
 
 	data->tex_y = (int)data->tex_pos % (txtr.h - 1);
 	data->tex_pos += data->step;
