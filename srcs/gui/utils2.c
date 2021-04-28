@@ -6,7 +6,7 @@
 /*   By: zskeeter <zskeeter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:21:28 by zskeeter          #+#    #+#             */
-/*   Updated: 2021/04/28 21:36:53 by zskeeter         ###   ########.fr       */
+/*   Updated: 2021/04/28 23:53:24 by zskeeter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	calcs_for_txtr(t_rc *rc, t_txtr_data *data)
 	else
 		data->wall_x = rc->player_pos.x + rc->dist_to_wall * rc->ray_dir.x;
 	data->wall_x -= floor(data->wall_x);
-	data->tex_x = rc->cur_side.w - 1 -  (int)(data->wall_x * (double)(rc->cur_side.w));
+	data->tex_x = (int)(data->wall_x * (double)(rc->cur_side.w));
 	if (rc->side == 0 && rc->ray_dir.x > 0)
 		data->tex_x = rc->cur_side.w - data->tex_x - 1;
 	if (rc->side == 1 && rc->ray_dir.y < 0)
